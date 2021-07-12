@@ -37,9 +37,8 @@ function Login({ toggle, sessionToken }){
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            props.updateToken(data.sessionToken)
-            // let token = data.sessionToken
-            // localStorage.setItem('confirmToken', token)
+            let token = data.sessionToken
+            localStorage.setItem('confirmToken', token)
         })
         .catch(err => {
             console.error(err)
