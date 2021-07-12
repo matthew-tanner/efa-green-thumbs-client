@@ -9,17 +9,11 @@ function Login({ toggle, sessionToken }){
     const [displayName, setDisplayName] = useState('')
     
     const confirmAndSend = () => {
-        // submitForm()
         userLogin()
     }
 
     function userLogin(props) {
         console.log('userLogin function called')
-    
-        // let email = document.getElementById('email').value
-        // let password = document.getElementById('password').value
-        // let displayName = document.getElementById('displayName').value
-    
         let userData = {
                 email: email,
                 password: password,
@@ -101,8 +95,6 @@ function Login({ toggle, sessionToken }){
                     Log In
                     </Button>
                 </Form.Item>
-                
-             
 
                 <Form.Item>
                 {/* <Typography className='portalCardTypography'>New here? <Typography.Link className='root' href='{toggle}'>Sign up</Typography.Link> to start planning your trip.</Typography> */}

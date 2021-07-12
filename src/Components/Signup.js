@@ -42,9 +42,6 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     .then(res => res.json())
     .then(data => {
         console.log(data)
-        // let token = data.sessionToken
-        // localStorage.setItem('confirmToken', token)
-        // tokenChecker()
     })
     .catch(err => {
         console.error(err)
