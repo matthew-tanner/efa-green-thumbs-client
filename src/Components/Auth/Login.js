@@ -6,7 +6,6 @@ const { Title } = Typography
 function Login({ toggle, sessionToken }){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [displayName, setDisplayName] = useState('')
     
     const confirmAndSend = () => {
         userLogin()
@@ -17,9 +16,8 @@ function Login({ toggle, sessionToken }){
         let userData = {
                 email: email,
                 password: password,
-                displayName: displayName
         }
-        console.log(`userData --> ${userData.email} ${userData.password} ${userData.displayName}`);
+        console.log(`userData --> ${userData.email} ${userData.password}`);
     
         fetch(`http://localhost:3000/user/login`, {
             method: 'POST',
@@ -32,7 +30,7 @@ function Login({ toggle, sessionToken }){
         .then(data => {
             console.log(data)
             let token = data.sessionToken
-            localStorage.setItem('confirmToken', token)
+            localStorage.setItem('token', token)
         })
         .catch(err => {
             console.error(err)
@@ -72,7 +70,7 @@ function Login({ toggle, sessionToken }){
                 },
                 ]}
             >
-                <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
+                {/* <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="password"
@@ -82,7 +80,7 @@ function Login({ toggle, sessionToken }){
                     message: 'Please input your password!',
                 },
                 ]}
-            >
+            > */}
                 <Input.Password style={{ width: '65%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
                 </Form.Item>
 

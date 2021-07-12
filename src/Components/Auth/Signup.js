@@ -13,7 +13,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
         userSignup()
     } else {
         setFailMessage("The Passwords don't match")
-        setTimeout(() => { setFailMessage("") }, 4000)
+        setTimeout(() => { failMessage("") }, 4000)
     }
     }
 
