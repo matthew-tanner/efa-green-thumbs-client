@@ -3,18 +3,48 @@ import { Form, Input, Button, Typography, Card, Checkbox } from 'antd'
 
 const { Title } = Typography
 
-function Login({email, password, setEmail, setPassword, displayName, setDisplayName, toggle, submitForm}){
-    const [confirmPassword, setConfirmPassword] = useState()
-    const [failMessage, setFailMessage] = useState("")
+function Login({ toggle, sessionToken }){
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [displayName, setDisplayName] = useState('')
     
-    // Helper Function
     const confirmAndSend = () => {
-    if (password === confirmPassword) {
-        submitForm()
-    } else {
-        setFailMessage("The Passwords don't match")
-        setTimeout(() => { setFailMessage("") }, 4000)
+        // submitForm()
+        userLogin()
     }
+
+    function userLogin(props) {
+        console.log('userLogin function called')
+    
+        // let email = document.getElementById('email').value
+        // let password = document.getElementById('password').value
+        // let displayName = document.getElementById('displayName').value
+    
+        let userData = {
+                email: email,
+                password: password,
+                displayName: displayName
+        }
+        console.log(`userData --> ${userData.email} ${userData.password} ${userData.displayName}`);
+    
+        fetch(`http://localhost:3000/user/login`, {
+            method: 'POST',
+            headers: new Headers ({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(userData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            props.updateToken(data.sessionToken)
+            // let token = data.sessionToken
+            // localStorage.setItem('confirmToken', token)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
     }
 
 
@@ -79,7 +109,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
                 {/* <Typography className='portalCardTypography'>New here? <Typography.Link className='root' href='{toggle}'>Sign up</Typography.Link> to start planning your trip.</Typography> */}
                     <Typography className='portalCardTypography'>New here? Sign up to plan your trip.</Typography>
                     <Button style={{ width: '65%' }} className='button' htmlType="submit" onClick={toggle}>
-                    Signup
+                    Sign Up
                     </Button>
                 </Form.Item>
             </Form>
