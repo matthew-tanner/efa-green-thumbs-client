@@ -9,7 +9,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     
     const confirmAndSend = () => {
     if (password === confirmPassword) {
-        submitForm()
+        // submitForm()
         userSignup()
     } else {
         setFailMessage("The Passwords don't match")
@@ -26,26 +26,24 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     let displayName = document.getElementById('displayName').value
 
     let newUserData = {
-        user: {
             email: email,
-            displayName: displayName,
-            password: password
-        }
+            password: password,
+            displayName: displayName
     }
-    console.log(`newUserData --> ${newUserData.user.email} ${displayName} ${newUserData.user.password}`);
+    console.log(`newUserData --> ${newUserData.email} ${newUserData.password} ${newUserData.displayName}`);
 
     fetch(`http://localhost:3000/user/signup`, {
         method: 'POST',
-        headers: {
+        headers: new Headers ({
             'Content-Type': 'application/json'
-        },
+        }),
         body: JSON.stringify(newUserData)
     })
     .then(res => res.json())
     .then(data => {
         console.log(data)
-        let token = data.confirmToken
-        localStorage.setItem('confirmToken', token)
+        // let token = data.sessionToken
+        // localStorage.setItem('confirmToken', token)
         // tokenChecker()
     })
     .catch(err => {
@@ -74,7 +72,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 },
                 ]}
             >
-                <Input id='email' style={{ width: '50%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input id='email' style={{ width: '65%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
@@ -86,7 +84,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 },
                 ]}
             >
-                <Input id='displayName' style={{ width: '50%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
+                <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="password"
@@ -98,7 +96,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 },
                 ]}
             >
-                <Input.Password id='password'  style={{ width: '50%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
+                <Input.Password id='password'  style={{ width: '65%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="confirm"
@@ -109,21 +107,22 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 },
                 ]}
             >
-                <Input.Password  style={{ width: '50%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>
+                <Input.Password  style={{ width: '65%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>
                 </Form.Item>
                 
 
                 <Form.Item>
-                    <Button  style={{ width: '50%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
+                    <Button  style={{ width: '65%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
                     Sign Up
                     </Button>
                 </Form.Item>
 
                 <Form.Item>
-                    <Button  style={{ width: '50%' }} className='button' htmlType="submit" onClick={toggle}>
+                {/* <Typography className='portalCardTypography'>Already have an account? <Typography.Link className='root' href='{toggle}'>Log In</Typography.Link></Typography> */}
+                    <Typography className='portalCardTypography'>Already have an account?</Typography>
+                    <Button  style={{ width: '65%' }} className='button' htmlType="submit" onClick={toggle}>
                     Log In
                     </Button>
-                    <Typography className='portalCardTypography'>Already have an account?</Typography>
                 </Form.Item>
 
             </Form>

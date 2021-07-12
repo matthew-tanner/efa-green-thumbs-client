@@ -9,7 +9,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
     
     // Helper Function
     const confirmAndSend = () => {
-    if (password == confirmPassword) {
+    if (password === confirmPassword) {
         submitForm()
     } else {
         setFailMessage("The Passwords don't match")
@@ -37,7 +37,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
                 },
                 ]}
             >
-                <Input style={{ width: '50%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input style={{ width: '65%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
@@ -49,7 +49,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
                 },
                 ]}
             >
-                <Input id='displayName' style={{ width: '50%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
+                <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="password"
@@ -60,7 +60,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
                 },
                 ]}
             >
-                <Input.Password style={{ width: '50%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
+                <Input.Password style={{ width: '65%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
                 </Form.Item>
 
                 <Form.Item className='checkbox' name="remember" valuePropName="checked" wrapperCol={{ offset: -8, span: 17 }}>
@@ -68,7 +68,7 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
                 </Form.Item>
             
                 <Form.Item>
-                    <Button style={{ width: '50%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
+                    <Button style={{ width: '65%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
                     Log In
                     </Button>
                 </Form.Item>
@@ -76,10 +76,11 @@ function Login({email, password, setEmail, setPassword, displayName, setDisplayN
              
 
                 <Form.Item>
-                    <Button style={{ width: '50%' }} className='button' htmlType="submit" onClick={toggle}>
+                {/* <Typography className='portalCardTypography'>New here? <Typography.Link className='root' href='{toggle}'>Sign up</Typography.Link> to start planning your trip.</Typography> */}
+                    <Typography className='portalCardTypography'>New here? Sign up to plan your trip.</Typography>
+                    <Button style={{ width: '65%' }} className='button' htmlType="submit" onClick={toggle}>
                     Signup
                     </Button>
-                    <Typography className='portalCardTypography'>New here? Sign up to plan your trip.</Typography>
                 </Form.Item>
             </Form>
             </Card>

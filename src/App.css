@@ -33,11 +33,11 @@ body {
 }
 
 .root a{
-  color: #FB743E;
+  color: white;
 }
 
 .root a:hover{
-  color: #383e56
+  color: #6A6E80
 }
 
 .button {
@@ -69,4 +69,16 @@ body {
 
 .portalCardTypography {
   color: #383e56;
+}
+
+.ant-card-body {
+  background-color: #9fb8ad;
+}
+
+.ant-typography h2 {
+  color: white !important;
+}
+
+.ant-card-head-title {
+  color: white !important;
 }
