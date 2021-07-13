@@ -4,14 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
 import { bool } from "prop-types";
 
-<<<<<<< HEAD
 import Home from '../Home/Home'
 import Portal from '../Auth/Portal'
 import Activities from '../Activities/Activities'
-=======
-import Home from "../Home/Home";
-import Portal from "../Auth/Portal";
->>>>>>> 0caf661917de41538f6357d69f6599f86cd7adab
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -57,33 +52,6 @@ const StyledMenu = styled.nav`
 const SideNav = ({ open, token, logout, newToken }) => {
   return (
     <>
-<<<<<<< HEAD
-    <Router>
-    <div>
-    <StyledMenu open={open}>
-      <Link to='/Home'>
-        <span aria-label='home'>Home</span>
-      </Link>
-      <Link to='/Activities'>
-      <span aria-label='Park Search'>Park Search</span>
-      </Link>
-      <Link to='/Home'>
-      <span aria-label='Trip Planner'>Trip Planner</span>
-      </Link>
-      <Link to='/Portal'>
-      <span aria-label='Login'>Login</span>
-      </Link>
-    </StyledMenu>
-    </div>
-    <div className='nav-route'>
-      <Switch>
-          <Route exact path='/home'><Home /></Route>
-          <Route exact path='/activities'><Activities /></Route>
-          <Route exact path='/portal'><Portal /></Route>
-      </Switch>
-    </div>
-    </Router>
-=======
       <Router>
         <div>
           <StyledMenu open={open}>
@@ -115,7 +83,6 @@ const SideNav = ({ open, token, logout, newToken }) => {
           </Switch>
         </div>
       </Router>
->>>>>>> 0caf661917de41538f6357d69f6599f86cd7adab
     </>
   );
 };

@@ -5,16 +5,11 @@ import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 
-<<<<<<< HEAD
 import Burger from './Components/Navbar/Burger'
 import SideNav from './Components/Navbar/SideNav'
 
 
 const { Header, Footer, Sider, Content } = Layout
-=======
-import Burger from "./Components/Navbar/Burger";
-import SideNav from "./Components/Navbar/SideNav";
->>>>>>> 0caf661917de41538f6357d69f6599f86cd7adab
 
 function App() {
   const [open, setOpen] = useState(false);
