@@ -6,11 +6,13 @@ import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 
-import Burger from './Components/Burger/Burger'
-import Menu from './Components/Menu/Menu'
+import Burger from './Components/Navbar/Burger'
+import RightNav from './Components/Navbar/RightNav'
+import Home from './Components/Home/Home'
+// import Navbar from './Components/Navbar/index'
 
 import Portal from "./Components/Auth/Portal";
-import NavHeader from "./Components/Navbar";
+// import NavHeader from "./Components/Navbar";
 
 const { Header, Footer, Sider, Content } = Layout
 
@@ -36,12 +38,12 @@ function App() {
   // }
   // parkFetch()
 
-  const parkToDoFetch = () => {
-    fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
-    .then (res => res.json())
-    .then (data2 => console.log(data2))
-  }
-  parkToDoFetch()
+  // const parkToDoFetch = () => {
+  //   fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
+  //   .then (res => res.json())
+  //   .then (data2 => console.log(data2))
+  // }
+  // parkToDoFetch()
 
 
   return (
@@ -49,13 +51,13 @@ function App() {
     <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
-          <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
+          {/* <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
             <Col>
               <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
                 <Portal />
               </Card>
             </Col>
-          </Row>
+          </Row> */}
           {/* <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
         <Col>
           <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
@@ -74,10 +76,11 @@ function App() {
           </Card>
         </Col>
       </Row> */}
+        <Home />
         </div>
         <div>
           <Burger open={open} setOpen={setOpen} />
-          <Menu open={open} setOpen={setOpen} />
+          <RightNav open={open} setOpen={setOpen} />
         </div>
         
       

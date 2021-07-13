@@ -2,17 +2,17 @@
 
 body {
   background-color: #9FB8AD;
-  flex-direction: column;
+  /* flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  text-align: center;
+  text-align: center; */
 }
 
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -21,11 +21,11 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 .root {
   background-color: #9FB8AD;
