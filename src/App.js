@@ -47,7 +47,6 @@ function App() {
     <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
-          
         </div>
         <div>
           <Burger open={open} setOpen={setOpen} />
