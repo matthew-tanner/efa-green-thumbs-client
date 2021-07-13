@@ -9,7 +9,6 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     
     const confirmAndSend = () => {
     if (password === confirmPassword) {
-        // submitForm()
         userSignup()
     } else {
         setFailMessage("The Passwords don't match")
@@ -65,11 +64,11 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 rules={[
                 {
                     required: true,
-                    message: 'Please input your email!',
+                    message: 'Please input your email.',
                 },
                 ]}
             >
-                <Input id='email' style={{ width: '65%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input id='email' style={{ width: '100%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
@@ -77,11 +76,11 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 rules={[
                 {
                     required: true,
-                    message: 'Please input your Display Name!',
+                    message: 'Please input your Display Name.',
                 },
                 ]}
             >
-                <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
+                <Input id='displayName' style={{ width: '100%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="password"
@@ -89,35 +88,34 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 rules={[
                 {
                     required: true,
-                    message: 'Please input your password!',
+                    message: 'Please input your password.',
                 },
                 ]}
             >
-                <Input.Password id='password'  style={{ width: '65%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
+                <Input.Password id='password'  style={{ width: '100%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="confirm"
                 rules={[
                 {
                     required: true,
-                    message: 'Please confirm your password!',
+                    message: 'Please confirm your password.',
                 },
                 ]}
             >
-                <Input.Password  style={{ width: '65%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>
+                <Input.Password  style={{ width: '100%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>
                 </Form.Item>
                 
 
                 <Form.Item>
-                    <Button  style={{ width: '65%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
+                    <Button  style={{ width: '100%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
                     Sign Up
                     </Button>
                 </Form.Item>
 
                 <Form.Item>
-                {/* <Typography className='portalCardTypography'>Already have an account? <Typography.Link className='root' href='{toggle}'>Log In</Typography.Link></Typography> */}
                     <Typography className='portalCardTypography'>Already have an account?</Typography>
-                    <Button  style={{ width: '65%' }} className='button' htmlType="submit" onClick={toggle}>
+                    <Button  style={{ width: '100%' }} className='button' htmlType="submit" onClick={toggle}>
                     Log In
                     </Button>
                 </Form.Item>

@@ -7,7 +7,7 @@ import { theme } from "./Theme";
 import "./App.css";
 
 import Burger from './Components/Navbar/Burger'
-import RightNav from './Components/Navbar/RightNav'
+import SideNav from './Components/Navbar/SideNav'
 import Home from './Components/Home/Home'
 // import Navbar from './Components/Navbar/index'
 
@@ -51,36 +51,11 @@ function App() {
     <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
-          {/* <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
-            <Col>
-              <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
-                <Portal />
-              </Card>
-            </Col>
-          </Row> */}
-          {/* <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
-        <Col>
-          <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
-            {/* <Carousel autoplay>
-              <div>
-                <h3 style={contentStyle}>Welcome to Green Thumbs</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Grow your garden and your community</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Plan + Create + Inspire</h3>
-              </div>
-            </Carousel> */}
-            {/* <Portal />
-          </Card>
-        </Col>
-      </Row> */}
-        <Home />
+          
         </div>
         <div>
           <Burger open={open} setOpen={setOpen} />
-          <RightNav open={open} setOpen={setOpen} />
+          <SideNav open={open} setOpen={setOpen} />
         </div>
         
       

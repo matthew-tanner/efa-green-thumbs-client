@@ -1,6 +1,15 @@
 import React from 'react'
+import {
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import styled from "styled-components"
 import { bool } from 'prop-types'
+
+import Home from '../Home/Home'
+import Portal from '../Auth/Portal'
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -41,27 +50,40 @@ const StyledMenu = styled.nav`
   }
 `
 
-const RightNav = ({open}) => {
+const SideNav = ({open}) => {
   return (
+    <>
+    <Router>
+    <div>
     <StyledMenu open={open}>
-      <a href='./Home/Home.js'>
+      <Link to='/Home'>
         <span aria-label='home'>Home</span>
-      </a>
-      <a href='/'>
-        <span aria-label='Park Search'>Park Search</span>
-      </a>
-      <a href='/'>
-        <span aria-label='Trip Planner'>Trip Planner</span>
-      </a>
-      <a href='./Components/Auth/Login.js'>
-        <span aria-label='Login'>Login</span>
-      </a>
+      </Link>
+      <Link to='/Home'>
+      <span aria-label='Park Search'>Park Search</span>
+      </Link>
+      <Link to='/Home'>
+      <span aria-label='Trip Planner'>Trip Planner</span>
+      </Link>
+      <Link to='/Portal'>
+      <span aria-label='Login'>Login</span>
+      </Link>
     </StyledMenu>
+    </div>
+    <div className='nav-route'>
+      <Switch>
+          <Route exact path='/home'><Home /></Route>
+          <Route exact path='/portal'><Portal /></Route>
+          <Route exact path='/'><Home /></Route>
+      </Switch>
+    </div>
+    </Router>
+    </>
   )
 }
 
-RightNav.propTypes = {
+SideNav.propTypes = {
   open: bool.isRequired
 }
 
-export default RightNav
+export default SideNav

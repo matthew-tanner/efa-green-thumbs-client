@@ -58,7 +58,7 @@ function Login({ toggle, sessionToken }){
                 },
                 ]}
             >
-                <Input style={{ width: '65%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input style={{ width: '100%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
@@ -70,18 +70,7 @@ function Login({ toggle, sessionToken }){
                 },
                 ]}
             >
-                {/* <Input id='displayName' style={{ width: '65%' }} placeholder='Display Name' onChange={(e) => { setDisplayName(e.target.value) }}/>
-                </Form.Item>
-                <Form.Item
-                name="password"
-                rules={[
-                {
-                    required: true,
-                    message: 'Please input your password!',
-                },
-                ]}
-            > */}
-                <Input.Password style={{ width: '65%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
+                <Input.Password style={{ width: '100%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
                 </Form.Item>
 
                 <Form.Item className='checkbox' name="remember" valuePropName="checked" wrapperCol={{ offset: -8, span: 17 }}>
@@ -89,15 +78,14 @@ function Login({ toggle, sessionToken }){
                 </Form.Item>
             
                 <Form.Item>
-                    <Button style={{ width: '65%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
+                    <Button style={{ width: '100%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
                     Log In
                     </Button>
                 </Form.Item>
 
                 <Form.Item>
-                {/* <Typography className='portalCardTypography'>New here? <Typography.Link className='root' href='{toggle}'>Sign up</Typography.Link> to start planning your trip.</Typography> */}
                     <Typography className='portalCardTypography'>New here? Sign up to plan your trip.</Typography>
-                    <Button style={{ width: '65%' }} className='button' htmlType="submit" onClick={toggle}>
+                    <Button style={{ width: '100%' }} className='button' htmlType="submit" onClick={toggle}>
                     Sign Up
                     </Button>
                 </Form.Item>
@@ -107,38 +95,5 @@ function Login({ toggle, sessionToken }){
         </div>
         )
     }
-
-
-// User Login
-// function login() {
-//     console.log('login function called');
-    // let email = document.getElementById('emailLogin').value
-    // let password = document.getElementById('passwordLogin').value
-    // console.log(email, password)
-    
-    // const loginData = {
-    //     email: email,
-    //     password: password
-    // }
-    // console.log(loginData)
-
-    // fetch(`http://localhost:3000/user/login`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(loginData)
-    // })
-    // .then(res => res.json())
-    // .then(data => {
-    //     console.log(data)
-    //     let token = data.sessionToken
-    //     localStorage.setItem('sessionToken', token)
-    //     tokenChecker()
-    // })
-    // .catch(err => {
-    //     console.error(err)
-    // })
-
 
 export default Login;
