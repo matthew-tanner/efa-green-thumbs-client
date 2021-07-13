@@ -1,60 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Carousel, Row, Col, Card, Layout } from "antd";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 
+<<<<<<< HEAD
 import Burger from './Components/Navbar/Burger'
 import SideNav from './Components/Navbar/SideNav'
 
 
 const { Header, Footer, Sider, Content } = Layout
+=======
+import Burger from "./Components/Navbar/Burger";
+import SideNav from "./Components/Navbar/SideNav";
+>>>>>>> 0caf661917de41538f6357d69f6599f86cd7adab
 
 function App() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [token, setToken] = useState("");
 
-  const contentStyle = {
-    height: "400px",
-    color: "#fff",
-    lineHeight: "400px",
-    fontSize: "30px",
-    textAlign: "center",
-    background: "#9fb8ad",
-  };
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      setToken(localStorage.getItem("token"))
+    }
+  }, [])
 
-  // const key = 'EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl'
-  // const baseUrl = 'https://developer.nps.gov/api/v1/events?'
+  const updateToken = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+  }
 
-  // const parkFetch = () => {
-  //   fetch ('https://developer.nps.gov/api/v1/events?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
-  //   .then (res => res.json())
-  //   .then (data => console.log(data))
-  // }
-  // parkFetch()
-
-  // const parkToDoFetch = () => {
-  //   fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
-  //   .then (res => res.json())
-  //   .then (data2 => console.log(data2))
-  // }
-  // parkToDoFetch()
-
+  const clearToken = () => {
+    localStorage.clear();
+    setToken("");
+  }
 
   return (
     <div className="App">
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
         </div>
         <div>
           <Burger open={open} setOpen={setOpen} />
-          <SideNav open={open} setOpen={setOpen} />
+          <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />
         </div>
-        
-      
-    </ThemeProvider>
+      </ThemeProvider>
     </div>
   );
 }

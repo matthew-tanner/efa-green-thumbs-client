@@ -1,20 +1,12 @@
-import React from 'react'
-import { Carousel, Row, Col, Card } from "antd";
+import React from "react";
+import { Row, Col, Card } from "antd";
 
-const contentStyle = {
-    height: "400px",
-    color: "#fff",
-    lineHeight: "400px",
-    fontSize: "30px",
-    textAlign: "center",
-    background: "#9fb8ad",
-  };
-
-const Home = () => {
-    return(
-        <>
-        <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
+const Home = (props) => {
+  return (
+    <>
+      <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
         <Col>
+<<<<<<< HEAD
             <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
                 <Carousel autoplay>
                 <div>
@@ -28,10 +20,21 @@ const Home = () => {
                 </div>
                 </Carousel>
         </Card>
+=======
+          <Card
+            bordered={false}
+            style={{ width: "70vw" }}
+            type="flex"
+            justify="center"
+            align="middle"
+            cover={<img alt="logomain" src="../assets/logo.png" />}
+          >
+          </Card>
+>>>>>>> 0caf661917de41538f6357d69f6599f86cd7adab
         </Col>
-        </Row>
-        </>
-    )
-}
+      </Row>
+    </>
+  );
+};
 
-export default Home
+export default Home;

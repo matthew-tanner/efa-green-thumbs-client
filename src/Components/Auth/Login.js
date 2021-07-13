@@ -3,7 +3,7 @@ import { Form, Input, Button, Typography, Card, Checkbox } from 'antd'
 
 const { Title } = Typography
 
-function Login({ toggle, sessionToken }){
+function Login({ toggle, token, newToken }){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
@@ -11,7 +11,7 @@ function Login({ toggle, sessionToken }){
         userLogin()
     }
 
-    function userLogin(props) {
+    function userLogin() {
         console.log('userLogin function called')
         let userData = {
                 email: email,
@@ -19,7 +19,7 @@ function Login({ toggle, sessionToken }){
         }
         console.log(`userData --> ${userData.email} ${userData.password}`);
     
-        fetch(`http://localhost:3000/user/login`, {
+        fetch(`http://localhost:3001/user/login`, {
             method: 'POST',
             headers: new Headers ({
                 'Content-Type': 'application/json'
@@ -29,8 +29,9 @@ function Login({ toggle, sessionToken }){
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            let token = data.sessionToken
-            localStorage.setItem('token', token)
+            let dataToken = data.sessionToken
+            //localStorage.setItem('token', token)
+            newToken(dataToken)
         })
         .catch(err => {
             console.error(err)
