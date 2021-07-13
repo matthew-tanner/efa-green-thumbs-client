@@ -10,11 +10,13 @@ import { bool } from 'prop-types'
 
 import Home from '../Home/Home'
 import Portal from '../Auth/Portal'
+import Activities from '../Activities/Activities'
 
 const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 1;
   background: ${({ theme }) => theme.primaryLight};
   height: 100vh;
   text-align: left;
@@ -59,7 +61,7 @@ const SideNav = ({open}) => {
       <Link to='/Home'>
         <span aria-label='home'>Home</span>
       </Link>
-      <Link to='/Home'>
+      <Link to='/Activities'>
       <span aria-label='Park Search'>Park Search</span>
       </Link>
       <Link to='/Home'>
@@ -73,8 +75,8 @@ const SideNav = ({open}) => {
     <div className='nav-route'>
       <Switch>
           <Route exact path='/home'><Home /></Route>
+          <Route exact path='/activities'><Activities /></Route>
           <Route exact path='/portal'><Portal /></Route>
-          <Route exact path='/'><Home /></Route>
       </Switch>
     </div>
     </Router>

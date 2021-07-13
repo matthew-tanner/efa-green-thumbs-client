@@ -8,11 +8,7 @@ import "./App.css";
 
 import Burger from './Components/Navbar/Burger'
 import SideNav from './Components/Navbar/SideNav'
-import Home from './Components/Home/Home'
-// import Navbar from './Components/Navbar/index'
 
-import Portal from "./Components/Auth/Portal";
-// import NavHeader from "./Components/Navbar";
 
 const { Header, Footer, Sider, Content } = Layout
 

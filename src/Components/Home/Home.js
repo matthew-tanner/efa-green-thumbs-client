@@ -15,18 +15,18 @@ const Home = () => {
         <>
         <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
         <Col>
-          <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
-            <Carousel autoplay>
-              <div>
-                <h3 style={contentStyle}>Welcome to Park Planner</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Explore your options for exploring the country.</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Plan + Discover + Explore</h3>
-              </div>
-            </Carousel>
+            <Card bordered={false} style={{ width: 700 }} type='flex' justify='center' align='middle'>
+                <Carousel autoplay>
+                <div>
+                    <h3 style={contentStyle}>Welcome to Park Planner</h3>
+                </div>
+                <div>
+                    <h3 style={contentStyle}>Explore your options for exploring the country.</h3>
+                </div>
+                <div>
+                    <h3 style={contentStyle}>Plan + Discover + Explore</h3>
+                </div>
+                </Carousel>
         </Card>
         </Col>
         </Row>
