@@ -1,6 +1,9 @@
 import React from "react";
 import { Carousel, Row, Col, Card } from "antd";
 import "./App.css";
+import ParkByState from "./trip/FetchParks";
+
+
 
 function App() {
   const contentStyle = {
@@ -16,14 +19,14 @@ function App() {
   // const baseUrl = 'https://developer.nps.gov/api/v1/events?'
 
   const parkFetch = () => {
-    fetch ('https://developer.nps.gov/api/v1/events?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
+    fetch ('https://developer.nps.gov/api/v1/events?stateCode=IN&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc')
     .then (res => res.json())
     .then (data => console.log(data))
   }
   parkFetch()
 
   const parkToDoFetch = () => {
-    fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl')
+    fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc')
     .then (res => res.json())
     .then (data2 => console.log(data2))
   }
@@ -36,7 +39,7 @@ function App() {
         <Col>
           <Card bordered={false} style={{ width: 700 }}>
             <Carousel autoplay>
-              <div>
+              {/* <div>
                 <h3 style={contentStyle}>Welcome to Green Thumbs</h3>
               </div>
               <div>
@@ -44,7 +47,8 @@ function App() {
               </div>
               <div>
                 <h3 style={contentStyle}>Plan + Create + Inspire</h3>
-              </div>
+              </div> */}
+              <ParkByState />
             </Carousel>
           </Card>
         </Col>
