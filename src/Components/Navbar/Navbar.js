@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import Burger from './Burger';
-import SideNav from './SideNav';
+import React from "react";
+import styled from "styled-components";
+import Burger from "./Burger";
+import SideNav from "./SideNav";
 
 const Nav = styled.nav`
     width: 100%;
@@ -23,18 +23,16 @@ const Nav = styled.nav`
         }
       }
     
-    `
+    `;
 
-    const Navbar = () => {
-    return (
-        <Nav>
-        <div className="logo">
-            Nav Bar
-        </div>
-        <SideNav />
-        <Burger />
-        </Nav>
-    )
-}
+const Navbar = () => {
+  return (
+    <Nav>
+      <div className="logo">Nav Bar</div>
+      <SideNav />
+      <Burger />
+    </Nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
