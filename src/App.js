@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 
+import { useOnClickOutside } from "./utils/hooks";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
 
 function App() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState("");
+
+  const node = useRef();
+  useOnClickOutside(node, () => setOpen(false))
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -34,7 +37,7 @@ function App() {
         <div>
           <GlobalStyles />
         </div>
-        <div>
+        <div ref={node}>
           <Burger open={open} setOpen={setOpen} />
           <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />
         </div>

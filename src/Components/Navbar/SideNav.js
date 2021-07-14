@@ -47,30 +47,30 @@ const StyledMenu = styled.nav`
   }
 `;
 
-const SideNav = ({ open, token, logout, newToken }) => {
+const SideNav = ({ open, setOpen, token, logout, newToken }) => {
   return (
     <>
       <Router>
         <div>
           <StyledMenu open={open}>
             <Link to="/Home">
-              <span aria-label="home">Home</span>
+              <span aria-label="home" onClick={() => setOpen(!open)}>Home</span>
             </Link>
             <Link to="/Home">
-              <span aria-label="Park Search">Park Search</span>
+              <span aria-label="Park Search" onClick={() => setOpen(!open)}>Park Search</span>
             </Link>
             <Link to="/Home">
-              <span aria-label="Trip Planner">Trip Planner</span>
+              <span aria-label="Trip Planner" onClick={() => setOpen(!open)}>Trip Planner</span>
             </Link>
             <Link to="/Portal">
-              <span aria-label="Login">Login</span>
+              <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
             </Link>
           </StyledMenu>
         </div>
         <div className="nav-route">
           <Switch>
             <Route exact path="/home">
-              <Home token={token} newToken={newToken} logout={logout} />
+              <Home token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />
