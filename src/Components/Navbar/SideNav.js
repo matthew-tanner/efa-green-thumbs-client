@@ -6,13 +6,11 @@ import { bool } from "prop-types";
 
 import Home from '../Home/Home'
 import Portal from '../Auth/Portal'
-import Activities from '../Activities/Activities'
 
 const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: 1;
   background: ${({ theme }) => theme.primaryLight};
   height: 100vh;
   text-align: left;

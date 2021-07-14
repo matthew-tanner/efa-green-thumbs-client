@@ -9,8 +9,6 @@ import Burger from './Components/Navbar/Burger'
 import SideNav from './Components/Navbar/SideNav'
 
 
-const { Header, Footer, Sider, Content } = Layout
-
 function App() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState("");
