@@ -1,23 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { Modal, Button, Checkbox, Form, Input} from 'antd';
+import { Modal, Checkbox, Form, Input} from 'antd';
 
 //  https://medium.com/@alef.duarte/using-ant-design-form-inside-a-modal-in-react-stateless-functional-component-634f33357c80
 
 // https://ant.design/components/form/v3
 
 import "antd/dist/antd.css";
-// import "./styles.css";
 
 const EditActivity = (props) => {
 
 console.log('In EditActivity')
 
   const [formRef, setFormRef] = useState(null);
-
-  const showModal = () => {
-console.log('In showModal')
-    props.setVisible(true);
-  };
   
   const handleOk = () => {
     console.log('In handleOk -- DO SOMETHING WITH DATA THE USER ENTERED')

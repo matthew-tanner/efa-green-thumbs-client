@@ -11,9 +11,9 @@ const TripActivities = () => {
     const [visible, setVisible] = useState(false);
     const { Meta } = Card;
 
-return (
+    return (
 
-// ToDo: Would a scrolling list be better?  See https://ant.design/components/list/
+        // ToDo: Would a scrolling list be better?  See https://ant.design/components/list/
         <div className="site-card-wrapper" >
             <div className="trip-activities">
                 <Row gutter={16}>
@@ -27,17 +27,6 @@ return (
                                     src="../../../assets/logo.png"
                                 />
                             }
-                            extra={
-                                <Button
-                                  type="danger"
-                                  shape="circle"
-                                  style={{ color: 'white', zIndex: 10 }}
-                                //   stopPropogation rec from https://stackoverflow.com/questions/61040013/ant-design-how-can-i-handle-button-in-card-extra-onclick-event
-                                  onClick = {e => { e.stopPropagation(); console.log('DELETE THE ACTIVITY')}}
-                                >
-                                  X
-                                </Button>
-                              }
                         >
                             <Meta
                                 title="PUT ACTIITY NAME HERE"
@@ -45,8 +34,18 @@ return (
                                 description="PUT OTHER ACTIVITY INFO HERE"
                             />
 
-                            <Button onClick = {() => {setVisible(true)}}>
-                              Edit
+                            <Button
+                                icon={<EditOutlined />}
+                                onClick={() => { setVisible(true) }}
+                            />
+
+                            <Button
+                                shape="circle"
+                                style={{ color: 'black', zIndex: 10 }}
+                                //   stopPropogation rec from https://stackoverflow.com/questions/61040013/ant-design-how-can-i-handle-button-in-card-extra-onclick-event
+                                onClick={e => { e.stopPropagation(); console.log('DELETE THE ACTIVITY') }}
+                            >
+                                X
                             </Button>
                         </Card>
                     </Col>
@@ -60,15 +59,26 @@ return (
                                     src="../../../assets/logo.png"
                                 />
                             }
-                            actions={[
-                                <EditOutlined key="edit" onClick= {e => { e.stopPropagation(); console.log('EDIT THE ACTIVITY')}}/>
-                            ]}
                         >
                             <Meta
                                 title="PUT NEXT ACTIVITY NAME HERE"
                                 bordered={true}
                                 description="PUT MORE ACTIVITY INFO HERE"
                             />
+
+                            <Button
+                                icon={<EditOutlined />}
+                                onClick={() => { setVisible(true) }}
+                            />
+
+                            <Button
+                                shape="circle"
+                                style={{ color: 'black', zIndex: 10 }}
+                                //   stopPropogation rec from https://stackoverflow.com/questions/61040013/ant-design-how-can-i-handle-button-in-card-extra-onclick-event
+                                onClick={e => { e.stopPropagation(); console.log('DELETE THE ACTIVITY') }}
+                            >
+                                X
+                            </Button>
                         </Card>
                     </Col>
 
@@ -81,15 +91,25 @@ return (
                                     src="../../../assets/logo.png"
                                 />
                             }
-                            actions={[
-                                <EditOutlined key="edit" onClick= {e => { e.stopPropagation(); console.log('EDIT THE ACTIVITY')}}/>
-                            ]}
                         >
                             <Meta
                                 title="THIRD ACTIVITY"
                                 bordered={true}
                                 description="ACTIVITY INFO HERE"
                             />
+                                                        <Button
+                                icon={<EditOutlined />}
+                                onClick={() => { setVisible(true) }}
+                            />
+
+                            <Button
+                                shape="circle"
+                                style={{ color: 'black', zIndex: 10 }}
+                                //   stopPropogation rec from https://stackoverflow.com/questions/61040013/ant-design-how-can-i-handle-button-in-card-extra-onclick-event
+                                onClick={e => { e.stopPropagation(); console.log('DELETE THE ACTIVITY') }}
+                            >
+                                X
+                            </Button>
                         </Card>
 
                     </Col>
