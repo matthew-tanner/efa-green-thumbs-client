@@ -1,12 +1,17 @@
+
+import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
-import { EditOutlined, FormOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 
 import "./activities.css";
+import EditActivity from './EditActivity'
+
 
 const TripActivities = () => {
+    const [visible, setVisible] = useState(false);
     const { Meta } = Card;
 
-    return (
+return (
 
 // ToDo: Would a scrolling list be better?  See https://ant.design/components/list/
         <div className="site-card-wrapper" >
@@ -33,15 +38,16 @@ const TripActivities = () => {
                                   X
                                 </Button>
                               }
-                            actions={[
-                                <EditOutlined key="edit" />
-                            ]}
                         >
                             <Meta
                                 title="PUT ACTIITY NAME HERE"
                                 bordered={true}
                                 description="PUT OTHER ACTIVITY INFO HERE"
                             />
+
+                            <Button onClick = {() => {setVisible(true)}}>
+                              Edit
+                            </Button>
                         </Card>
                     </Col>
 
@@ -55,7 +61,7 @@ const TripActivities = () => {
                                 />
                             }
                             actions={[
-                                <EditOutlined key="edit" />
+                                <EditOutlined key="edit" onClick= {e => { e.stopPropagation(); console.log('EDIT THE ACTIVITY')}}/>
                             ]}
                         >
                             <Meta
@@ -76,7 +82,7 @@ const TripActivities = () => {
                                 />
                             }
                             actions={[
-                                <EditOutlined key="edit" />
+                                <EditOutlined key="edit" onClick= {e => { e.stopPropagation(); console.log('EDIT THE ACTIVITY')}}/>
                             ]}
                         >
                             <Meta
@@ -89,6 +95,7 @@ const TripActivities = () => {
                     </Col>
                 </Row>
             </div>
+            <EditActivity visible={visible} setVisible={setVisible} />
 
         </div>
 
