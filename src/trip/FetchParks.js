@@ -1,30 +1,26 @@
 import React, { useState } from 'react'
-import { Menu, Dropdown, message } from 'antd';
+import { Menu, Dropdown, Checkbox } from 'antd';
+import CreateTrips from './CreateTrips';
 
-function handleButtonClick(e) {
-    message.info('Click on left button.');
-    console.log('click left button', e);
-  }
-  
-  function handleMenuClick(e) {
-    message.info('Click on menu item.');
-    console.log('click', e);
-  }
+
   
 
 const ParkByState = () => {
     const [park, setPark] = useState('')
     const [activity, setActivity] = useState('')
     const [stateCode, setStateCode] = useState('')
+    
+    const [parksList, setParksList] = useState([])
+    const [chosenPark, setChosenPark] = useState('')
+    const [parkDescription, setParkDescription] = useState('')
+    const [chosenActivity, setChosenActivity] = useState('')
+    const [activitiesList, setActivitiesList] = useState([])
     const statesList = ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
     'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
     'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
     'VT','VI','VA','WA','WV','WI','WY']
-    const [parksList, setParksList] = useState([])
-    const [chosenPark, setChosenPark] = useState('')
-    const [activitiesList, setActivitiesList] = useState([])
-    const fetchPark = ({key}) =>{
+    const fetchParks = ({key}) =>{
         // const stateCodes = []
         console.log(key);
         // const statecode;
@@ -39,12 +35,14 @@ const ParkByState = () => {
                 console.log(data.map(park => park))
                 console.log(data.map(park => park.activities.map(activity => activity.name)))
                 setParksList(data.map(park => park))
+                
+                console.log(chosenPark)
             } catch (err) {
                 return err
             }
         })
     }
-    
+
     const fetchActivities = ({key}) => {
         console.log(key);
         fetch (`https://developer.nps.gov/api/v1/parks?parkCode=${key}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`) 
@@ -56,20 +54,28 @@ const ParkByState = () => {
                 setActivitiesList(data.map(park =>park.activities.map(activity => activity.name)))
                 // setActivitiesList(data.map(park =>park.activities.map((activity, index) => activity.name[index]))) -When I try this it gives back some encrypted info in the activities drop down
                 console.log(activitiesList);
+                setParkDescription(data.map(park => park.description))
+                setPark(data.map(park => park.fullName))
             } catch (err) {
                 return err
             }
         })   
     }
 
-  const menu =( <Menu value={stateCode} onClick={fetchPark} >
+
+
+function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
+
+  const menu =( <Menu value={stateCode} onClick={fetchParks} >
       {/* Now that I'm using Ant Design setStateCode is not being used */}
      {statesList.map((code)  => {return <Menu.Item key={code}>{code}</Menu.Item>})}
       
     </Menu>)
 
     const menu2 = (<Menu value={park} onClick={fetchActivities} >
-        {parksList.map((p)  => { return <Menu.Item key={p.parkCode}>{p.fullName}</Menu.Item>})}
+        {parksList.map((p)  => {return <> <Menu.Item key={p.parkCode}>{p.fullName}</Menu.Item> <Checkbox onChange={onChange}>Add to Park Trip</Checkbox></> })}
          {/* On click we want to fetchActivities and change park code instead of FetchPark the action that needs to performed is one that  when you hover the menu down it should have an option, maybe a checkbox, to to add park to trip and when you click on the park in the menu it should display park info in a div below. Then onSubmit anything that is checked gets added to trip. Probably requires another fetch separate from the FetchPark */}
          {/* whatever park they select it needs to get assigned to the name property in CreateTrips */}
         
@@ -81,7 +87,7 @@ const ParkByState = () => {
          
        </Menu>)
        
-        // 
+        // {parksList.map((p)  => { return <Menu.Item key={p.parkCode}>{p.fullName}</Menu.Item>})}
     return (
         <> 
     <Dropdown overlay={menu}>
@@ -91,7 +97,7 @@ const ParkByState = () => {
     </a>
   </Dropdown>
   <br />
-  <Dropdown overlay={menu2}>
+  <Dropdown overlay={menu2} >
     <a className="ant-dropdown-link">
       Choose a Park
       {/* Maybe you need another fetch for parks */}
@@ -103,9 +109,14 @@ const ParkByState = () => {
       Choose an Activity 
     </a>
   </Dropdown>
-        
-  {/* <CreateTrip FetchParks={FetchParks} parks={park}/> */}
+        <p>{parkDescription}</p>
 
+{/* Button need to have onSubmit = e.target.checked === true && addToTrip)  */}
+        <br/>
+        <p>{park}</p>
+  <CreateTrips fetchParks={fetchParks} park={park}  />
+
+  {/* chosenPark={chosenPark} */}
   {/* We need buttons here that will add parks and activities to the trips */}
 
 

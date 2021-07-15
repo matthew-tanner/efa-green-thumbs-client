@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TripsIndex = (props) => {
-    const [trips,setTrips] = useState([])
+    const [trips, setTrips] = useState([])
     const fetchTrips = () => {
         fetch(`http://localhost:3000/:id`, {
             method: 'GET',
@@ -22,6 +22,9 @@ const TripsIndex = (props) => {
     return(
         <>
         <CreateTrips fetchTrips={fetchTrips} token={props.token} />
+        {/* <TripsTable fetchTrips= {fetchTrips} trips={trips} editUpdateTrips={editUpdateTrips} updateOn={updateOn} token={props.token} /> */}
+
+        {/* {updateActive ? <TripEdit tripToUpdate={tripToUpdate} updateOff={updateOff} token={props.token} fetchTrips={f}} */}
         </>
     )
 }
