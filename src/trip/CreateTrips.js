@@ -28,11 +28,7 @@ const CreateTrips = (props) => {
         console.log(`switch to ${checked}`);
         setPub(checked)
       }
-    //props.FetchParks()
 
-    //we need a way to add a park and activity to the trip. Maybe on the back end 
-    //creating an entry to the Trips model that speaks to the fetched data on the front end.
-    // Maybe we pass the results from FetchPark.js in as a prop 
     return(
         <>
    <Form onFinish={handleSubmit}

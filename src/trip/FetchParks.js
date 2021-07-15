@@ -10,9 +10,9 @@ const ParkByState = () => {
     const [activity, setActivity] = useState('')
     const [stateCode, setStateCode] = useState('')   
     const [parksList, setParksList] = useState([])
-    const [chosenPark, setChosenPark] = useState('')
     const [parkDescription, setParkDescription] = useState('')
     const [chosenActivity, setChosenActivity] = useState([])
+    const [checked, setChecked] = useState(false)
     const [activitiesList, setActivitiesList] = useState([])
     const statesList = ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
@@ -51,9 +51,8 @@ const ParkByState = () => {
                 setActivitiesList(data[0].activities.map((activity => activity.name)))
                 // setActivitiesList(data.map(activity => console.log(activity.name)))
                 // console.log(activitiesList);
-                setParkDescription(data.map(park => park.description))
-
-                setPark(data.map(park => park.fullName))
+                setParkDescription(data[0].description)
+                setPark(data[0].fullName)
             } catch (err) {
                 return err
             
@@ -61,25 +60,24 @@ const ParkByState = () => {
 
         })   
     }
-
+// const activityMapper = () => {
+  
+// }
 //Function for the checkboxes
 function onChange(e) {
-    console.log(`checked = setChosen${e.target.checked}`);
-   e.target.checked === true && setChosenPark(e.target.checked)
-   e.target.checked === true && setChosenActivity(e.target.checked)
+    // console.log(`checked = ${e}`);
+    checked === true && console.log(e);
+//    e.target.checked === true && setChosenActivity(e.target.checked)
 
-   console.log(park);
-   
-   console.log(chosenPark);
-   console.log(activity);
-   console.log(chosenActivity);
   }
 
   //Function for the Submit Button
 function submitFunc() {
-    chosenPark === true && <CreateTrips fetchParks={fetchParks} park={park} />
+
     console.log(park); 
+    console.log(activity);
 }
+
 
   const menu =( <Menu value={stateCode} onClick={fetchParks} >
       {/* Now that I'm using Ant Design setStateCode is not being used */}
@@ -88,14 +86,14 @@ function submitFunc() {
     </Menu>)
 
     const menu2 = (<Menu value={park} onClick={fetchActivities} >
-        {parksList.map((p)  => {return <> <Menu.Item key={p.parkCode}><Checkbox onChange={onChange} value={chosenPark} >Add to Park Trip {p.fullName}</Checkbox></Menu.Item> </> })}
+        {parksList.map((p)  => {return <> <Menu.Item key={p.parkCode}>{p.fullName}</Menu.Item> </> })}
         
          {/* whatever park they select it needs to get assigned to the name property in CreateTrips */}
         
        </Menu>)
         // console.log(park)
-       const menu3 = (<Menu value={activity} >
-        {activitiesList.map((a)  => { return <Menu.Item key={a}>{a}<Checkbox onChange={onChange} value={chosenActivity} >Add to Park Trip {a}</Checkbox></Menu.Item>})}
+       const menu3 = (<Menu value={activity} onClick={(e => console.log(e.target))} >
+        {activitiesList.map((a)  => { return <Menu.Item key={a}>{a}<Checkbox onChange={onChange(a)} >Add to Park Trip {a}</Checkbox></Menu.Item>})}
         
          
        </Menu>)
@@ -122,13 +120,14 @@ function submitFunc() {
         <p>{parkDescription}</p>
         <br/>
         <p>{park}</p>
-        <Button type="primary" htmlType="submit" onClick= {submitFunc} >
+        <p>{activity}</p>
+        <Button type="primary" htmlType="submit" onClick={submitFunc} >
             Add Items to New Trip
           </Button>
 {/* Button need to have onSubmit = e.target.checked === true && <CreateTrips park={park} /> )  */}
         
         
-        {/* <CreateTrips submit={submitFunc} park={park} /> */}
+        <CreateTrips park={park} />
         </>
         
     )
