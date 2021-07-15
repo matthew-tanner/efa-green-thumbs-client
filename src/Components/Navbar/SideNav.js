@@ -47,12 +47,12 @@ const StyledMenu = styled.nav`
   }
 `;
 
-const SideNav = ({ open, token, logout, newToken }) => {
+const SideNav = (props) => {
   return (
     <>
       <Router>
         <div>
-          <StyledMenu open={open}>
+          <StyledMenu open={props.open}>
             <Link to="/Home">
               <span aria-label="home">Home</span>
             </Link>
@@ -70,10 +70,10 @@ const SideNav = ({ open, token, logout, newToken }) => {
         <div className="nav-route">
           <Switch>
             <Route exact path="/home">
-              <Home token={token} newToken={newToken} logout={logout} />
+              <Home token={props.token} newToken={props.newToken} logout={props.logout} />
             </Route>
             <Route exact path="/portal">
-              <Portal token={token} newToken={newToken} logout={logout} />
+              <Portal token={props.token} newToken={props.newToken} logout={props.logout} />
             </Route>
             <Route exact path="/">
               <Home />

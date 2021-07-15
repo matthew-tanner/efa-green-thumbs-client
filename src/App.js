@@ -31,11 +31,13 @@ function App() {
 
   return (
     <div className="App">
+      
       <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
         </div>
         <div>
+          {/* <Navbar token={token} logout={clearToken} newToken={updateToken}/> */}
           <Burger open={open} setOpen={setOpen} />
           <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />
         </div>

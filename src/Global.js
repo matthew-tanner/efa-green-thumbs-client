@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.primaryLight};
     color: ${({ theme }) => theme.primaryDark};
     display: flex;
-    font-family: 'Varela Round', sans-serif;
+    font-family: 'Varela Round', sans-serif;;
     height: 100vh;
     justify-content: center;
     text-rendering: optimizeLegibility;
