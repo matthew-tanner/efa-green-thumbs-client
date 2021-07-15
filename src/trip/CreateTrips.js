@@ -6,8 +6,7 @@ const CreateTrips = (props) => {
     const [name, setName] = useState(props.park) 
     const [pub, setPub] = useState(false)
     //const [parks, setParks] = useState([])
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = (e) => {        
         fetch(`http://localhost:3000/trip/create`, {
             method: 'POST',
             body: JSON.stringify({name: name , public: pub}),
@@ -27,6 +26,7 @@ const CreateTrips = (props) => {
     }
     function onChange(checked) {
         console.log(`switch to ${checked}`);
+        setPub(checked)
       }
     //props.FetchParks()
 
@@ -47,7 +47,7 @@ const CreateTrips = (props) => {
       <Form.Item label="Trip Name">
         <span className="ant-form-text">{name}</span>
       </Form.Item>
-      <Form.Item name="switch" label="Switch" valuePropName="checked">
+      <Form.Item name="public" label="Public" valuePropName="checked">
         <Switch defaultChecked onChange={onChange} />
       </Form.Item>
       <Form.Item >
