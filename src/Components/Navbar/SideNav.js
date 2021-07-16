@@ -7,6 +7,7 @@ import { bool } from "prop-types";
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
 import TripActivities from "../Activities/TripActivities"
+import TripsIndex from "../Trips/TripsIndex";
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -57,7 +58,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Home">
               <span aria-label="home" onClick={() => setOpen(!open)}>Home</span>
             </Link>
-            <Link to="/Home">
+            <Link to="/Trips">
               <span aria-label="Park Search" onClick={() => setOpen(!open)}>Park Search</span>
             </Link>
             <Link to="/Home">
@@ -75,6 +76,9 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
           <Switch>
             <Route exact path="/home">
               <Home token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
+            </Route>
+            <Route exact path="/trips">
+              <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />

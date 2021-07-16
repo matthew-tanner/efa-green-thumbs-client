@@ -1,10 +1,21 @@
 import React from "react";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Button } from "antd";
+import { useHistory } from "react-router-dom";
 
 const Home = (props) => {
+  let history = useHistory();
+
   return (
     <>
-      <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }} onClick={() => props.setOpen(!props.open)}>
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ minHeight: "100vh" }}
+        onClick={() => {
+          props.open === true ? props.setOpen(!props.open) : <></>
+        }}
+      >
         <Col>
           <Card
             bordered={false}
@@ -12,8 +23,11 @@ const Home = (props) => {
             type="flex"
             justify="center"
             align="middle"
-            cover={<img alt="logomain" src="../assets/logo.png" style={{maxWidth: "400px"}} />}
+            cover={<img alt="logomain" src="../assets/logo.png" style={{ maxWidth: "400px" }} />}
           >
+            <Button type="primary" onClick={() => history.push("/portal")}>
+              Test
+            </Button>
           </Card>
         </Col>
       </Row>
