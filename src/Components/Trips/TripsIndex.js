@@ -4,7 +4,8 @@ import { Select, Button, Divider } from "antd";
 const TripsIndex = (props) => {
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
-  const [selectedActivities, setSelectedActivities] = useState("");
+  const [parkName, setParkName] = useState("");
+  const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
   const { Option } = Select;
@@ -110,16 +111,22 @@ const TripsIndex = (props) => {
 
   const getActivities = (e) => {
     fetch(
-      `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`
+      `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`
     )
       .then((response) => response.json())
       .then((data) => {
+        //console.log(data.data[0].relatedParks[0].fullName);
+        setParkName(data.data[0].relatedParks[0].fullName);
         setActivitiesList(
-          data.data[0].activities.map((x) => {
+          data.data.map((x) => {
             return {
-              id: x.id,
-              name: x.name,
-            };
+              name: x.activities[0].name,
+              title: x.title,
+              location: x.location,
+              shortDescription: x.shortDescription,
+              url: x.url,
+              image: x.images[0].url
+            }
           })
         );
       });
@@ -164,7 +171,7 @@ const TripsIndex = (props) => {
           onChange={onChangeActivity}
         >
           {activitiesList.map((x) => (
-            <Option key={x.id} value={x.name}>
+            <Option key={x.name} value={x.name}>
               {x.name}
             </Option>
           ))}
@@ -175,7 +182,8 @@ const TripsIndex = (props) => {
 
   const createTrip = () => {
     const data = {
-      name: selectedActivities,
+      name: parkName,
+      activities: selectedActivities
     };
 
     fetch("http://localhost:3001/trip/create", {
@@ -226,7 +234,7 @@ const TripsIndex = (props) => {
       <br />
       <div>{parksList.length > 0 ? popParks() : <></>}</div>
       <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
-      <div>{selectedActivities !== "" ? showCreateButton() : <></>}</div>
+      <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
     </div>
   );
 };
