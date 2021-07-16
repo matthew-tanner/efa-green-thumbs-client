@@ -3,10 +3,13 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
+import { useMediaQuery } from "react-responsive";
 
 import { useOnClickOutside } from "./utils/hooks";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
+import Navbar from "./Components/Navbar/Navbar";
+import { DeviceSize } from "./Components/Responsive";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -31,6 +34,8 @@ function App() {
     setToken("");
   }
 
+  const isMobile = useMediaQuery({maxWidth: DeviceSize.mobile})
+
   return (
     <div className="App">
       
@@ -39,8 +44,11 @@ function App() {
           <GlobalStyles />
         </div>
         <div ref={node}>
-          <Burger open={open} setOpen={setOpen} />
-          <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />
+          {!isMobile && <Navbar token={token} logout={clearToken} newToken={updateToken} />}
+          {/* {isMobile && <Burger open={open} setOpen={setOpen} /> && */}
+                {/* // <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken}/>} */}
+          {isMobile && <Burger open={open} setOpen={setOpen} />}
+          {isMobile && <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />}
         </div>
       </ThemeProvider>
     </div>

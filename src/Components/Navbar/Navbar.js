@@ -1,16 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
-import { useMediaQuery } from "react-responsive";
 import styled from 'styled-components'
-
 
 import NavLinks from './NavLinks'
 import Access from './Access'
-import Burger from './Burger'
-import { DeviceSize } from '../Responsive/index'
-import SideNav from './SideNav';
 import Logo from './Logo';
-
 
 const NavbarContainer = styled.div`
     width: 100%;
@@ -20,6 +13,9 @@ const NavbarContainer = styled.div`
     padding: 0 1.5em;
     background-color: #383E56;
     color: white;
+    top: 0;
+    position: fixed;
+    left: 0;
 `
 
 const LeftSection = styled.div`
@@ -38,9 +34,7 @@ const RightSection = styled.div`
 `
 
 const Navbar = (props) => {
-    const [open, setOpen] = useState(false);
 
-    const isMobile = useMediaQuery({maxWidth: DeviceSize.mobile})
     return(
         <NavbarContainer>
             <LeftSection>
@@ -48,13 +42,9 @@ const Navbar = (props) => {
             </LeftSection>
             <MiddleSection>
                 <NavLinks token={props.token} logout={props.clearToken} newToken={props.updateToken}/>
-                {/* {!isMobile && <NavLinks />} */}
             </MiddleSection>
             <RightSection>
                 <Access />
-                {/* {!isMobile && <Access />}
-                {isMobile && <Burger open={open} setOpen={setOpen} /> &&
-                <SideNav open={open} setOpen={setOpen} />} */}
             </RightSection>
         </NavbarContainer>
     )

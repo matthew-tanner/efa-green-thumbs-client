@@ -77,7 +77,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
               <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/portal">
-              <Portal token={props.token} newToken={props.newToken} logout={props.logout} />
+              <Portal token={token} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/">
               <Home />
