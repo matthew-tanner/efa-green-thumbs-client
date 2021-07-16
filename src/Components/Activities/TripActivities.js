@@ -12,6 +12,7 @@ const TripActivities = () => {
 
 let tripActivityList = [
 {
+   id: 1,
    name: "Boating",
    description: "quiet lake",
    cost: "Free",

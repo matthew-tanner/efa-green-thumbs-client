@@ -9,9 +9,11 @@ import { Modal, Checkbox, Form, Input } from 'antd';
 import "antd/dist/antd.css";
 
 const EditActivity = (props) => {
+  const [activityId, setActivityId] = useState(props.tripActivity.id)
   const [name, setName] = useState(props.tripActivity?.name)
   const [description, setDescription] = useState(props.tripActivity.description)
   const [notes, setNotes] = useState(props.tripActivity.notes)
+  const [cost, setCost] = useState(props.tripActivity.cost)
 
   console.log('In EditActivity')
   console.log(props.tripActivity.description)
@@ -22,16 +24,13 @@ const EditActivity = (props) => {
 
   const handleOk = () => {
     console.log('In handleOk -- DO SOMETHING WITH DATA THE USER ENTERED')
+    console.log(notes)
     props.setVisible(false);
   };
 
   const handleCancel = () => {
     console.log('In handleCancel')
     props.setVisible(false);
-  };
-
-  const handleCreate = () => {
-    console.log('In handleCreate -- DO SOMETHING WITH DATA THE USER ENTERED')
   };
 
   const saveFormRef = useCallback(node => {
@@ -49,10 +48,24 @@ const EditActivity = (props) => {
         onCancel={handleCancel}
         onOk={handleOk}
       >
-        
-        <Form layout="horizontal">
+        <p>{name} -- {description}</p>
+        <p>Cost:  {cost} </p>
+        <Form
+          layout="horizontal"
+        >
+          
+          <Form.Item label="Notes">
+            <Input 
+              name="notes" value={notes}
+              onChange={(e) => { setNotes(e.target.value) }} 
+            />
+          </Form.Item>
 
-          <Form.Item label="Name">
+          {/* <Form.Item label="Notes">
+            <Input name="notes" value={notes}/>
+          </Form.Item> */}
+
+          {/* <Form.Item label="Name">
             <Input name="name" value={name}/>
           </Form.Item>
 
@@ -60,9 +73,9 @@ const EditActivity = (props) => {
             <Input name="description" value={description}/>
           </Form.Item>
 
-          <Form.Item label="Notes">
-            <Input name="notes" value={notes}/>
-          </Form.Item>
+          <Form.Item label="Cost">
+            <Input name="cost" value={cost}/>
+          </Form.Item> */}
 
         </Form>
       </Modal>
