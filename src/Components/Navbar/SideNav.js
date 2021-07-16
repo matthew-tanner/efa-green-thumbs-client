@@ -52,7 +52,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
     <>
       <Router>
         <div>
-          <StyledMenu open={props.open}>
+          <StyledMenu open={open}>
             <Link to="/Home">
               <span aria-label="home" onClick={() => setOpen(!open)}>Home</span>
             </Link>
