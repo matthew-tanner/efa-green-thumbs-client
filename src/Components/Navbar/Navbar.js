@@ -1,38 +1,53 @@
-import React from "react";
-import styled from "styled-components";
-import Burger from "./Burger";
-import SideNav from "./SideNav";
+import React from 'react'
+import styled from 'styled-components'
 
-const Nav = styled.nav`
+import NavLinks from './NavLinks'
+import Access from './Access'
+import Logo from './Logo';
+
+const NavbarContainer = styled.div`
     width: 100%;
-    height: 55px;
-    border-bottom: 2px solid #f1f1f1;
-    padding: 0 20px;
+    height: 80px;
     display: flex;
-    justify-content: space-between;
-    .logo {
-        padding: 15px 0;
-    };
-    ul{ 
-        list-style: none;
-        display: flex;
-        flex-flow: row nowrap;
-        li {
-            padding: 18px 10px;
-            }
-        }
-      }
-    
-    `;
+    align-items: center;
+    padding: 0 1.5em;
+    background-color: #383E56;
+    color: white;
+    top: 0;
+    position: fixed;
+    left: 0;
+`
 
-const Navbar = () => {
-  return (
-    <Nav>
-      <div className="logo">Nav Bar</div>
-      <SideNav />
-      <Burger />
-    </Nav>
-  );
-};
+const LeftSection = styled.div`
+    display: flex;
+`
 
-export default Navbar;
+const MiddleSection = styled.div`
+    display: flex;
+    flex-grow: 2;
+    height: 100%;
+    justify-content: center;
+`
+
+const RightSection = styled.div`
+    display: flex;
+`
+
+const Navbar = (props) => {
+
+    return(
+        <NavbarContainer>
+            <LeftSection>
+                <Logo />
+            </LeftSection>
+            <MiddleSection>
+                <NavLinks token={props.token} logout={props.clearToken} newToken={props.updateToken}/>
+            </MiddleSection>
+            <RightSection>
+                <Access />
+            </RightSection>
+        </NavbarContainer>
+    )
+}
+
+export default Navbar
