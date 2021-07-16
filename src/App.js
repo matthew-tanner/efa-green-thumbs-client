@@ -1,58 +1,50 @@
-import React from "react";
-import { Carousel, Row, Col, Card } from "antd";
+import React, { useEffect, useState, useRef } from "react";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./Global";
+import { theme } from "./Theme";
 import "./App.css";
 import ParkByState from "./trip/FetchParks";
 
 
 
+import { useOnClickOutside } from "./utils/hooks";
+import Burger from "./Components/Navbar/Burger";
+import SideNav from "./Components/Navbar/SideNav";
+
 function App() {
-  const contentStyle = {
-    height: "400px",
-    color: "#fff",
-    lineHeight: "400px",
-    fontSize: "30px",
-    textAlign: "center",
-    background: "#184D47",
-  };
+  const [open, setOpen] = useState(false);
+  const [token, setToken] = useState("");
 
-  // const key = 'EsB6ufQhwYntOPZBgIhu6Jtf3jfbXjrAEvf8ZGEl'
-  // const baseUrl = 'https://developer.nps.gov/api/v1/events?'
+  const node = useRef();
+  useOnClickOutside(node, () => setOpen(false))
 
-  const parkFetch = () => {
-    fetch ('https://developer.nps.gov/api/v1/events?stateCode=IN&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc')
-    .then (res => res.json())
-    .then (data => console.log(data))
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      setToken(localStorage.getItem("token"))
+    }
+  }, [])
+
+  const updateToken = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
   }
-  parkFetch()
 
-  const parkToDoFetch = () => {
-    fetch ('https://developer.nps.gov/api/v1/thingstodo?stateCode=ME&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc')
-    .then (res => res.json())
-    .then (data2 => console.log(data2))
+  const clearToken = () => {
+    localStorage.clear();
+    setToken("");
   }
-  parkToDoFetch()
-
 
   return (
     <div className="App">
-      <Row type="flex" justify="center" align="middle" style={{ minHeight: "100vh" }}>
-        <Col>
-          <Card bordered={false} style={{ width: 700 }}>
-            <Carousel autoplay>
-              {/* <div>
-                <h3 style={contentStyle}>Welcome to Green Thumbs</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Grow your garden and your community</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>Plan + Create + Inspire</h3>
-              </div> */}
-              <ParkByState />
-            </Carousel>
-          </Card>
-        </Col>
-      </Row>
+      <ThemeProvider theme={theme}>
+        <div>
+          <GlobalStyles />
+        </div>
+        <div ref={node}>
+          <Burger open={open} setOpen={setOpen} />
+          <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />
+        </div>
+      </ThemeProvider>
     </div>
   );
 }
