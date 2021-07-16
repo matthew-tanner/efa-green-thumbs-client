@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Select, Button, Divider } from "antd";
+import { useHistory } from "react-router-dom";
 
 const TripsIndex = (props) => {
+  const history = useHistory();
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
   const [parkName, setParkName] = useState("");
@@ -132,6 +134,29 @@ const TripsIndex = (props) => {
       });
   };
 
+  const popStates = () => {
+    return (
+      <>
+      <Select
+      showSearch
+      style={{ width: 200 }}
+      placeholder="Select a State"
+      optionFilterProp="children"
+      filterOption={(input, option) =>
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
+      onChange={onChangeState}
+    >
+      {statesList.map((x) => (
+        <Option key={x} value={x}>
+          {x}
+        </Option>
+      ))}
+    </Select>
+    </>
+    )
+  }
+
   const popParks = () => {
     return (
       <>
@@ -181,24 +206,29 @@ const TripsIndex = (props) => {
   };
 
   const createTrip = () => {
-    const data = {
-      name: parkName,
-      activities: selectedActivities
-    };
+    if(props.token){
+      const data = {
+        name: parkName,
+        activities: selectedActivities
+      };
+  
+      fetch("http://localhost:3001/trip/create", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization:
+            `Bearer ${props.token}`,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }else{
+      history.push("/login");
+    }
 
-    fetch("http://localhost:3001/trip/create", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI2MzkzNDA2LCJleHAiOjE2MjY0Nzk4MDZ9.gv2dWGJ7xlPc05v614Jp09yF7hmNyjulOSU8wjO4-b8",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
   };
 
   const showCreateButton = () => {
@@ -215,22 +245,7 @@ const TripsIndex = (props) => {
       <div>
         <h3>Select a State</h3>
       </div>
-      <Select
-        showSearch
-        style={{ width: 200 }}
-        placeholder="Select a State"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        onChange={onChangeState}
-      >
-        {statesList.map((x) => (
-          <Option key={x} value={x}>
-            {x}
-          </Option>
-        ))}
-      </Select>
+      <div>{popStates()}</div>
       <br />
       <div>{parksList.length > 0 ? popParks() : <></>}</div>
       <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
