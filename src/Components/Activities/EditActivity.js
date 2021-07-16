@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { Modal, Checkbox, Form, Input} from 'antd';
+import { Modal, Checkbox, Form, Input } from 'antd';
+
 
 //  https://medium.com/@alef.duarte/using-ant-design-form-inside-a-modal-in-react-stateless-functional-component-634f33357c80
 
@@ -8,11 +9,17 @@ import { Modal, Checkbox, Form, Input} from 'antd';
 import "antd/dist/antd.css";
 
 const EditActivity = (props) => {
+  const [name, setName] = useState(props.tripActivity?.name)
+  const [description, setDescription] = useState(props.tripActivity.description)
+  const [notes, setNotes] = useState(props.tripActivity.notes)
 
-console.log('In EditActivity')
+  console.log('In EditActivity')
+  console.log(props.tripActivity.description)
+  console.log(props.tripActivity.name)
+  console.log(props.tripActivity.notes);
 
   const [formRef, setFormRef] = useState(null);
-  
+
   const handleOk = () => {
     console.log('In handleOk -- DO SOMETHING WITH DATA THE USER ENTERED')
     props.setVisible(false);
@@ -22,7 +29,7 @@ console.log('In EditActivity')
     console.log('In handleCancel')
     props.setVisible(false);
   };
-  
+
   const handleCreate = () => {
     console.log('In handleCreate -- DO SOMETHING WITH DATA THE USER ENTERED')
   };
@@ -36,27 +43,29 @@ console.log('In EditActivity')
   return (
     <>
       <Modal
-            visible={props.visible}
-            title="Edit your Notes for the activity"
-            okText="Save"
-            onCancel={handleCancel}
-            onOk={handleOk}
-        >
-            <Form 
-                layout="vertical" 
-                initialValues={{
-                    private: true,
-                }}>
-                    
-                <Form.Item name="name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
+        visible={props.visible}
+        title="Edit your Notes for the activity"
+        okText="Save"
+        onCancel={handleCancel}
+        onOk={handleOk}
+      >
+        
+        <Form layout="horizontal">
 
-                {/* <Form.Item className='checkbox' name="private" valuePropName="checked" wrapperCol={{ offset: -8, span: 17 }}>
-                    <Checkbox className='portalCardTypography'>Private</Checkbox>
-                </Form.Item> */}
-            </Form>
-        </Modal>
+          <Form.Item label="Name">
+            <Input name="name" value={name}/>
+          </Form.Item>
+
+          <Form.Item label="Description">
+            <Input name="description" value={description}/>
+          </Form.Item>
+
+          <Form.Item label="Notes">
+            <Input name="notes" value={notes}/>
+          </Form.Item>
+
+        </Form>
+      </Modal>
     </>
   );
 };

@@ -19,6 +19,7 @@ let tripActivityList = [
    tripId: 1,
    userId: 100
 }]
+console.log (tripActivityList[0].name)
     const [visible, setVisible] = useState(false);
     const { Meta } = Card;
 
@@ -38,9 +39,9 @@ let tripActivityList = [
                             }
                         >
                             <Meta
-                                title="PUT ACTIITY NAME HERE"
+                                title={tripActivityList[0].name}
                                 bordered={true}
-                                description="PUT OTHER ACTIVITY INFO HERE"
+                                description={tripActivityList[0].description}
                             />
 
                             <Button
@@ -124,7 +125,11 @@ let tripActivityList = [
                     </Col>
                 </Row>
             </div>
-            <EditActivity visible={visible} setVisible={setVisible} />
+            <EditActivity 
+                tripActivity={tripActivityList[0]} 
+                visible={visible} 
+                setVisible={setVisible} 
+            />
 
         </div>
 
