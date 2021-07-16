@@ -37,8 +37,8 @@ console.log('In EditActivity')
     <>
       <Modal
             visible={props.visible}
-            title="Form within a Modal"
-            okText="Submit"
+            title="Edit your Notes for the activity"
+            okText="Save"
             onCancel={handleCancel}
             onOk={handleOk}
         >
@@ -52,9 +52,9 @@ console.log('In EditActivity')
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='checkbox' name="private" valuePropName="checked" wrapperCol={{ offset: -8, span: 17 }}>
+                {/* <Form.Item className='checkbox' name="private" valuePropName="checked" wrapperCol={{ offset: -8, span: 17 }}>
                     <Checkbox className='portalCardTypography'>Private</Checkbox>
-                </Form.Item>
+                </Form.Item> */}
             </Form>
         </Modal>
     </>

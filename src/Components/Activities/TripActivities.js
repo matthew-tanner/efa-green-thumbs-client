@@ -7,13 +7,22 @@ import "./activities.css";
 import EditActivity from './EditActivity'
 
 
+// ToDo: Trip and activities should be passed in as parameters (props?)
 const TripActivities = () => {
+
+let tripActivityList = [
+{
+   name: "Boating",
+   description: "quiet lake",
+   cost: "Free",
+   notes: "looks like fun",
+   tripId: 1,
+   userId: 100
+}]
     const [visible, setVisible] = useState(false);
     const { Meta } = Card;
 
     return (
-
-        // ToDo: Would a scrolling list be better?  See https://ant.design/components/list/
         <div className="site-card-wrapper" >
             <div className="trip-activities">
                 <Row gutter={16}>
