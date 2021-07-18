@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Divider } from "antd";
+import { Select, Button, Divider, Form, Switch, Checkbox } from "antd";
 import { useHistory } from "react-router-dom";
+import TripsDisplay from "./TripsDisplay";
 
 const TripsIndex = (props) => {
   const history = useHistory();
@@ -10,6 +11,7 @@ const TripsIndex = (props) => {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
+  const [pub, setPub] = useState(false)
   const { Option } = Select;
   const statesList = [
     "AL",
@@ -186,6 +188,7 @@ const TripsIndex = (props) => {
       <>
         <h3>Select an Activity</h3>
         <Select
+          mode= "multiple"
           showSearch
           style={{ width: 300 }}
           placeholder="Select an Activity"
@@ -205,37 +208,65 @@ const TripsIndex = (props) => {
     );
   };
 
-  const createTrip = () => {
-    if(props.token){
+  const createTrip = () => { 
+    // if(props.token){
       const data = {
         name: parkName,
-        activities: selectedActivities
+        activities: selectedActivities,
+        public: pub
       };
   
-      fetch("http://localhost:3001/trip/create", {
+      fetch("http://localhost:3000/trip/create", {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization:
-            `Bearer ${props.token}`,
+            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2NTQwOTA1LCJleHAiOjE2MjY2MjczMDV9.6kxokReFmJcOcA4Td1JymzvGk-ONFEtyuwuZxcB4yRE`,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
         });
-    }else{
-      history.push("/login");
-    }
+    // } else {
+    //   history.push("/login");
+    // }
 
   };
 
+  function onChange(checked){
+    console.log(`switch to ${checked} ${pub}`);
+    setPub(!checked)
+  }
+
   const showCreateButton = () => {
     return (
-      <>
-        <Divider />
+      <> 
+      <Divider />        
+      <Form 
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        layout="horizontal"
+      > 
+      <Form.Item label="Trip Name">
+        <span className="ant-form-text">{parkName}</span>
+      </Form.Item>
+      <Form.Item label="Selected Activities">
+        <span className="ant-form-text">{selectedActivities}</span>
+      </Form.Item>
+      <Form.Item name="public" label="Public" valuePropName="checked" value={pub} >
+        <Switch defaultChecked onChange={onChange} />
+      </Form.Item>
+      <Form.Item >
         <Button type="primary" onClick={() => createTrip()}>Create Trip</Button>
+          </ Form.Item>
+      </Form>
+       
       </>
     );
   };
@@ -250,6 +281,7 @@ const TripsIndex = (props) => {
       <div>{parksList.length > 0 ? popParks() : <></>}</div>
       <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
       <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
+      
     </div>
   );
 };

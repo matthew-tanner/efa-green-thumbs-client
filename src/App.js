@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
-import ParkByState from "./trip/FetchParks";
+
 
 
 
