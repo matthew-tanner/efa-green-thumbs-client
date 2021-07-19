@@ -1,10 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Modal, Checkbox, Form, Input } from 'antd';
-
-
-//  https://medium.com/@alef.duarte/using-ant-design-form-inside-a-modal-in-react-stateless-functional-component-634f33357c80
-
-// https://ant.design/components/form/v3
+import { Modal, Form, Input } from 'antd';
 
 import "antd/dist/antd.css";
 
@@ -60,23 +55,6 @@ const EditActivity = (props) => {
               onChange={(e) => { setNotes(e.target.value) }} 
             />
           </Form.Item>
-
-          {/* <Form.Item label="Notes">
-            <Input name="notes" value={notes}/>
-          </Form.Item> */}
-
-          {/* <Form.Item label="Name">
-            <Input name="name" value={name}/>
-          </Form.Item>
-
-          <Form.Item label="Description">
-            <Input name="description" value={description}/>
-          </Form.Item>
-
-          <Form.Item label="Cost">
-            <Input name="cost" value={cost}/>
-          </Form.Item> */}
-
         </Form>
       </Modal>
     </>
