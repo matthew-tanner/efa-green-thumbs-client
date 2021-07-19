@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
 
 import DisplayTripActivities from './DisplayTripActivities'
+import AddActivity from './AddActivity'
 
 const TripActivityIndex = (props) => {
     const [tripActivities, setTripActivities] = useState([])
@@ -33,20 +34,28 @@ const TripActivityIndex = (props) => {
     }, [])
 
     return (
-        <>
-            <div>
-                <h3>Activities</h3>
-            </div>
-            <div>
-                <DisplayTripActivities 
-                    tripId={props.tripId} 
-                    tripActivityList={tripActivities} 
-                    fetchTripActivities={fetchTripActivities}
-                    token={props.token}
-                />
-            </div>
+        <div style={{ }}>
+            <Row >
+                <Col span={8}>
+                    <AddActivity 
+                        inActivityName={'New Activity'} 
+                        inActivityDescription={'This new activity will be super fun'}
+                        inActivityCost={'$30/hour'}
+                        fetcTripActivities={fetchTripActivities} 
+                        token={props.token} />    
+                </Col>
+                <Col span={16}>
+                    <DisplayTripActivities 
+                        tripId={props.tripId} 
+                        tripActivityList={tripActivities} 
+                        fetchTripActivities={fetchTripActivities}
+                        token={props.token}
+                    />
+                </Col>
+            </Row>
 
-        </>
+
+        </div>
     )
 }
 

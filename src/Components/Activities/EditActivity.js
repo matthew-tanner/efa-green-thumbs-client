@@ -12,9 +12,9 @@ const EditActivity = (props) => {
   const [activityId, setActivityId] = useState(props.tripActivity.id)
   const [name, setName] = useState(props.tripActivity?.name)
   const [description, setDescription] = useState(props.tripActivity.description)
-  const [notes, setNotes] = useState(props.tripActivity.notes)
   const [cost, setCost] = useState(props.tripActivity.cost)
-
+  const [notes, setNotes] = useState(props.tripActivity.notes)
+  
   console.log('In EditActivity')
   console.log(props.tripActivity.name)
   console.log(props.tripActivity.id)
