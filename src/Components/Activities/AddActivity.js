@@ -55,6 +55,7 @@ const AddActivity = (props) => {
                     <Form.Item>
                         <Button htmlType="submit" onClick={handleSubmit}>Save</Button>
                     </Form.Item>
+{/* ToDo: Add a cancel button */}
                 </Form>
             </Card>
         </div>

@@ -7,8 +7,7 @@ import EditActivity from './EditActivity'
 
 
 const DisplayTripActivities = (props) => {
-    const [visible, setVisible] = useState(false);
-    const [delActivityId, setDelActivityId] = useState('')
+
     const { Meta } = Card;
 
     console.log(props.tripActivityList)
@@ -22,6 +21,7 @@ const DisplayTripActivities = (props) => {
                 'Authorization': `Bearer ${props.token}`
             })
         })
+// ToDo:  Display a confirmation message?
         .then(() => props.fetchTripActivities())
     }
 
@@ -33,6 +33,7 @@ const DisplayTripActivities = (props) => {
                     {props.tripActivityList.map(tripActivity => {
                         return (
                             <Col span={8}>
+{/* ToDo: Ant recommends having a max of 4 rows of cards.  Do we need to allow for an unlimited number of activities for a trip? */}
                                 <Card
                                     className="activityCard"
                                     size="small"
@@ -45,34 +46,26 @@ const DisplayTripActivities = (props) => {
                                     }
                                 >
                                     <Meta
+// ToDo: Add notes to the card.
                                         title={tripActivity.name}
                                         bordered={true}
                                         description={tripActivity.description}
                                     />
+                                    <p>{tripActivity.notes}</p>
 
                                     <Button
                                         icon={<EditOutlined />}
-                                        onClick={() => { setVisible(true) }}
+                                        // onClick={() => { setVisible(true) }}
+                                        onClick={() => {props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn()}}
                                     />
 
                                     <Button
                                         shape="circle"
                                         style={{ color: 'black', zIndex: 10 }}
-// ToDo: Doesn't consistently set the updActivityId to the right value
-                                        // onClick={e => { setDelActivityId(tripActivity.id); handleDelete() }}
                                         onClick={() => {deleteActivity(tripActivity)}}
                                     >
                                         X
                                     </Button>
-{/* POPULATES MODAL FORM WITH DATA FROM THE LAST CARD INSTEAD OF THE CARD BEING CLICKED. BASED ON CONSOLE LOG IN EDITACTIVITY, LOOKS LIKE ONCE VISIBLE IS TRUE, EDITACTIVITY IS BEING CALLED FOR EACH ITEM IN THE ARRAY. */}
-                                    {visible 
-                                        ? <EditActivity
-                                            tripActivity={tripActivity}
-                                            visible={visible}
-                                            setVisible={setVisible}
-                                        />
-                                        : <></>
-                                    }       
                                 </Card>
                             </Col>
                         )
@@ -80,13 +73,6 @@ const DisplayTripActivities = (props) => {
 
                 </Row>
             </div>
-{/* DATA IS ON THE FORM, BUT ISN"T TIED TO THE MAPPED DATA */}
-            {/* <EditActivity
-                tripActivity={tripActivityList[0]}
-                visible={visible}
-                setVisible={setVisible}
-            /> */}
-
         </div>
     )
 }

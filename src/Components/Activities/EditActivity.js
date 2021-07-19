@@ -4,26 +4,40 @@ import { Modal, Form, Input } from 'antd';
 import "antd/dist/antd.css";
 
 const EditActivity = (props) => {
-  const [activityId, setActivityId] = useState(props.tripActivity.id)
-  const [name, setName] = useState(props.tripActivity?.name)
-  const [description, setDescription] = useState(props.tripActivity.description)
-  const [cost, setCost] = useState(props.tripActivity.cost)
-  const [notes, setNotes] = useState(props.tripActivity.notes)
+  const [activityId, setActivityId] = useState(props.activityToUpdate.id)
+  const [name, setName] = useState(props.activityToUpdate.name)
+  const [description, setDescription] = useState(props.activityToUpdate.description)
+  const [cost, setCost] = useState(props.activityToUpdate.cost)
+  const [notes, setNotes] = useState(props.activityToUpdate.notes)
   
-  console.log('In EditActivity')
-  console.log(props.tripActivity.name)
-  console.log(props.tripActivity.id)
+  console.log(`In EditActivity - visible is ${props.visible}`)
+  console.log(props.activityToUpdate.name)
+  console.log(props.activityToUpdate.id)
 
   const [formRef, setFormRef] = useState(null);
 
   const handleOk = () => {
-    console.log('In handleOk -- DO SOMETHING WITH DATA THE USER ENTERED')
-    console.log(notes)
-    props.setVisible(false);
-  };
+    console.log(`In handleOk - Id is ${activityId}, notes= ${notes}`)
+    console.log (props.activityToUpdate)
+
+    fetch(`http://localhost:3000/activity/${props.activityToUpdate.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({notes: notes}),
+        headers: new Headers({ 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${props.token}`
+        })
+    })
+    .then((res) => {
+        props.fetchTripActivities()
+        props.updateOff()
+        props.setVisible(false)
+    })
+  }
 
   const handleCancel = () => {
     console.log('In handleCancel')
+    props.updateOff()
     props.setVisible(false);
   };
 
@@ -44,7 +58,6 @@ const EditActivity = (props) => {
       >
         <p>{name} -- {description}</p>
         <p>Cost:  {cost} </p>
-{/* ToDo: Emory suggested adding <Form onSubmit={activityUpdate}, making the Save button a type=submit, and doing a PUT fetch in activityUpdate.  How is this different from using the handleOk function? */}
         <Form
           layout="horizontal"
         >

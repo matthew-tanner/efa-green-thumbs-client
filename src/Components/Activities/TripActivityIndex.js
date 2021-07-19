@@ -3,9 +3,13 @@ import { Col, Row } from 'antd';
 
 import DisplayTripActivities from './DisplayTripActivities'
 import AddActivity from './AddActivity'
+import EditActivity from './EditActivity'
 
 const TripActivityIndex = (props) => {
     const [tripActivities, setTripActivities] = useState([])
+    const [updateActive, setUpdateActive] = useState(false)
+    const [activityToUpdate, setActivityToUpdate] = useState({})
+    const [visible, setVisible] = useState(false);
 
     const fetchTripActivities = () => {
         fetch(`http://localhost:3000/activity/all/${props.tripId}`, {
@@ -19,6 +23,19 @@ const TripActivityIndex = (props) => {
             .then((tripActivityData) => {
                 setTripActivities(tripActivityData)
             })
+    }
+
+    const editUpdateActivity = (tripActivity) => {
+        setActivityToUpdate(tripActivity)
+        console.log(tripActivity)
+    }
+
+    const updateOn = () => {
+        setUpdateActive(true)
+    }
+
+    const updateOff = () => {
+        setUpdateActive(false)
     }
 
     useEffect(() => {
@@ -42,10 +59,25 @@ const TripActivityIndex = (props) => {
                     <DisplayTripActivities 
                         tripId={props.tripId} 
                         tripActivityList={tripActivities} 
+                        editUpdateActivity={editUpdateActivity}
+                        updateOn={updateOn}
                         fetchTripActivities={fetchTripActivities}
+                        visible={visible}
+                        setVisible={setVisible}
                         token={props.token}
                     />
                 </Col>
+                {updateActive
+                    ? <EditActivity 
+                        activityToUpdate={activityToUpdate}
+                        updateOff={updateOff}
+                        token={props.token}
+                        fetchTripActivities={fetchTripActivities}
+                        visible={visible}
+                        setVisible={setVisible}
+                        />
+                    : <></>
+                }
             </Row>
         </div>
     )
