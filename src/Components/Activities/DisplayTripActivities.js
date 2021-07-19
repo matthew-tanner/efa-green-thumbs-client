@@ -8,11 +8,21 @@ import EditActivity from './EditActivity'
 
 const DisplayTripActivities = (props) => {
     const [visible, setVisible] = useState(false);
+    const [delActivityId, setDelActivityId] = useState('')
     const { Meta } = Card;
 
-// ToDo: delete activity from db and re-display the cards 
-    const handleDelete = () => {
-        console.log('In handleDelete -- DELETE THE ACTIVITY')
+    console.log(props.tripActivityList)
+
+    const deleteActivity = (tripActivity) => {
+
+        fetch(`http://localhost:3000/activity/${tripActivity.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.token}`
+            })
+        })
+        .then(() => props.fetchTripActivities())
     }
 
     return (
@@ -48,7 +58,9 @@ const DisplayTripActivities = (props) => {
                                     <Button
                                         shape="circle"
                                         style={{ color: 'black', zIndex: 10 }}
-                                        onClick={e => { e.stopPropagation(); handleDelete() }}
+// ToDo: Doesn't consistently set the updActivityId to the right value
+                                        // onClick={e => { setDelActivityId(tripActivity.id); handleDelete() }}
+                                        onClick={() => {deleteActivity(tripActivity)}}
                                     >
                                         X
                                     </Button>
