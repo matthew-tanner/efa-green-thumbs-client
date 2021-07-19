@@ -16,9 +16,8 @@ const EditActivity = (props) => {
   const [cost, setCost] = useState(props.tripActivity.cost)
 
   console.log('In EditActivity')
-  console.log(props.tripActivity.description)
   console.log(props.tripActivity.name)
-  console.log(props.tripActivity.notes);
+  console.log(props.tripActivity.id)
 
   const [formRef, setFormRef] = useState(null);
 
@@ -50,6 +49,7 @@ const EditActivity = (props) => {
       >
         <p>{name} -- {description}</p>
         <p>Cost:  {cost} </p>
+{/* ToDo: Emory suggested adding <Form onSubmit={activityUpdate}, making the Save button a type=submit, and doing a PUT fetch in activityUpdate.  How is this different from using the handleOk function? */}
         <Form
           layout="horizontal"
         >

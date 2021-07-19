@@ -1,57 +1,18 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
+
 import { EditOutlined } from '@ant-design/icons';
 
 import EditActivity from './EditActivity'
 
 
-// ToDo: Trip and activities should be passed in as parameters (props?)
-const TripActivities = () => {
-
-    let tripActivityList = [
-        {
-            id: 1,
-            name: "Boating",
-            description: "quiet lake",
-            cost: "$50/hour rental",
-            notes: "looks like fun",
-            tripId: 1,
-            userId: 100
-        },
-        {
-            id: 2,
-            name: "Hiking",
-            description: "Easy terrain",
-            cost: "Free",
-            notes: "",
-            tripId: 1,
-            userId: 100
-        },
-        {
-            id: 3,
-            name: "Mountain Biking",
-            description: "Advanced trail",
-            cost: "Free",
-            notes: "Scarry steep drop-offs",
-            tripId: 1,
-            userId: 100
-        },
-        {
-            id: 4,
-            name: "Nature Center",
-            description: "History of park, ranger programs, music",
-            cost: "Free",
-            notes: "Good recommendations for trails",
-            tripId: 1,
-            userId: 100
-        }
-    ]
-
-
+const DisplayTripActivities = (props) => {
     const [visible, setVisible] = useState(false);
     const { Meta } = Card;
 
+    console.log('In DisplayTripActivities')
+    console.log(props)
+    console.log(props.tripActivityList)
     console.log(visible)
 
     // ToDo: delete activity from db and re-display the cards 
@@ -64,7 +25,7 @@ const TripActivities = () => {
             <div style={{ margin: 100 }} >
                 <Row gutter={16}>
 
-                    {tripActivityList.map(tripActivity => {
+                    {props.tripActivityList.map(tripActivity => {
                         return (
                             <Col span={8}>
                                 <Card
@@ -120,9 +81,8 @@ const TripActivities = () => {
             /> */}
 
         </div>
-
     )
 }
 
-export default TripActivities
+export default DisplayTripActivities
 

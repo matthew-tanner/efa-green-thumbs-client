@@ -43,3 +43,21 @@ const handleCancel = () => {
 
     props.setVisible(false);
 };
+
+ // ToDo: delete activity from db and re-display the cards 
+ const handleDelete = (id) => {
+    console.log('In handleDelete -- DELETE THE ACTIVITY')
+    console.log(id)
+    fetch(`http://localhost:3000/log/${id}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '
+//ToDo: use props token
+            // 'Authorization': `Bearer ${props.token}`
+        })
+    })
+    .then 
+        console.log('Deleted')
+    // .then(() => props.fetchWorkouts())
+}
