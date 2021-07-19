@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Divider, Form, Switch, Checkbox } from "antd";
+import { Select, Button, Divider, Form, Switch, Modal} from "antd";
 import { useHistory } from "react-router-dom";
 import TripsDisplay from "./TripsDisplay";
 
@@ -207,6 +207,11 @@ const TripsIndex = (props) => {
       </>
     );
   };
+  function success() {
+    Modal.success({
+      content: parkName + ' has been created as a new trip!',
+    });
+  }
 
   const createTrip = () => { 
     // if(props.token){
@@ -222,7 +227,7 @@ const TripsIndex = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization:
-            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2NTQwOTA1LCJleHAiOjE2MjY2MjczMDV9.6kxokReFmJcOcA4Td1JymzvGk-ONFEtyuwuZxcB4yRE`,
+            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2NjMzNzg3LCJleHAiOjE2MjY3MjAxODd9.Pj7kI423ySCXP55Zbv9160BKk5J2_NiMpMCH-oeTXcs`,
         }),
       })
         .then((response) => response.json())
@@ -233,10 +238,15 @@ const TripsIndex = (props) => {
     //   history.push("/login");
     // }
 
+
+    // return(
+      
+    //  ) 
+
   };
 
   function onChange(checked){
-    console.log(`switch to ${checked} ${pub}`);
+    console.log(`switch to ${checked} ${pub}`)
     setPub(!checked)
   }
 
@@ -244,29 +254,29 @@ const TripsIndex = (props) => {
     return (
       <> 
       <Divider />        
-      <Form 
+      {/* <Form 
         labelCol={{
-          span: 8,
+          span:12,
         }}
         wrapperCol={{
           span: 14,
         }}
         layout="horizontal"
-      > 
-      <Form.Item label="Trip Name">
+      >  */}
+      {/* <Form.Item label="Trip Name">
         <span className="ant-form-text">{parkName}</span>
       </Form.Item>
       <Form.Item label="Selected Activities">
-        <span className="ant-form-text">{selectedActivities}</span>
+        <span className="ant-form-text">{selectedActivities + "  "}</span>
       </Form.Item>
       <Form.Item name="public" label="Public" valuePropName="checked" value={pub} >
         <Switch defaultChecked onChange={onChange} />
       </Form.Item>
-      <Form.Item >
-        <Button type="primary" onClick={() => createTrip()}>Create Trip</Button>
-          </ Form.Item>
+      <Form.Item > */}
+        <Button type="primary" onClick={() => createTrip(), (success)}>Create Trip</Button>
+          {/* </ Form.Item>
       </Form>
-       
+        */}
       </>
     );
   };
@@ -274,6 +284,7 @@ const TripsIndex = (props) => {
   return (
     <div>
       <div>
+        <TripsDisplay /> 
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>
@@ -281,7 +292,7 @@ const TripsIndex = (props) => {
       <div>{parksList.length > 0 ? popParks() : <></>}</div>
       <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
       <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
-      
+     
     </div>
   );
 };
