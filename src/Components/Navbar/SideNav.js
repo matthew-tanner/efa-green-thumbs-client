@@ -6,6 +6,7 @@ import { bool } from "prop-types";
 
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
+import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsIndex from "../Trips/TripsIndex";
 
 const StyledMenu = styled.nav`
@@ -63,6 +64,10 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Home">
               <span aria-label="Trip Planner" onClick={() => setOpen(!open)}>Trip Planner</span>
             </Link>
+            <Link to="/tripActivityIndex">
+              <span aria-label="Trip Activities" onClick={() => setOpen(!open)}>Trip Activities</span>
+            </Link>
+
             <Link to="/Portal">
               <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
             </Link>
@@ -78,6 +83,11 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             </Route>
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />
+            </Route>
+{/* ToDo Fix hardcoded TripId and token*/}
+            <Route exact path="/tripActivityIndex">
+              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI2NzkwMDI5LCJleHAiOjE2MjY4NzY0Mjl9.Zq7xCp7gKECgmMiPkhuO3dvzpwQE6TvuDm9tmDACESs'} 
+              tripId={3} />
             </Route>
             <Route exact path="/">
               <Home />
