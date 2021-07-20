@@ -1,12 +1,5 @@
 @import '~antd/dist/antd.css';
 
-body {
-  background-color: #9FB8AD;
-  /* flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  text-align: center; */
-}
 
 .App {
   text-align: center;
@@ -61,6 +54,8 @@ body {
 
 .site-card-border-less-wrapper {
   background: #9fb8ad;
+  align-items: center;
+  margin-top: 6rem;
 }
 
 .portalCard {
@@ -82,4 +77,24 @@ body {
 
 .ant-card-head-title {
   color: white !important;
+}
+
+.link1 {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.tripDiv {
+  margin-top: 10rem;
+
+}
+
+.tripDisplay {
+  margin-top: 10rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+// import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
 import { bool } from "prop-types";
 
@@ -52,7 +52,7 @@ const StyledMenu = styled.nav`
 const SideNav = ({ open, setOpen, token, logout, newToken }) => {
   return (
     <>
-      <Router>
+      {/* <Router> */}
         <div>
           <StyledMenu open={open}>
             <Link to="/Home">
@@ -86,15 +86,15 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             </Route>
 {/* ToDo Fix hardcoded TripId and token*/}
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI2NzkwMDI5LCJleHAiOjE2MjY4NzY0Mjl9.Zq7xCp7gKECgmMiPkhuO3dvzpwQE6TvuDm9tmDACESs'} 
-              tripId={3} />
+              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjI2Nzk5MzI0LCJleHAiOjE2MjY4ODU3MjR9.Dl68Fm7oe-6Uz0Awbn2vM7Di9OOEyspQOAOGoex7DFQ'} 
+                        tripId={2} />
             </Route>
             <Route exact path="/">
               <Home />
             </Route>
           </Switch>
         </div>
-      </Router>
+      {/* </Router> */}
     </>
   );
 };

@@ -136,7 +136,7 @@ const TripsIndex = (props) => {
 
   const popStates = () => {
     return (
-      <>
+      <div >
       <Select
       showSearch
       style={{ width: 200 }}
@@ -153,7 +153,7 @@ const TripsIndex = (props) => {
         </Option>
       ))}
     </Select>
-    </>
+    </div>
     )
   }
 
@@ -243,7 +243,7 @@ const TripsIndex = (props) => {
 
   return (
     <div>
-      <div>
+      <div className='tripDiv'>
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>

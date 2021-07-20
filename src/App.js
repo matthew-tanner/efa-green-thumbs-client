@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Footer } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";

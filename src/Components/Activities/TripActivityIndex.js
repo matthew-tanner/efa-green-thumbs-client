@@ -43,12 +43,14 @@ const TripActivityIndex = (props) => {
     }, [])
 
     return (
-        <div>
+        
+        <div className='tripDisplay'>
+            <div>
             <Row>
-                <Col span={3}>
+                {/* <Col span={3}>
                     
-                </Col>
-                <Col span={21}>
+                </Col> */}
+                <Col>
                     <DisplayTripActivities
                         tripId={props.tripId}
                         tripActivityList={tripActivities}
@@ -73,6 +75,9 @@ const TripActivityIndex = (props) => {
                     : <></>
                 }
             </Row>
+        </div>
+        <div>
+
             <Row>
                 {/* ToDo:  Fix harded data */}
                 <AddActivity
@@ -83,6 +88,7 @@ const TripActivityIndex = (props) => {
                     fetchTripActivities={fetchTripActivities}
                     token={props.token} />
             </Row>
+        </div>
         </div>
     )
 }

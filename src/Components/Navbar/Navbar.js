@@ -5,7 +5,7 @@ import NavLinks from './NavLinks'
 import Access from './Access'
 import Logo from './Logo';
 
-const NavbarContainer = styled.div`
+const NavbarContainer = styled.nav`
     width: 100%;
     height: 80px;
     display: flex;
@@ -14,7 +14,7 @@ const NavbarContainer = styled.div`
     background-color: #383E56;
     color: white;
     top: 0;
-    position: fixed;
+    position: sticky;
     left: 0;
 `
 
@@ -44,7 +44,7 @@ const Navbar = (props) => {
                 <NavLinks token={props.token} logout={props.clearToken} newToken={props.updateToken}/>
             </MiddleSection>
             <RightSection>
-                <Access />
+                <Access  token={props.token} newToken={props.newToken} logout={props.logout}/>
             </RightSection>
         </NavbarContainer>
     )
