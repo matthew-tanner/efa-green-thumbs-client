@@ -5,7 +5,7 @@ import { theme } from "./Theme";
 import "./App.css";
 import { useMediaQuery } from "react-responsive";
 
-import { useOnClickOutside } from "./utils/hooks";
+import { useOnClickOutside } from "./Utils/Hooks";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
 import Navbar from "./Components/Navbar/Navbar";
