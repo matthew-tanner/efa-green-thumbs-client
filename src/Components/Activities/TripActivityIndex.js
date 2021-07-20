@@ -44,13 +44,14 @@ const TripActivityIndex = (props) => {
 
     return (
         
-        <div className='tripDisplay'>
-            <div>
-            <Row>
+        <div >
+            <div className='tripDisplay'>
+            {/* <Row> */}
                 {/* <Col span={3}>
-                    
+
                 </Col> */}
-                <Col>
+                
+                {/* <Col> */}
                     <DisplayTripActivities
                         tripId={props.tripId}
                         tripActivityList={tripActivities}
@@ -61,7 +62,7 @@ const TripActivityIndex = (props) => {
                         setVisible={setVisible}
                         token={props.token}
                     />
-                </Col>
+                {/* </Col> */}
 
                 {updateActive
                     ? <EditActivity
@@ -74,11 +75,11 @@ const TripActivityIndex = (props) => {
                     />
                     : <></>
                 }
-            </Row>
+            {/* </Row> */}
         </div>
-        <div>
+        <div className='newActivity'>
 
-            <Row>
+            {/* <Row> */}
                 {/* ToDo:  Fix harded data */}
                 <AddActivity
                     tripId={props.tripId}
@@ -87,7 +88,7 @@ const TripActivityIndex = (props) => {
                     inActivityCost={'$30/hour'}
                     fetchTripActivities={fetchTripActivities}
                     token={props.token} />
-            </Row>
+            {/* </Row> */}
         </div>
         </div>
     )

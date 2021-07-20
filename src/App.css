@@ -96,5 +96,9 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  overflow: auto;
+}
+
+.newActivity {
+  display: flex;
+  justify-content: center;
 }

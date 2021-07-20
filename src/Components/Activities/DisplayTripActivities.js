@@ -28,11 +28,11 @@ const DisplayTripActivities = (props) => {
     return (
         <div className="site-card-wrapper" >
             <div >
-                <Row gutter={16}>
+                <Row >
 
                     {props.tripActivityList.map(tripActivity => {
                         return (
-                            <Col span={8}>
+                            <Col>
 {/* ToDo: Ant recommends having a max of 4 rows of cards.  Do we need to allow for an unlimited number of activities for a trip? */}
                                 <Card
                                     className="activityCard"
