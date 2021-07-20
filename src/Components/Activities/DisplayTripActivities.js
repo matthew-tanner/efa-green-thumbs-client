@@ -27,7 +27,7 @@ const DisplayTripActivities = (props) => {
 
     return (
         <div className="site-card-wrapper" >
-            <div style={{ margin: 100 }} >
+            <div >
                 <Row gutter={16}>
 
                     {props.tripActivityList.map(tripActivity => {

@@ -43,22 +43,15 @@ const TripActivityIndex = (props) => {
     }, [])
 
     return (
-        <div style={{ }}>
-            <Row >
-                <Col span={8}>
-{/* ToDo:  Fix harded data */}
-                    <AddActivity 
-                        tripId={props.tripId}
-                        inActivityName={'New Activity'} 
-                        inActivityDescription={'This new activity will be super fun'}
-                        inActivityCost={'$30/hour'}
-                        fetchTripActivities={fetchTripActivities} 
-                        token={props.token} />    
+        <div>
+            <Row>
+                <Col span={3}>
+                    
                 </Col>
-                <Col span={16}>
-                    <DisplayTripActivities 
-                        tripId={props.tripId} 
-                        tripActivityList={tripActivities} 
+                <Col span={21}>
+                    <DisplayTripActivities
+                        tripId={props.tripId}
+                        tripActivityList={tripActivities}
                         editUpdateActivity={editUpdateActivity}
                         updateOn={updateOn}
                         fetchTripActivities={fetchTripActivities}
@@ -67,17 +60,28 @@ const TripActivityIndex = (props) => {
                         token={props.token}
                     />
                 </Col>
+
                 {updateActive
-                    ? <EditActivity 
+                    ? <EditActivity
                         activityToUpdate={activityToUpdate}
                         updateOff={updateOff}
                         token={props.token}
                         fetchTripActivities={fetchTripActivities}
                         visible={visible}
                         setVisible={setVisible}
-                        />
+                    />
                     : <></>
                 }
+            </Row>
+            <Row>
+                {/* ToDo:  Fix harded data */}
+                <AddActivity
+                    tripId={props.tripId}
+                    inActivityName={'New Activity'}
+                    inActivityDescription={'This new activity will be super fun'}
+                    inActivityCost={'$30/hour'}
+                    fetchTripActivities={fetchTripActivities}
+                    token={props.token} />
             </Row>
         </div>
     )
