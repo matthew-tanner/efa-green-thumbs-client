@@ -14,7 +14,7 @@ const NavbarContainer = styled.nav`
     background-color: #383E56;
     color: white;
     top: 0;
-    position: sticky;
+    position: fixed;
     left: 0;
 `
 
