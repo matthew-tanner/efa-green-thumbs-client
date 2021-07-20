@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, Footer } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
@@ -16,39 +16,44 @@ function App() {
   const [token, setToken] = useState("");
 
   const node = useRef();
-  useOnClickOutside(node, () => setOpen(false))
+  useOnClickOutside(node, () => setOpen(false));
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-      setToken(localStorage.getItem("token"))
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
     }
-  }, [])
+  }, []);
 
   const updateToken = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
-  }
+  };
 
   const clearToken = () => {
     localStorage.clear();
     setToken("");
-  }
+  };
 
-  const isMobile = useMediaQuery({maxWidth: DeviceSize.mobile})
+  const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
 
   return (
     <div className="App">
-      
       <ThemeProvider theme={theme}>
         <div>
           <GlobalStyles />
         </div>
         <div ref={node}>
           {!isMobile && <Navbar token={token} logout={clearToken} newToken={updateToken} />}
-          {/* {isMobile && <Burger open={open} setOpen={setOpen} /> && */}
-                {/* // <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken}/>} */}
           {isMobile && <Burger open={open} setOpen={setOpen} />}
-          {isMobile && <SideNav open={open} setOpen={setOpen} token={token} logout={clearToken} newToken={updateToken} />}
+          {isMobile && (
+            <SideNav
+              open={open}
+              setOpen={setOpen}
+              token={token}
+              logout={clearToken}
+              newToken={updateToken}
+            />
+          )}
         </div>
       </ThemeProvider>
     </div>

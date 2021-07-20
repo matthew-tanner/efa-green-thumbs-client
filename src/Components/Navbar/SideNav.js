@@ -6,8 +6,11 @@ import { bool } from "prop-types";
 
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
+import TripsDisplay from "../Trips/TripsDisplay";
+import TripActivities from "../Activities/TripActivities"
 import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsIndex from "../Trips/TripsIndex";
+
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -61,13 +64,12 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Trips">
               <span aria-label="Park Search" onClick={() => setOpen(!open)}>Park Search</span>
             </Link>
-            <Link to="/Home">
-              <span aria-label="Trip Planner" onClick={() => setOpen(!open)}>Trip Planner</span>
+            <Link to="/viewTrips">
+              <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
             </Link>
             <Link to="/tripActivityIndex">
               <span aria-label="Trip Activities" onClick={() => setOpen(!open)}>Trip Activities</span>
             </Link>
-
             <Link to="/Portal">
               <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
             </Link>
@@ -84,10 +86,11 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />
             </Route>
-{/* ToDo Fix hardcoded TripId and token*/}
+            <Route exact path="/viewTrips">
+              <TripsDisplay token={token} />
+            </Route>
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjI2Nzk5MzI0LCJleHAiOjE2MjY4ODU3MjR9.Dl68Fm7oe-6Uz0Awbn2vM7Di9OOEyspQOAOGoex7DFQ'} 
-                        tripId={2} />
+              <TripActivityIndex token={token} tripId={3} />
             </Route>
             <Route exact path="/">
               <Home />

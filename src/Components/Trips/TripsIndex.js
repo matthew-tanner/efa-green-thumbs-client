@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Divider } from "antd";
+import { Select, Button, Divider, Form, Switch, Modal } from "antd";
 import { useHistory } from "react-router-dom";
+import TripsDisplay from "./TripsDisplay";
 
 const TripsIndex = (props) => {
   const history = useHistory();
@@ -10,6 +11,7 @@ const TripsIndex = (props) => {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
+  const [trips, setTrips] = useState([]);
   const { Option } = Select;
   const statesList = [
     "AL",
@@ -127,8 +129,8 @@ const TripsIndex = (props) => {
               location: x.location,
               shortDescription: x.shortDescription,
               url: x.url,
-              image: x.images[0].url
-            }
+              image: x.images[0].url,
+            };
           })
         );
       });
@@ -136,26 +138,26 @@ const TripsIndex = (props) => {
 
   const popStates = () => {
     return (
-      <div >
-      <Select
-      showSearch
-      style={{ width: 200 }}
-      placeholder="Select a State"
-      optionFilterProp="children"
-      filterOption={(input, option) =>
-        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-      onChange={onChangeState}
-    >
-      {statesList.map((x) => (
-        <Option key={x} value={x}>
-          {x}
-        </Option>
-      ))}
-    </Select>
-    </div>
-    )
-  }
+      <div>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder="Select a State"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          onChange={onChangeState}
+        >
+          {statesList.map((x) => (
+            <Option key={x} value={x}>
+              {x}
+            </Option>
+          ))}
+        </Select>
+      </div>
+    );
+  };
 
   const popParks = () => {
     return (
@@ -186,6 +188,7 @@ const TripsIndex = (props) => {
       <>
         <h3>Select an Activity</h3>
         <Select
+          mode="multiple"
           showSearch
           style={{ width: 300 }}
           placeholder="Select an Activity"
@@ -204,46 +207,50 @@ const TripsIndex = (props) => {
       </>
     );
   };
+  function success() {
+    Modal.success({
+      content: parkName + " has been created as a new trip!",
+    });
+  }
 
   const createTrip = () => {
-    if(props.token){
-      const data = {
-        name: parkName,
-        activities: selectedActivities
-      };
-  
-      fetch("http://localhost:3001/trip/create", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization:
-            // `Bearer ${props.token}`,
-            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTYyNjQ1NDc2NywiZXhwIjoxNjI2NTQxMTY3fQ.4DFl0g9toJS23xXURFFEolnoYQV3hqfLRwY77_Xy1S8`,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
-    }else{
-      history.push("/login");
-    }
+    // if(props.token){
+    const data = {
+      name: parkName,
+    };
 
+    fetch("http://localhost:3000/trip/create", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    // } else {
+    //   history.push("/login");
+    // }
   };
 
   const showCreateButton = () => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => createTrip()}>Create Trip</Button>
+        <Button type="primary" onClick={(() => createTrip(), success)}>
+          Create Trip
+        </Button>
       </>
     );
   };
 
   return (
     <div>
-      <div className='tripDiv'>
+      <div className="tripDiv">
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>
@@ -254,5 +261,4 @@ const TripsIndex = (props) => {
     </div>
   );
 };
-
 export default TripsIndex;
