@@ -79,7 +79,7 @@ const DisplayTripActivities = (props) => {
                 visible={visible}
                 setVisible={setVisible}
             /> */}
-
+            
         </div>
     )
 }

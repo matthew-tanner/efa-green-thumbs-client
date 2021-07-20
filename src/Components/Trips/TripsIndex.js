@@ -12,7 +12,6 @@ const TripsIndex = (props) => {
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
   const [trips, setTrips] = useState([])
-  const [pub, setPub] = useState(false)
   const { Option } = Select;
   const statesList = [
     "AL",
@@ -215,11 +214,9 @@ const TripsIndex = (props) => {
   }
 
   const createTrip = () => { 
-    // if(props.token && data.length < 6){
+    // if(props.token){
       const data = {
-        name: parkName,
-        activities: selectedActivities,
-        public: pub
+        name: parkName
       };
   
       fetch("http://localhost:3000/trip/create", {
@@ -240,55 +237,20 @@ const TripsIndex = (props) => {
     //   history.push("/login");
     // }
 
-
-    // return(
-      
-    //  ) 
-
-  };
-
-  function onChange(checked){
-    console.log(`switch to ${checked} ${pub}`)
-    setPub(!checked)
   }
 
   const showCreateButton = () => {
     return (
       <> 
-      <Switch defaultChecked onChange={onChange} />
       <Divider />        
-      {/* <Form 
-        labelCol={{
-          span:12,
-        }}
-        wrapperCol={{
-          span: 14,
-        }}
-        layout="horizontal"
-      >  */}
-      {/* <Form.Item label="Trip Name">
-        <span className="ant-form-text">{parkName}</span>
-      </Form.Item>
-      <Form.Item label="Selected Activities">
-        <span className="ant-form-text">{selectedActivities + "  "}</span>
-      </Form.Item>
-      <Form.Item name="public" label="Public" valuePropName="checked" value={pub} >
-        
-      </Form.Item>
-      <Form.Item > */}
         <Button type="primary" onClick={() => createTrip(), (success)}>Create Trip</Button>
-        
-          {/* </ Form.Item>
-      </Form>
-        */}
       </>
     );
   };
 
   return (
     <div>
-      <div>
-        <TripsDisplay /> 
+      <div> 
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>
@@ -300,5 +262,4 @@ const TripsIndex = (props) => {
     </div>
   );
 };
-
 export default TripsIndex;
