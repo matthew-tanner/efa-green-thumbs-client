@@ -41,7 +41,7 @@ const TripActivityIndex = (props) => {
                         inActivityName={'New Activity'} 
                         inActivityDescription={'This new activity will be super fun'}
                         inActivityCost={'$30/hour'}
-                        fetcTripActivities={fetchTripActivities} 
+                        fetchTripActivities={fetchTripActivities} 
                         token={props.token} />    
                 </Col>
                 <Col span={16}>

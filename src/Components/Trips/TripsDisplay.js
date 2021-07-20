@@ -1,16 +1,17 @@
 import React, { useState, useEffect} from 'react';
-import { Table, Tag, Space, Row, Col, Card } from 'antd';
+import { Table, Tag, Space, Row, Col, Card, } from 'antd';
 
 
 const TripsDisplay = (props) => {
     const [trips, setTrips] = useState([])
+    const {Meta} = Card
     const fetchTrips = () => {
-        console.log('Inside of fetch trip');
+       
         fetch(`http://localhost:3000/trip/all`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2NjMzNzg3LCJleHAiOjE2MjY3MjAxODd9.Pj7kI423ySCXP55Zbv9160BKk5J2_NiMpMCH-oeTXcs`
+                'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E`
             })
         }).then((res) => res.json())
             .then((tripData) => {
@@ -18,62 +19,34 @@ const TripsDisplay = (props) => {
                 console.log(tripData);
             }) .catch ((err) => console.log(err))
     }
-
+    console.log(trips);
     useEffect(() => {
         fetchTrips()
     }, [])
-    // const data = [
-    //     {
-    //        name: trips.map(trip => trip.name),
-    //        activities: trips.map(trip => trip.activities),
-    //        isPublic: trips.map(trip => trip.public)
 
-    //     }
-    // ]
-    // console.log(data);
-    // const columns = [
-    //     {
-    //         title: 'Park Name',
-    //         dataIndex: 'name',
-    //         key: 'name',
-            
-    //     },
-    //     {
-    //         title: 'Activities',
-    //         dataIndex: 'activities',
-    //         key: 'activities',
-            
-    //     },
-    //     {
-    //         title: 'Public',
-    //         dataIndex: 'public',
-    //         key: 'public',
-            
-    //     }
-    // ]
-    // console.log(columns);
-    let card = () => {
+    const gridStyle = {
+        width: '50%',
+        textAlign: 'center',
         
-    }
-
+      };
+    
     return(
         <>
         Hello from Trips Display
         {/* <Table dataSource={data} columns={[]} /> */}
-    
-    <div className="site-card-wrapper">
-    <Row gutter={16}>
-      <Col span={8}>
-        <Card title="Card title" bordered={true}>
-            <p>{"name: " + trips.map(trip => trip.name)}</p>
-
-           <p>{"activities:" + trips.map(trip => trip.activities)}</p>
-           <p>{"isPublic:" + trips.map(trip => trip.public)}</p>
-        </Card>
-      </Col>
-      </Row>
-  </div>,
-        
+    <div className="view-trips-grid">
+    <Card title="Trips">
+     {trips.map(trip => {
+         return (
+                 <Card.Grid style={gridStyle}>
+                     Trip Name: {trip.name}<br /> 
+                     Activities: {trip.activities}<br />
+                </Card.Grid>
+         )
+     }
+     )}
+    </Card>
+    </div>
         </>
     )
 }

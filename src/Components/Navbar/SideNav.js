@@ -6,9 +6,11 @@ import { bool } from "prop-types";
 
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
+import TripsDisplay from "../Trips/TripsDisplay";
 import TripActivities from "../Activities/TripActivities"
 import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsIndex from "../Trips/TripsIndex";
+
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -65,6 +67,9 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Home">
               <span aria-label="Trip Planner" onClick={() => setOpen(!open)}>Trip Planner</span>
             </Link>
+            <Link to="/viewTrips">
+              <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
+            </Link>
             <Link to="/tripActivityIndex">
               <span aria-label="TMP Trip Activity Index" onClick={() => setOpen(!open)}>TMP Trip Activity Index</span>
             </Link>
@@ -87,12 +92,15 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />
             </Route>
+            <Route exact path="/viewTrips">
+              <TripsDisplay token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E'} />
+            </Route>
 {/* ToDo Fix hardcoded TripId and token*/}
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI2NjU1NjkxLCJleHAiOjE2MjY3NDIwOTF9.GHF8wPUu_O2H6XbYrSgKbHiALEP8z_EY66whJjSC974'} tripId={3} />
+              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E'} tripId={3} />
             </Route>
             <Route exact path="/tripActivities">
-              <TripActivities token={token} />
+              <TripActivities token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E'} />
             </Route>
             <Route exact path="/">
               <Home />

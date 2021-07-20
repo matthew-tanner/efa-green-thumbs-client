@@ -11,6 +11,7 @@ const TripsIndex = (props) => {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
+  const [trips, setTrips] = useState([])
   const [pub, setPub] = useState(false)
   const { Option } = Select;
   const statesList = [
@@ -214,7 +215,7 @@ const TripsIndex = (props) => {
   }
 
   const createTrip = () => { 
-    // if(props.token){
+    // if(props.token && data.length < 6){
       const data = {
         name: parkName,
         activities: selectedActivities,
@@ -227,13 +228,14 @@ const TripsIndex = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization:
-            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2NjMzNzg3LCJleHAiOjE2MjY3MjAxODd9.Pj7kI423ySCXP55Zbv9160BKk5J2_NiMpMCH-oeTXcs`,
+            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E`,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-        });
+        })
+     
     // } else {
     //   history.push("/login");
     // }
@@ -253,6 +255,7 @@ const TripsIndex = (props) => {
   const showCreateButton = () => {
     return (
       <> 
+      <Switch defaultChecked onChange={onChange} />
       <Divider />        
       {/* <Form 
         labelCol={{
@@ -270,10 +273,11 @@ const TripsIndex = (props) => {
         <span className="ant-form-text">{selectedActivities + "  "}</span>
       </Form.Item>
       <Form.Item name="public" label="Public" valuePropName="checked" value={pub} >
-        <Switch defaultChecked onChange={onChange} />
+        
       </Form.Item>
       <Form.Item > */}
         <Button type="primary" onClick={() => createTrip(), (success)}>Create Trip</Button>
+        
           {/* </ Form.Item>
       </Form>
         */}
