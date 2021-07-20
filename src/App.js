@@ -9,7 +9,7 @@ import { useOnClickOutside } from "./utils/hooks";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
 import Navbar from "./Components/Navbar/Navbar";
-import { DeviceSize } from "./Components/Responsive";
+import { DeviceSize } from "./Utils/DeviceSize";
 
 function App() {
   const [open, setOpen] = useState(false);
