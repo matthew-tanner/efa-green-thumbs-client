@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 const AccessContainer = styled.div`
     display: flex;
@@ -25,9 +26,13 @@ const LoginButton = styled.button`
 
 const Access = (props) => {
     return(
+        <>
         <AccessContainer>
-            <LoginButton>Login</LoginButton>
+        <Link to="/Portal"><LoginButton>Login</LoginButton></Link>
         </AccessContainer>
+        <div className="nav-route">
+        </div>
+        </>
     )
 }
 

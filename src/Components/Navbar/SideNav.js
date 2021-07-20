@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+// import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
 import { bool } from "prop-types";
 
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
+import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsIndex from "../Trips/TripsIndex";
 
 const StyledMenu = styled.nav`
@@ -51,7 +52,7 @@ const StyledMenu = styled.nav`
 const SideNav = ({ open, setOpen, token, logout, newToken }) => {
   return (
     <>
-      <Router>
+      {/* <Router> */}
         <div>
           <StyledMenu open={open}>
             <Link to="/Home">
@@ -63,6 +64,10 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Home">
               <span aria-label="Trip Planner" onClick={() => setOpen(!open)}>Trip Planner</span>
             </Link>
+            <Link to="/tripActivityIndex">
+              <span aria-label="Trip Activities" onClick={() => setOpen(!open)}>Trip Activities</span>
+            </Link>
+
             <Link to="/Portal">
               <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
             </Link>
@@ -79,12 +84,17 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Route exact path="/portal">
               <Portal token={token} newToken={newToken} logout={logout} />
             </Route>
+{/* ToDo Fix hardcoded TripId and token*/}
+            <Route exact path="/tripActivityIndex">
+              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjI2Nzk5MzI0LCJleHAiOjE2MjY4ODU3MjR9.Dl68Fm7oe-6Uz0Awbn2vM7Di9OOEyspQOAOGoex7DFQ'} 
+                        tripId={2} />
+            </Route>
             <Route exact path="/">
               <Home />
             </Route>
           </Switch>
         </div>
-      </Router>
+      {/* </Router> */}
     </>
   );
 };

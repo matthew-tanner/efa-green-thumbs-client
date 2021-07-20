@@ -136,7 +136,7 @@ const TripsIndex = (props) => {
 
   const popStates = () => {
     return (
-      <>
+      <div >
       <Select
       showSearch
       style={{ width: 200 }}
@@ -153,7 +153,7 @@ const TripsIndex = (props) => {
         </Option>
       ))}
     </Select>
-    </>
+    </div>
     )
   }
 
@@ -218,7 +218,8 @@ const TripsIndex = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization:
-            `Bearer ${props.token}`,
+            // `Bearer ${props.token}`,
+            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTYyNjQ1NDc2NywiZXhwIjoxNjI2NTQxMTY3fQ.4DFl0g9toJS23xXURFFEolnoYQV3hqfLRwY77_Xy1S8`,
         }),
       })
         .then((response) => response.json())
@@ -242,7 +243,7 @@ const TripsIndex = (props) => {
 
   return (
     <div>
-      <div>
+      <div className='tripDiv'>
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>

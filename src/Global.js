@@ -5,17 +5,16 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  *, *::after, *::before {
-    box-sizing: border-box;
-  }
+  
   body {
     align-items: center;
     background: ${({ theme }) => theme.primaryLight};
     color: ${({ theme }) => theme.primaryDark};
     display: flex;
-    font-family: 'Varela Round', sans-serif;;
-    height: 100vh;
+    font-family: 'Varela Round', sans-serif;
+    height: auto;
     justify-content: center;
     text-rendering: optimizeLegibility;
+    overflow: auto;
   }
   `
