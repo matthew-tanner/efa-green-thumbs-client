@@ -109,13 +109,17 @@
   display: flex;
   justify-content: center;
 }
+.ant-card-bordered {
+  margin-top: 30%
 
+}
 .ant-card-grid {
-  background-color: white;
-  color: #383e56;
+  background-color: #383e56;
+  color: white;
+  font-family: 'Varela Round', sans-serif;
   margin: 5%;
   margin-top: 10%;
-  border: 5px solid #383e56;
+  /* border: 5px solid #FB743E; */
   word-wrap: break-word;
   font: 'Varela Round', sans-serif;
   box-shadow: 0.5px 0 0 0 #f0f0f0, 
@@ -130,8 +134,24 @@
   display: flex;
   justify-content: center;
 }
-
+.card-grid-style {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
 .stateSelector {
   font-family: 'Varela Round', sans-serif;
   color: #383e56 !important;
+}
+.delete-button{
+  background-color: #FB743E;
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  border: none;
+
+}
+
+a {
+color: white;
+font-family: 'Varela Round', sans-serif;
 }

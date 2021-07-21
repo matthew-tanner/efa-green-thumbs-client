@@ -269,7 +269,7 @@ const TripsIndex = (props) => {
       body: JSON.stringify(actData),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        "Authorization": `Bearer ${props.token}`,
       }),
     })
       .then((response) => setActivityStatus(response.status)
@@ -283,7 +283,7 @@ const TripsIndex = (props) => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => console.log(createTrip())}>
+        <Button type="primary" onClick={() => createTrip()}>
           Create Trip
         </Button>
       </>
