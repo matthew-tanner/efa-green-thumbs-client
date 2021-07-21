@@ -1,14 +1,26 @@
 import { useState } from "react"
 import { Form, Input, Button, Typography, Card, Checkbox } from 'antd'
+import { Redirect } from "react-router-dom"
+import TripsIndex from "../Trips/TripsIndex"
+import { PropertySafetyFilled } from "@ant-design/icons"
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography
 
 function Login({ toggle, token, newToken }){
+    const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const confirmAndSend = () => {
         userLogin()
+        // history.goBack()
+        // if (userLogin()) {
+        //     return <Redirect to ='/' />
+        // } else {
+        //     return <div>test</div>
+        // }
+
     }
 
     function userLogin() {
@@ -30,8 +42,9 @@ function Login({ toggle, token, newToken }){
         .then(data => {
             console.log(data)
             let dataToken = data.sessionToken
-            //localStorage.setItem('token', token)
+            // localStorage.setItem('token', token)
             newToken(dataToken)
+            // props.history.push('/path')
         })
         .catch(err => {
             console.error(err)

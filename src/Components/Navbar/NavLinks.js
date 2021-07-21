@@ -52,7 +52,7 @@ const Link1 = styled.a`
     }
 `
 
-const NavLinks = (props) => {
+const NavLinks = ({token, logout, newToken, open, setOpen }) => {
     return(
         <>
         <NavLinksContainer>
@@ -64,24 +64,29 @@ const NavLinks = (props) => {
 
 
                 <LinkItem ><Link to="/Home" className='link1'><Link1>Home</Link1></Link></LinkItem>
-                <LinkItem ><Link to="/Trips" className='link1'><Link1>Trip Planner</Link1></Link></LinkItem>
+                <LinkItem ><Link to="/Trips" className='link1'><Link1>Park Search</Link1></Link></LinkItem>
+                <LinkItem ><Link to="/viewTrips" className='link1'><Link1>View Trips</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/tripActivityIndex" className='link1'><Link1>Activities</Link1></Link></LinkItem>
+                
 
             </LinksWrapper>
         </NavLinksContainer>
                 <div className="nav-route">
                     <Switch>
                         <Route exact path="/home">
-                        <Home token={props.token} newToken={props.newToken} logout={props.logout} />
+                        <Home token={token} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/portal">
-                        <Portal token={props.token} newToken={props.newToken} logout={props.logout} />
+                        <Portal token={token} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/trips">
-                        <TripsIndex token={props.token} open={props.open} setOpen={props.setOpen} newToken={props.newToken} logout={props.logout} />
+                        <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
+                        </Route>
+                        <Route exact path="/viewTrips">
+                        <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/tripActivityIndex">
-                        <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjI2Nzk5MzI0LCJleHAiOjE2MjY4ODU3MjR9.Dl68Fm7oe-6Uz0Awbn2vM7Di9OOEyspQOAOGoex7DFQ'} 
+                        <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsI…zk4fQ.u_9HuKRllUqWJIdmeq3LyBVNG3vymd3fwJXcd2tfVlk'} 
                         tripId={2} />
                         </Route>
                         {/* <Route exact path="/activities">

@@ -80,12 +80,12 @@ const TripActivityIndex = (props) => {
         <div className='newActivity'>
 
             {/* <Row> */}
-                {/* ToDo:  Fix harded data */}
+{/* ToDo:  Fix hard coded data */}
                 <AddActivity
                     tripId={props.tripId}
                     inActivityName={'New Activity'}
                     inActivityDescription={'This new activity will be super fun'}
-                    inActivityCost={'$30/hour'}
+                    inActivityTitle={'Title of Activity'}
                     fetchTripActivities={fetchTripActivities}
                     token={props.token} />
             {/* </Row> */}

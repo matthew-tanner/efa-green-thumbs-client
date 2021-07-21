@@ -1,11 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import { Card, Button } from 'antd';
-import DisplayTripActivities from '../Activities/DisplayTripActivities';
+
+import TripActivityIndex from '../Activities/TripActivityIndex'
 
 const TripsDisplay = (props) => {
     const [trips, setTrips] = useState([])
     
     const fetchTrips = () => {
+console.log(`In TripsDisplay fetchTrips`)
        fetch(`http://localhost:3000/trip/all`, {
             method: 'GET',
             headers: new Headers({
@@ -14,11 +16,11 @@ const TripsDisplay = (props) => {
             })
         }).then((res) => res.json())
             .then((tripData) => {
+                console.log(tripData)
                 setTrips(tripData)
-                console.log(tripData);
+                console.log(trips);
             }) .catch ((err) => console.log(err))
     }
-    console.log(trips);
     const deleteTrips = (trip) => {
         fetch(`http://localhost:3000/trip/${trip.id}`, {
         method: 'DELETE',
@@ -32,7 +34,30 @@ const TripsDisplay = (props) => {
     }
     // console.log(deleteTrips());
 // in our delete and edit we need to find a way to drill into trips for trip id in the url
+
+
+
+    const editTrips = (trip) => {
+console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
+        return (
+            <TripActivityIndex token={props.token} tripId={trip.id} />
+        )
+
+    }
+    // const editTrips = (trip) => {
+    //     fetch(`http://localhost:3000/trip/${trip.id}`, {
+    //     method: 'PUT',
+    //     headers: new Headers({
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${props.token}`
+    //     })
+    // }) .then (() => fetchTrips())
+    //     .catch (err => console.log(err))
+        
+    // }
+
     useEffect(() => {
+    console.log('In TripsDisplay useEffect')
         fetchTrips()
     }, [])
 
