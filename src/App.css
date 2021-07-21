@@ -104,5 +104,7 @@
 }
 
 .view-trips-grid {
-  margin-right: 80px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
