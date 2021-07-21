@@ -14,7 +14,7 @@ function Login({ toggle, token, newToken, previous }){
     
     const confirmAndSend = () => {
         userLogin()
-        history.push(previous)
+        history.goBack()
         // if (userLogin()) {
         //     return <Redirect to ='/' />
         // } else {
@@ -31,7 +31,7 @@ function Login({ toggle, token, newToken, previous }){
         }
         console.log(`userData --> ${userData.email} ${userData.password}`);
     
-        fetch(`http://localhost:3001/user/login`, {
+        fetch(`http://localhost:3000/user/login`, {
             method: 'POST',
             headers: new Headers ({
                 'Content-Type': 'application/json'

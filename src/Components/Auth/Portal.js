@@ -16,6 +16,7 @@ const Portal = (props) => {
     console.log(
       `Form is sent!\nemail: ${email}\ndisplayName: ${displayName}\npassword: ${password}`
     );
+  
 
   return (
     <>
@@ -29,7 +30,7 @@ const Portal = (props) => {
           displayName={displayName}
           setDisplayName={setDisplayName}
           token={props.token}
-          newToken={props.newToken}
+          newToken={props.newToken}        
         />
       ) : (
         <Signup
