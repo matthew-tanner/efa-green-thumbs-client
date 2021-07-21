@@ -3,16 +3,16 @@ import { Modal, Form, Input } from 'antd';
 
 import "antd/dist/antd.css";
 
+// ToDo: Add location, url, image
 const EditActivity = (props) => {
   const [activityId, setActivityId] = useState(props.activityToUpdate.id)
   const [name, setName] = useState(props.activityToUpdate.name)
   const [description, setDescription] = useState(props.activityToUpdate.description)
-  const [cost, setCost] = useState(props.activityToUpdate.cost)
+  const [title, setTitle] = useState(props.ActivityToUpdate.title)
   const [notes, setNotes] = useState(props.activityToUpdate.notes)
   
   console.log(`In EditActivity - visible is ${props.visible}`)
-  console.log(props.activityToUpdate.name)
-  console.log(props.activityToUpdate.id)
+  console.log(props.activityToUpdate)
 
   const [formRef, setFormRef] = useState(null);
 
@@ -57,7 +57,7 @@ const EditActivity = (props) => {
         onOk={handleOk}
       >
         <p>{name} -- {description}</p>
-        <p>Cost:  {cost} </p>
+        <p>Title:  {title} </p>
         <Form
           layout="horizontal"
         >

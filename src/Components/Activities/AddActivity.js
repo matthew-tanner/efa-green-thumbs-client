@@ -3,11 +3,12 @@ import { Button, Card, Form, Input } from 'antd';
 
 import "antd/dist/antd.css";
 
+// ToDo: Add location, url, image
 const AddActivity = (props) => {
     const [activityId, setActivityId] = useState('')
     const [name, setName] = useState(props.inActivityName)
     const [description, setDescription] = useState(props.inActivityDescription)
-    const [cost, setCost] = useState(props.inActivityCost)
+    const [title, setTitle] = useState(props.inTitle)
     const [notes, setNotes] = useState('')
 
     const handleSubmit = () => {
@@ -18,10 +19,11 @@ const AddActivity = (props) => {
                 'Authorization': `Bearer ${props.token}`
             }),
             body: JSON.stringify({ 
+                tripId: props.tripId,
                 notes: notes, 
                 name: name, 
                 description: description, 
-                cost: cost 
+                title: title
             })
         })
             .then(res => res.json())
@@ -40,7 +42,7 @@ const AddActivity = (props) => {
 
             <Card bordered={true} style={{ margin: 30 }}>
                 <p>{name} -- {description}</p>
-                <p>Cost:  {cost} </p>
+                <p>Title: {title}</p>
 
                 <Form
                     name="basic">

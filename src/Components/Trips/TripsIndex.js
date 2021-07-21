@@ -227,7 +227,7 @@ const TripsIndex = (props) => {
         parkCode: parkCode,
       };
 
-      fetch("http://localhost:3001/trip/create", {
+      fetch("http://localhost:3000/trip/create", {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
@@ -263,7 +263,7 @@ const TripsIndex = (props) => {
       });
     });
 
-    fetch(`http://localhost:3001/activity/create/${tripId}`, {
+    fetch(`http://localhost:3000/activity/create/${tripId}`, {
       method: "POST",
       body: JSON.stringify(actData),
       headers: new Headers({
