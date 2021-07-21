@@ -41,7 +41,7 @@ const Navbar = (props) => {
                 <Logo />
             </LeftSection>
             <MiddleSection>
-                <NavLinks token={props.token} logout={props.clearToken} newToken={props.updateToken}/>
+                <NavLinks token={props.token} logout={props.clearToken} newToken={props.newToken}/>
             </MiddleSection>
             <RightSection>
                 <Access  token={props.token} newToken={props.newToken} logout={props.logout}/>
