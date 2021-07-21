@@ -7,7 +7,6 @@ import { bool } from "prop-types";
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
 import TripsDisplay from "../Trips/TripsDisplay";
-import TripActivities from "../Activities/TripActivities"
 import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsIndex from "../Trips/TripsIndex";
 

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Divider, Form, Switch, Modal } from "antd";
+import { Select, Button, Divider, Modal } from "antd";
 import { useHistory } from "react-router-dom";
-import TripsDisplay from "./TripsDisplay";
 
 const TripsIndex = (props) => {
   const history = useHistory();
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
   const [parkName, setParkName] = useState("");
+  const [tripId, setTripId] = useState("");
+  const [activityStatus, setActivityStatus] = useState("");
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
-  const [trips, setTrips] = useState([]);
   const { Option } = Select;
   const statesList = [
     "AL",
@@ -82,7 +82,13 @@ const TripsIndex = (props) => {
     if (parkCode !== "") {
       getActivities();
     }
-  }, [stateId, parkCode]);
+    if (tripId !== "") {
+      createActivities();
+    }
+    if (activityStatus == "200") {
+      success();
+    }
+  }, [stateId, parkCode, tripId, activityStatus]);
 
   const onChangeState = (value) => {
     setStateId(value);
@@ -119,7 +125,6 @@ const TripsIndex = (props) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data.data[0].relatedParks[0].fullName);
         setParkName(data.data[0].relatedParks[0].fullName);
         setActivitiesList(
           data.data.map((x) => {
@@ -207,41 +212,77 @@ const TripsIndex = (props) => {
       </>
     );
   };
-  function success() {
+  const success = () => {
     Modal.success({
       content: parkName + " has been created as a new trip!",
     });
-  }
+    history.push("/viewTrips")
+  };
 
   const createTrip = () => {
-    // if(props.token){
-    const data = {
-      name: parkName,
-    };
+    if (props.token) {
+      //console.log(activitiesList, selectedActivities)
+      const data = {
+        name: parkName,
+        parkCode: parkCode,
+      };
 
-    fetch("http://localhost:3000/trip/create", {
+      fetch("http://localhost:3001/trip/create", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${props.token}`,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.data.id);
+          setTripId(data.data.id);
+        });
+    } else {
+      history.push("/portal");
+    }
+  };
+
+  const createActivities = () => {
+    const actData = [];
+    activitiesList.map((x) => {
+      return selectedActivities.forEach((item, index, array) => {
+        if (x.name === item) {
+          actData.push({
+            name: x.name,
+            tripId: tripId,
+            description: x.shortDescription,
+            location: x.location,
+            title: x.title,
+            url: x.url,
+            image: x.image,
+          });
+        }
+      });
+    });
+
+    fetch(`http://localhost:3001/activity/create/${tripId}`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(actData),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2Nzg1MzE0LCJleHAiOjE2MjY4NzE3MTR9.BHVccVtf-xSKiKuUIAr5uPAZfBvi9f7C-dub0w07u1E`,
+        Authorization: `Bearer ${props.token}`,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-    // } else {
-    //   history.push("/login");
-    // }
+      .then((response) => setActivityStatus(response.status)
+      // .then((data) => {
+      //   console.log(data.status);
+      //}
+      );
   };
 
   const showCreateButton = () => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={(() => createTrip(), success)}>
+        <Button type="primary" onClick={() => createTrip()}>
           Create Trip
         </Button>
       </>
@@ -261,4 +302,5 @@ const TripsIndex = (props) => {
     </div>
   );
 };
+
 export default TripsIndex;
