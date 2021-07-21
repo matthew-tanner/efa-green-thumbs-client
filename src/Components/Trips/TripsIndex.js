@@ -245,7 +245,7 @@ const TripsIndex = (props) => {
       history.push("/portal", {from: '/trips'});
     }
   };
-
+console.log(tripId);
   const createActivities = () => {
     const actData = [];
     activitiesList.map((x) => {
@@ -275,7 +275,7 @@ const TripsIndex = (props) => {
       .then((response) => setActivityStatus(response.status)
       // .then((data) => {
       //   console.log(data.status);
-      //}
+      //}   
       );
   };
 
