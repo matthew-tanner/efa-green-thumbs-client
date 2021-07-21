@@ -16,13 +16,14 @@ console.log(`In TripsDisplay fetchTrips`)
             })
         }).then((res) => res.json())
             .then((tripData) => {
-                console.log(tripData)
+console.log(tripData)
                 setTrips(tripData)
-                console.log(trips);
+console.log(trips);
             }) .catch ((err) => console.log(err))
     }
 
     const deleteTrips = (trip) => {
+console.log(`In deleteTrips, trip = ${trip}`)
         fetch(`http://localhost:3000/trip/${trip.id}`, {
         method: 'DELETE',
         headers: new Headers({
@@ -39,12 +40,13 @@ console.log(`In TripsDisplay fetchTrips`)
 
 
     const editTrips = (trip) => {
-console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
+console.log(`In editTrips in TripsDisplay - tripId = ${trip.id}, name = ${trip.name}, trip = ${trip}`)
         return (
             <TripActivityIndex token={props.token} tripId={trip.id} />
         )
 
     }
+    
     // const editTrips = (trip) => {
     //     fetch(`http://localhost:3000/trip/${trip.id}`, {
     //     method: 'PUT',

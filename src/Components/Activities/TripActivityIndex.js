@@ -6,12 +6,15 @@ import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 
 const TripActivityIndex = (props) => {
+console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.token}`)
+
     const [tripActivities, setTripActivities] = useState([])
     const [updateActive, setUpdateActive] = useState(false)
     const [activityToUpdate, setActivityToUpdate] = useState({})
     const [visible, setVisible] = useState(false);
 
     const fetchTripActivities = () => {
+console.log(`In tripActivityIndex fetchTripActivities. tripId = ${props.tripId}, token = ${props.token}`)
         fetch(`http://localhost:3000/activity/all/${props.tripId}`, {
             method: 'GET',
             headers: new Headers({

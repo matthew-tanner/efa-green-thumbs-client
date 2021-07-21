@@ -46,7 +46,6 @@ const DisplayTripActivities = (props) => {
                                     }
                                 >
                                     <Meta
-// ToDo: Add notes to the card.
                                         title={tripActivity.name}
                                         bordered={true}
                                         description={tripActivity.description}
