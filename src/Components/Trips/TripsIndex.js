@@ -227,7 +227,7 @@ const TripsIndex = (props) => {
           console.log(data);
         });
     }else{
-      history.push("/login");
+      history.push({pathname: "/login", state: {previous: '/trips'}});
     }
 
   };

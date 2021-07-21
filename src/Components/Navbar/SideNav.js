@@ -86,7 +86,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             </Route>
 {/* ToDo Fix hardcoded TripId and token*/}
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjI2Nzk5MzI0LCJleHAiOjE2MjY4ODU3MjR9.Dl68Fm7oe-6Uz0Awbn2vM7Di9OOEyspQOAOGoex7DFQ'} 
+              <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsI…zk4fQ.u_9HuKRllUqWJIdmeq3LyBVNG3vymd3fwJXcd2tfVlk'} 
                         tripId={2} />
             </Route>
             <Route exact path="/">
