@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Divider } from "antd";
+import { Select, Button, Divider, Modal } from "antd";
 import { useHistory } from "react-router-dom";
 
 const TripsIndex = (props) => {
@@ -7,6 +7,8 @@ const TripsIndex = (props) => {
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
   const [parkName, setParkName] = useState("");
+  const [tripId, setTripId] = useState("");
+  const [activityStatus, setActivityStatus] = useState("");
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
@@ -80,7 +82,13 @@ const TripsIndex = (props) => {
     if (parkCode !== "") {
       getActivities();
     }
-  }, [stateId, parkCode]);
+    if (tripId !== "") {
+      createActivities();
+    }
+    if (activityStatus == "200") {
+      success();
+    }
+  }, [stateId, parkCode, tripId, activityStatus]);
 
   const onChangeState = (value) => {
     setStateId(value);
@@ -117,7 +125,6 @@ const TripsIndex = (props) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data.data[0].relatedParks[0].fullName);
         setParkName(data.data[0].relatedParks[0].fullName);
         setActivitiesList(
           data.data.map((x) => {
@@ -127,8 +134,8 @@ const TripsIndex = (props) => {
               location: x.location,
               shortDescription: x.shortDescription,
               url: x.url,
-              image: x.images[0].url
-            }
+              image: x.images[0].url,
+            };
           })
         );
       });
@@ -136,26 +143,26 @@ const TripsIndex = (props) => {
 
   const popStates = () => {
     return (
-      <div >
-      <Select
-      showSearch
-      style={{ width: 200 }}
-      placeholder="Select a State"
-      optionFilterProp="children"
-      filterOption={(input, option) =>
-        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-      onChange={onChangeState}
-    >
-      {statesList.map((x) => (
-        <Option key={x} value={x}>
-          {x}
-        </Option>
-      ))}
-    </Select>
-    </div>
-    )
-  }
+      <div>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder="Select a State"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          onChange={onChangeState}
+        >
+          {statesList.map((x) => (
+            <Option key={x} value={x}>
+              {x}
+            </Option>
+          ))}
+        </Select>
+      </div>
+    );
+  };
 
   const popParks = () => {
     return (
@@ -186,6 +193,7 @@ const TripsIndex = (props) => {
       <>
         <h3>Select an Activity</h3>
         <Select
+          mode="multiple"
           showSearch
           style={{ width: 300 }}
           placeholder="Select an Activity"
@@ -204,46 +212,86 @@ const TripsIndex = (props) => {
       </>
     );
   };
+  const success = () => {
+    Modal.success({
+      content: parkName + " has been created as a new trip!",
+    });
+    history.push("/viewTrips")
+  };
 
   const createTrip = () => {
-    if(props.token){
+    if (props.token) {
+      //console.log(activitiesList, selectedActivities)
       const data = {
         name: parkName,
-        activities: selectedActivities
+        parkCode: parkCode,
       };
-  
+
       fetch("http://localhost:3001/trip/create", {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
           "Content-Type": "application/json",
-          Authorization:
-            // `Bearer ${props.token}`,
-            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTYyNjQ1NDc2NywiZXhwIjoxNjI2NTQxMTY3fQ.4DFl0g9toJS23xXURFFEolnoYQV3hqfLRwY77_Xy1S8`,
+          Authorization: `Bearer ${props.token}`,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          console.log(data.data.id);
+          setTripId(data.data.id);
         });
     }else{
       history.push({pathname: "/login", state: {previous: '/trips'}});
     }
+  };
 
+  const createActivities = () => {
+    const actData = [];
+    activitiesList.map((x) => {
+      return selectedActivities.forEach((item, index, array) => {
+        if (x.name === item) {
+          actData.push({
+            name: x.name,
+            tripId: tripId,
+            description: x.shortDescription,
+            location: x.location,
+            title: x.title,
+            url: x.url,
+            image: x.image,
+          });
+        }
+      });
+    });
+
+    fetch(`http://localhost:3001/activity/create/${tripId}`, {
+      method: "POST",
+      body: JSON.stringify(actData),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${props.token}`,
+      }),
+    })
+      .then((response) => setActivityStatus(response.status)
+      // .then((data) => {
+      //   console.log(data.status);
+      //}
+      );
   };
 
   const showCreateButton = () => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => createTrip()}>Create Trip</Button>
+        <Button type="primary" onClick={() => createTrip()}>
+          Create Trip
+        </Button>
       </>
     );
   };
 
   return (
     <div>
-      <div className='tripDiv'>
+      <div className="tripDiv">
         <h3>Select a State</h3>
       </div>
       <div>{popStates()}</div>

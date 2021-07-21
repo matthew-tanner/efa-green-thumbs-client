@@ -6,21 +6,6 @@
   height: 100%;
 }
 
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
-} */
-
 .root {
   background-color: #9FB8AD;
   color: white;
@@ -101,4 +86,23 @@
 .newActivity {
   display: flex;
   justify-content: center;
+}
+
+.ant-card-grid {
+  background-color: white;
+  color: #383e56;
+  margin: 5%;
+  margin-top: 10%;
+  border: 5px solid #383e56;
+  word-wrap: break-word;
+  font: 'Varela Round', sans-serif;
+  box-shadow: 0.5px 0 0 0 #f0f0f0, 
+  0 1px 0 0 #f0f0f0, 
+  0.5px 0.5px 0 0 #f0f0f0, 
+  1px 0 0 0 #f0f0f0 inset, 
+  0 1px 0 0 #f0f0f0 inset;
+}
+
+.view-trips-grid {
+  margin-right: 80px;
 }
