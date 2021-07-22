@@ -1,36 +1,22 @@
 import { useState } from "react"
 import { Form, Input, Button, Typography, Card, Checkbox } from 'antd'
-import { Redirect } from "react-router-dom"
-import TripsIndex from "../Trips/TripsIndex"
-import { PropertySafetyFilled } from "@ant-design/icons"
-import { useHistory } from "react-router-dom";
 
 const { Title } = Typography
 
 function Login({ toggle, token, newToken }){
     const baseUrl = process.env.REACT_APP_API_URL;
-    const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const confirmAndSend = () => {
         userLogin()
-        // history.goBack()
-        // if (userLogin()) {
-        //     return <Redirect to ='/' />
-        // } else {
-        //     return <div>test</div>
-        // }
-
     }
 
     function userLogin() {
-        console.log('userLogin function called')
         let userData = {
                 email: email,
                 password: password,
         }
-        console.log(`userData --> ${userData.email} ${userData.password}`);
     
         fetch(`${baseUrl}/user/login`, {
             method: 'POST',
@@ -41,11 +27,8 @@ function Login({ toggle, token, newToken }){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             let dataToken = data.sessionToken
-            // localStorage.setItem('token', token)
             newToken(dataToken)
-            // props.history.push('/path')
         })
         .catch(err => {
             console.error(err)

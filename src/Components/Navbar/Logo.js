@@ -17,13 +17,6 @@ const LogoImg = styled.div`
     }
 `
 
-const LogoText = styled.h2`
-    font-size: 16px;
-    margin: 0;
-    margin-left: 4px;
-    font-weight: 500;
-`
-
 const Logo = (props) => {
     return(
         <>
