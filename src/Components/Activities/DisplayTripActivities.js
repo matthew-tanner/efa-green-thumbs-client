@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
 
 import { EditOutlined } from '@ant-design/icons';
-
-import EditActivity from './EditActivity'
-
+import { useEffect } from 'react';
 
 const DisplayTripActivities = (props) => {
 
     const { Meta } = Card;
-
-    console.log(props.tripActivityList)
 
     const deleteActivity = (tripActivity) => {
 
@@ -21,8 +16,8 @@ const DisplayTripActivities = (props) => {
                 'Authorization': `Bearer ${props.token}`
             })
         })
-// ToDo:  Display a confirmation message?
-        .then(() => props.fetchTripActivities())
+            // ToDo:  Display a confirmation message?
+            .then(() => props.fetchTripActivities())
     }
 
     return (
@@ -33,7 +28,6 @@ const DisplayTripActivities = (props) => {
                     {props.tripActivityList.map(tripActivity => {
                         return (
                             <Col>
-{/* ToDo: Ant recommends having a max of 4 rows of cards.  Do we need to allow for an unlimited number of activities for a trip? */}
                                 <Card
                                     className="activityCard"
                                     size="small"
@@ -46,23 +40,21 @@ const DisplayTripActivities = (props) => {
                                     }
                                 >
                                     <Meta
-// ToDo: Add notes to the card.
                                         title={tripActivity.name}
-                                        bordered={true}
+                                        bordered="true"
                                         description={tripActivity.description}
                                     />
                                     <p>{tripActivity.notes}</p>
 
                                     <Button
                                         icon={<EditOutlined />}
-                                        // onClick={() => { setVisible(true) }}
-                                        onClick={() => {props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn()}}
+                                        onClick={() => { props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn() }}
                                     />
 
                                     <Button
                                         shape="circle"
                                         style={{ color: 'black', zIndex: 10 }}
-                                        onClick={() => {deleteActivity(tripActivity)}}
+                                        onClick={() => { deleteActivity(tripActivity) }}
                                     >
                                         X
                                     </Button>

@@ -43,44 +43,25 @@ const TripsDisplay = (props) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    fetchTrips();
-  }, []);
+    };
 
-  const gridStyle = {
-    width: "50%",
-    textAlign: "center",
-  };
-
-  return (
-    <>
-      <div className="view-trips-grid">
-        <Card title="Trips">
-          {trips.map((trip) => {
-            return (
-              <Card.Grid style={gridStyle}>
-                Trip Name: {trip.name}
-                <br />
-                <Button
-                  onClick={() => {
-                    deleteTrips(trip);
-                  }}
-                >
-                  Delete
-                </Button>
-                <Button
-                  onClick={() => {
-                    editTrips(trip);
-                  }}
-                >
-                  Edit
-                </Button>
-              </Card.Grid>
-            );
-          })}
-        </Card>
-      </div>
-    </>
-  );
-};
-export default TripsDisplay;
+    return (
+        <>
+            <div className="view-trips-grid">
+                <Card title="Trips" >
+                    {trips.map(trip => {
+                        return (
+                            <Card.Grid style={gridStyle}>
+                                Trip Name: {trip.name}<br />
+                                <Button onClick={() => { deleteTrips(trip) }}>Delete</Button>
+                                <Button onClick={() => { editTrips(trip) }}>Edit</Button>
+                            </Card.Grid>
+                        )
+                    }
+                    )}
+                </Card>
+            </div>
+        </>
+    )
+}
+export default TripsDisplay

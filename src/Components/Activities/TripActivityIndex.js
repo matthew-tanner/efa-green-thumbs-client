@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row } from 'antd';
 
 import DisplayTripActivities from './DisplayTripActivities'
 import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 
 const TripActivityIndex = (props) => {
+
     const [tripActivities, setTripActivities] = useState([])
     const [updateActive, setUpdateActive] = useState(false)
     const [activityToUpdate, setActivityToUpdate] = useState({})
@@ -27,7 +27,6 @@ const TripActivityIndex = (props) => {
 
     const editUpdateActivity = (tripActivity) => {
         setActivityToUpdate(tripActivity)
-        console.log(tripActivity)
     }
 
     const updateOn = () => {
@@ -43,26 +42,19 @@ const TripActivityIndex = (props) => {
     }, [])
 
     return (
-        
+
         <div >
             <div className='tripDisplay'>
-            {/* <Row> */}
-                {/* <Col span={3}>
-
-                </Col> */}
-                
-                {/* <Col> */}
-                    <DisplayTripActivities
-                        tripId={props.tripId}
-                        tripActivityList={tripActivities}
-                        editUpdateActivity={editUpdateActivity}
-                        updateOn={updateOn}
-                        fetchTripActivities={fetchTripActivities}
-                        visible={visible}
-                        setVisible={setVisible}
-                        token={props.token}
-                    />
-                {/* </Col> */}
+                <DisplayTripActivities
+                    tripId={props.tripId}
+                    tripActivityList={tripActivities}
+                    editUpdateActivity={editUpdateActivity}
+                    updateOn={updateOn}
+                    fetchTripActivities={fetchTripActivities}
+                    visible={visible}
+                    setVisible={setVisible}
+                    token={props.token}
+                />
 
                 {updateActive
                     ? <EditActivity
@@ -75,21 +67,20 @@ const TripActivityIndex = (props) => {
                     />
                     : <></>
                 }
-            {/* </Row> */}
-        </div>
-        <div className='newActivity'>
+            </div>
+            <div className='newActivity'>
 
-            {/* <Row> */}
-                {/* ToDo:  Fix harded data */}
-                <AddActivity
+{/* ToDo:  Need to fetch activities for a park, and let the user select them. This component was a fill-in 
+for getting and storing the Notes, but that won't be necessary if we add Activities to a Trip using a 
+method similar menu selector used with Trip Planner.*/}
+                {/* <AddActivity
                     tripId={props.tripId}
                     inActivityName={'New Activity'}
                     inActivityDescription={'This new activity will be super fun'}
-                    inActivityCost={'$30/hour'}
+                    inActivityTitle={'Title of Activity'}
                     fetchTripActivities={fetchTripActivities}
-                    token={props.token} />
-            {/* </Row> */}
-        </div>
+                    token={props.token} /> */}
+            </div>
         </div>
     )
 }

@@ -3,22 +3,14 @@ import { Modal, Form, Input } from 'antd';
 
 import "antd/dist/antd.css";
 
+// ToDo: Add url, image
 const EditActivity = (props) => {
   const [activityId, setActivityId] = useState(props.activityToUpdate.id)
-  const [name, setName] = useState(props.activityToUpdate.name)
-  const [description, setDescription] = useState(props.activityToUpdate.description)
-  const [cost, setCost] = useState(props.activityToUpdate.cost)
   const [notes, setNotes] = useState(props.activityToUpdate.notes)
-  
-  console.log(`In EditActivity - visible is ${props.visible}`)
-  console.log(props.activityToUpdate.name)
-  console.log(props.activityToUpdate.id)
 
   const [formRef, setFormRef] = useState(null);
 
   const handleOk = () => {
-    console.log(`In handleOk - Id is ${activityId}, notes= ${notes}`)
-    console.log (props.activityToUpdate)
 
     fetch(`http://localhost:3000/activity/${props.activityToUpdate.id}`, {
         method: 'PUT',
@@ -36,7 +28,6 @@ const EditActivity = (props) => {
   }
 
   const handleCancel = () => {
-    console.log('In handleCancel')
     props.updateOff()
     props.setVisible(false);
   };
@@ -56,8 +47,10 @@ const EditActivity = (props) => {
         onCancel={handleCancel}
         onOk={handleOk}
       >
-        <p>{name} -- {description}</p>
-        <p>Cost:  {cost} </p>
+        <p>{props.activityToUpdate.title} </p>
+        <p>{props.activityToUpdate.name} -- {props.activityToUpdate.description}</p>
+        <p>Location:  {props.activityToUpdate.location}</p>
+        
         <Form
           layout="horizontal"
         >
