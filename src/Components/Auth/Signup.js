@@ -5,7 +5,6 @@ import APIURL from "../../Utils/Environment";
 const { Title } = Typography
 
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
-    const APIURL = process.env.REACT_APP_API_URL;
     const [confirmPassword, setConfirmPassword] = useState()
     const [failMessage, setFailMessage] = useState("")
     

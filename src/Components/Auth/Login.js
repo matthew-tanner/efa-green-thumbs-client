@@ -5,7 +5,6 @@ import APIURL from "../../Utils/Environment";
 const { Title } = Typography
 
 function Login({ toggle, token, newToken }){
-    const APIURL = process.env.REACT_APP_API_URL;
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     

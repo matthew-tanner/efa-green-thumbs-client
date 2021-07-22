@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, Button } from "antd";
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
-  const APIURL = process.env.REACT_APP_API_URL;
   const [trips, setTrips] = useState([]);
 
   const fetchTrips = () => {
