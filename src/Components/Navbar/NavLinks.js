@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Route, Link, Switch } from "react-router-dom";
-import { bool } from 'prop-types'
 
 import Home from '../Home/Home';
 import Portal from '../Auth/Portal';
@@ -53,20 +52,16 @@ const Link1 = styled.a`
 `
 
 const NavLinks = ({token, logout, newToken, open, setOpen }) => {
+
     return(
         <>
         <NavLinksContainer>
             <LinksWrapper>
-                {/* <LinkItem to="/Home"><Link href='#'>Home</Link></LinkItem>
-                <LinkItem to="/Home"><Link href='#'>Activity Search</Link></LinkItem>
-                <LinkItem to="/Home"><Link href='#'>Trip Planner</Link></LinkItem> */}
-                   
-
-
                 <LinkItem ><Link to="/Home" className='link1'><Link1>Home</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/Trips" className='link1'><Link1>Park Search</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/viewTrips" className='link1'><Link1>View Trips</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/tripActivityIndex" className='link1'><Link1>Activities</Link1></Link></LinkItem>
+                {/* <LinkItem ><Link to="/portal" className='link1'><Link1>Login</Link1></Link></LinkItem> */}
                 
 
             </LinksWrapper>
@@ -89,9 +84,6 @@ const NavLinks = ({token, logout, newToken, open, setOpen }) => {
                         <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsI…zk4fQ.u_9HuKRllUqWJIdmeq3LyBVNG3vymd3fwJXcd2tfVlk'} 
                         tripId={2} />
                         </Route>
-                        {/* <Route exact path="/activities">
-                        <DisplayTripActivities token={props.token} newToken={props.newToken} logout={props.logout} />
-                        </Route> */}
                     </Switch>
                 </div>
                 </>
