@@ -1,12 +1,11 @@
 import { Button, Card, Col, Row } from 'antd';
 
 import { EditOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
 
 const DisplayTripActivities = (props) => {
 
     const { Meta } = Card;
-
-console.log(`In DisplayTripActivities - tripActivityList is ${props.tripActivityList}`)
 
     const deleteActivity = (tripActivity) => {
 
@@ -17,8 +16,8 @@ console.log(`In DisplayTripActivities - tripActivityList is ${props.tripActivity
                 'Authorization': `Bearer ${props.token}`
             })
         })
-// ToDo:  Display a confirmation message?
-        .then(() => props.fetchTripActivities())
+            // ToDo:  Display a confirmation message?
+            .then(() => props.fetchTripActivities())
     }
 
     return (
@@ -49,13 +48,13 @@ console.log(`In DisplayTripActivities - tripActivityList is ${props.tripActivity
 
                                     <Button
                                         icon={<EditOutlined />}
-                                        onClick={() => {props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn()}}
+                                        onClick={() => { props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn() }}
                                     />
 
                                     <Button
                                         shape="circle"
                                         style={{ color: 'black', zIndex: 10 }}
-                                        onClick={() => {deleteActivity(tripActivity)}}
+                                        onClick={() => { deleteActivity(tripActivity) }}
                                     >
                                         X
                                     </Button>

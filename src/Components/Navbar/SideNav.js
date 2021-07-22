@@ -90,9 +90,10 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
               <TripsDisplay token={token} />
             </Route>
 {/* ToDo: This TripActivittyIndex component is just a temporary Route to facilitate development.  
-Remove this Route once it's accessible from TripsDisplay */}
+Remove this Route once it's accessible from TripsDisplay Note that the trip object, not just the tripId should 
+be passed in as a prop so that the user can search for/add new activities to the trip via parkCode.*/}
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={token} tripId={2}/>
+              <TripActivityIndex token={token} tripId={7}/>
             </Route>
             <Route exact path="/">
               <Home />

@@ -5,7 +5,6 @@ import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 
 const TripActivityIndex = (props) => {
-    console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.token}`)
 
     const [tripActivities, setTripActivities] = useState([])
     const [updateActive, setUpdateActive] = useState(false)
@@ -71,14 +70,16 @@ const TripActivityIndex = (props) => {
             </div>
             <div className='newActivity'>
 
-{/* ToDo:  Need to fetch activities for a park, and let the user select them. */}
-                <AddActivity
+{/* ToDo:  Need to fetch activities for a park, and let the user select them. This component was a fill-in 
+for getting and storing the Notes, but that won't be necessary if we add Activities to a Trip using a 
+method similar menu selector used with Trip Planner.*/}
+                {/* <AddActivity
                     tripId={props.tripId}
                     inActivityName={'New Activity'}
                     inActivityDescription={'This new activity will be super fun'}
                     inActivityTitle={'Title of Activity'}
                     fetchTripActivities={fetchTripActivities}
-                    token={props.token} />
+                    token={props.token} /> */}
             </div>
         </div>
     )
