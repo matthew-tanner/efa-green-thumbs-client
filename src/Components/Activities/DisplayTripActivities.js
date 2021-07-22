@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
 
 import { EditOutlined } from '@ant-design/icons';
-
-import EditActivity from './EditActivity'
-
 
 const DisplayTripActivities = (props) => {
 
     const { Meta } = Card;
 
-    console.log(props.tripActivityList)
+console.log(`In DisplayTripActivities - tripActivityList is ${props.tripActivityList}`)
 
     const deleteActivity = (tripActivity) => {
 
@@ -33,7 +29,6 @@ const DisplayTripActivities = (props) => {
                     {props.tripActivityList.map(tripActivity => {
                         return (
                             <Col>
-{/* ToDo: Ant recommends having a max of 4 rows of cards.  Do we need to allow for an unlimited number of activities for a trip? */}
                                 <Card
                                     className="activityCard"
                                     size="small"
@@ -47,14 +42,13 @@ const DisplayTripActivities = (props) => {
                                 >
                                     <Meta
                                         title={tripActivity.name}
-                                        bordered={true}
+                                        bordered="true"
                                         description={tripActivity.description}
                                     />
                                     <p>{tripActivity.notes}</p>
 
                                     <Button
                                         icon={<EditOutlined />}
-                                        // onClick={() => { setVisible(true) }}
                                         onClick={() => {props.editUpdateActivity(tripActivity); props.setVisible(true); props.updateOn()}}
                                     />
 

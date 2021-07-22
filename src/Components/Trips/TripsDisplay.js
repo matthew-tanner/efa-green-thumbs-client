@@ -34,13 +34,17 @@ const TripsDisplay = (props) => {
             .catch(err => console.log(err))
 
     }
-    // console.log(deleteTrips());
-    // in our delete and edit we need to find a way to drill into trips for trip id in the url
-
 
 
     const editTrips = (trip) => {
-console.log(`In editTrips in TripsDisplay - tripId = ${trip.id}, name = ${trip.name}, token = ${props.token} and trip = ${trip}`)
+        console.log(`In editTrips in TripsDisplay - tripId = ${trip.id}, name = ${trip.name}, token = ${props.token} and trip = ${trip}`)
+        
+// ToDo: The TripActivityIndex component doesn't execute here.  
+//   - We tried using a Route here (so that TripActivityIndex is a child of TripsDisplay, 
+//     instead of a peer of TripsDisplay), but that didn't work.  
+//   - We were able to get the TripActivityIndex page to show using a Link on the Button 
+//     in TripsDisplay's return, but, we can't pass the trip.id and props.token via a Link.  
+//   - We also tried Redirect but it has the same limitation as Link.
         return (
             <>
                 <div>
@@ -51,20 +55,7 @@ console.log(`In editTrips in TripsDisplay - tripId = ${trip.id}, name = ${trip.n
 
     }
 
-    // const editTrips = (trip) => {
-    //     fetch(`http://localhost:3000/trip/${trip.id}`, {
-    //     method: 'PUT',
-    //     headers: new Headers({
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${props.token}`
-    //     })
-    // }) .then (() => fetchTrips())
-    //     .catch (err => console.log(err))
-
-    // }
-
     useEffect(() => {
-console.log('In TripsDisplay useEffect')
         fetchTrips()
     }, [])
 
@@ -84,8 +75,6 @@ console.log('In TripsDisplay useEffect')
                                 Trip Name: {trip.name}<br />
                                 <Button onClick={() => { deleteTrips(trip) }}>Delete</Button>
                                 <Button onClick={() => { editTrips(trip) }}>Edit</Button>
-
-                                {/* You'll want two buttons, one that updates and one that deletes  */}
                             </Card.Grid>
                         )
                     }

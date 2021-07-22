@@ -1,11 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Form, Input } from 'antd';
 
 import "antd/dist/antd.css";
 
 // ToDo: Add location, url, image
 const AddActivity = (props) => {
-    const [activityId, setActivityId] = useState('')
     const [name, setName] = useState(props.inActivityName)
     const [description, setDescription] = useState(props.inActivityDescription)
     const [title, setTitle] = useState(props.inTitle)
@@ -37,10 +36,9 @@ const AddActivity = (props) => {
     }
 
     return (
-
         <div className='site-card-border-less-wrapper'>
 
-            <Card bordered={true} style={{ margin: 30 }}>
+            <Card bordered="true" style={{ margin: 30 }}>
                 <p>{name} -- {description}</p>
                 <p>Title: {title}</p>
 

@@ -66,7 +66,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/viewTrips">
               <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
             </Link>
-{/* ToDo: Remove this link once it's accessible from TripsDisplay */}
+{/* ToDo: Remove this link once TripActivityIndex is accessible from TripsDisplay */}
             <Link to="/tripActivityIndex">
               <span aria-label="Trip Activities" onClick={() => setOpen(!open)}>Trip Activities</span>
             </Link>
@@ -88,11 +88,11 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             </Route>
             <Route exact path="/viewTrips">
               <TripsDisplay token={token} />
-
             </Route>
-{/* ToDo: Remove this Route once it's accessible from TripsDisplay */}
+{/* ToDo: This TripActivittyIndex component is just a temporary Route to facilitate development.  
+Remove this Route once it's accessible from TripsDisplay */}
             <Route exact path="/tripActivityIndex">
-              <TripActivityIndex token={token} tripId={2} />
+              <TripActivityIndex token={token} tripId={2}/>
             </Route>
             <Route exact path="/">
               <Home />

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row } from 'antd';
 
 import DisplayTripActivities from './DisplayTripActivities'
 import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 
 const TripActivityIndex = (props) => {
-console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.token}`)
+    console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.token}`)
 
     const [tripActivities, setTripActivities] = useState([])
     const [updateActive, setUpdateActive] = useState(false)
@@ -14,10 +13,8 @@ console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.tok
     const [visible, setVisible] = useState(false);
 
     const fetchTripActivities = () => {
-console.log(`In tripActivityIndex fetchTripActivities. tripId = ${props.tripId}, token = ${props.token}`)
         fetch(`http://localhost:3000/activity/all/${props.tripId}`, {
             method: 'GET',
-            
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${props.token}`
@@ -25,14 +22,12 @@ console.log(`In tripActivityIndex fetchTripActivities. tripId = ${props.tripId},
         })
             .then((res) => res.json())
             .then((tripActivityData) => {
-console.log(`After fetching activities, tripActivityData is ${tripActivityData}`)
                 setTripActivities(tripActivityData)
             })
     }
 
     const editUpdateActivity = (tripActivity) => {
         setActivityToUpdate(tripActivity)
-        console.log(tripActivity)
     }
 
     const updateOn = () => {
@@ -48,26 +43,19 @@ console.log(`After fetching activities, tripActivityData is ${tripActivityData}`
     }, [])
 
     return (
-        
+
         <div >
             <div className='tripDisplay'>
-            {/* <Row> */}
-                {/* <Col span={3}>
-
-                </Col> */}
-                
-                {/* <Col> */}
-                    <DisplayTripActivities
-                        tripId={props.tripId}
-                        tripActivityList={tripActivities}
-                        editUpdateActivity={editUpdateActivity}
-                        updateOn={updateOn}
-                        fetchTripActivities={fetchTripActivities}
-                        visible={visible}
-                        setVisible={setVisible}
-                        token={props.token}
-                    />
-                {/* </Col> */}
+                <DisplayTripActivities
+                    tripId={props.tripId}
+                    tripActivityList={tripActivities}
+                    editUpdateActivity={editUpdateActivity}
+                    updateOn={updateOn}
+                    fetchTripActivities={fetchTripActivities}
+                    visible={visible}
+                    setVisible={setVisible}
+                    token={props.token}
+                />
 
                 {updateActive
                     ? <EditActivity
@@ -80,12 +68,10 @@ console.log(`After fetching activities, tripActivityData is ${tripActivityData}`
                     />
                     : <></>
                 }
-            {/* </Row> */}
-        </div>
-        <div className='newActivity'>
+            </div>
+            <div className='newActivity'>
 
-            {/* <Row> */}
-{/* ToDo:  Fix hard coded data */}
+{/* ToDo:  Need to fetch activities for a park, and let the user select them. */}
                 <AddActivity
                     tripId={props.tripId}
                     inActivityName={'New Activity'}
@@ -93,8 +79,7 @@ console.log(`After fetching activities, tripActivityData is ${tripActivityData}`
                     inActivityTitle={'Title of Activity'}
                     fetchTripActivities={fetchTripActivities}
                     token={props.token} />
-            {/* </Row> */}
-        </div>
+            </div>
         </div>
     )
 }
