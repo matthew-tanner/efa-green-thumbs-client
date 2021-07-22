@@ -4,7 +4,6 @@ import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 import { useMediaQuery } from "react-responsive";
-import {useOnClickOutside} from "./Utils/Hooks";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
 import Navbar from "./Components/Navbar/Navbar";
@@ -15,7 +14,6 @@ function App() {
   const [token, setToken] = useState("");
 
   const node = useRef();
-  useOnClickOutside(node, () => setOpen(false));
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
