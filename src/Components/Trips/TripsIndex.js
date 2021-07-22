@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Select, Button, Divider, Modal } from "antd";
 import { useHistory } from "react-router-dom";
-import APIURL from "../../Utils/Environment";
+import {APIURL, NPSKEY} from "../../Utils/Environment";
 
 const TripsIndex = (props) => {
-  const npsKey = process.env.REACT_APP_NPS_KEY;
   const history = useHistory();
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
@@ -105,7 +104,7 @@ const TripsIndex = (props) => {
   };
 
   const getParks = (e) => {
-    fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=${npsKey}`)
+    fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=${NPSKEY}`)
       .then((response) => response.json())
       .then((data) => {
         setParksList(
@@ -120,7 +119,7 @@ const TripsIndex = (props) => {
   };
 
   const getActivities = (e) => {
-    fetch(`https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${npsKey}`)
+    fetch(`https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${NPSKEY}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.data[0].relatedParks[0].fullName) {
