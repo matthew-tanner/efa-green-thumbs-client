@@ -5,6 +5,7 @@ import { Route, Link, Switch } from "react-router-dom";
 import Home from '../Home/Home';
 import Portal from '../Auth/Portal';
 import TripsIndex from '../Trips/TripsIndex';
+import TripsDisplay from '../Trips/TripsDisplay';
 import TripActivityIndex from "../Activities/TripActivityIndex"
 
 
@@ -78,7 +79,7 @@ const NavLinks = ({token, logout, newToken, open, setOpen }) => {
                         <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/viewTrips">
-                        <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
+                        <TripsDisplay token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/tripActivityIndex">
                         <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsI…zk4fQ.u_9HuKRllUqWJIdmeq3LyBVNG3vymd3fwJXcd2tfVlk'} 

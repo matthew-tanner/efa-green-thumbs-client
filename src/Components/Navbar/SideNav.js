@@ -84,8 +84,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
               <Portal token={token} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/viewTrips">
-              <TripsDisplay token={token} />
-              
+              <TripsDisplay token={token} />  
             </Route>
             <Route exact path="/tripActivityIndex">
               <TripActivityIndex token={token} tripId={3} />

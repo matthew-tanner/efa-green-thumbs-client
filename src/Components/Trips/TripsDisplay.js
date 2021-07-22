@@ -33,11 +33,6 @@ console.log(`In TripsDisplay fetchTrips`)
         .catch (err => console.log(err))
         
     }
-    // console.log(deleteTrips());
-// in our delete and edit we need to find a way to drill into trips for trip id in the url
-
-
-
     const editTrips = (trip) => {
 console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
         return (
@@ -67,22 +62,19 @@ console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
         textAlign: 'center',
 
       };
-    // const cardGrid = {
-    //     backgroundColor: '#FB743E'
-    // }
     return(
         <>
 <div className="trips-grid">
-    <Card title="Trips">
+    <Card title="Trips">        
      {trips.map(trip => {
          return (
              <div className="card-grid-style">
                  <Card.Grid style={gridStyle} >
                     {trip.name}<br />
                  <Button className="delete-button" onClick={() => {deleteTrips(trip)}}>Delete</Button><br />
-                 <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
-                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a>
-        {/* You'll want two buttons, one that updates and one that deletes  */}
+                 {/* <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
+                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a> */}
+       
                 </Card.Grid>
                 </div>
         )
