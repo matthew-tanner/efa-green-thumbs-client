@@ -242,7 +242,7 @@ const TripsIndex = (props) => {
       history.push("/portal", { from: "/trips" });
     }
   };
-
+console.log(tripId);
   const createActivities = () => {
     const actData = [];
     activitiesList.map((x) => {
@@ -277,7 +277,7 @@ const TripsIndex = (props) => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => createTrip()}>
+        <Button type="primary" onClick={() => console.log(createTrip())}>
           Create Trip
         </Button>
       </>

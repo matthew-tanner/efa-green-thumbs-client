@@ -109,13 +109,28 @@
   display: flex;
   justify-content: center;
 }
+.stateSelector {
+  font-family: 'Varela Round', sans-serif;
+  color: #383e56 !important;
+}
+.ant-card-head {
+  background-color: #383e56 !important;
+}
+.ant-card-head-title {
+  font: 30px 'Varela Round', sans-serif !important;
 
+}
+.ant-card-bordered {
+  margin-top: 30%;
+ 
+}
 .ant-card-grid {
-  background-color: white;
-  color: #383e56;
+  background-color: #383e56;
+  color: white;
+  font-family: 'Varela Round', sans-serif;
   margin: 5%;
   margin-top: 10%;
-  border: 5px solid #383e56;
+  /* border: 5px solid #FB743E; */
   word-wrap: break-word;
   font: 'Varela Round', sans-serif;
   box-shadow: 0.5px 0 0 0 #f0f0f0, 
@@ -124,12 +139,31 @@
   1px 0 0 0 #f0f0f0 inset, 
   0 1px 0 0 #f0f0f0 inset;
 }
-
-.view-trips-grid {
-  margin-right: 80px;
+.card-background {
+  background-color: #383e56
+}
+.trips-grid {
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.stateSelector {
+.card-grid-style {
+  display: flex;
+  justify-content: center;
+  background-color: #FB743E;
+  width: 100%;
+}
+
+.delete-button{
+  background-color: #FB743E;
+  color: white;
   font-family: 'Varela Round', sans-serif;
-  color: #383e56 !important;
+  border: none;
+
+}
+
+a {
+color: white;
+font-family: 'Varela Round', sans-serif;
 }
