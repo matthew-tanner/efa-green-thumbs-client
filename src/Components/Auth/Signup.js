@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { Form, Input, Button, Typography, Card } from 'antd'
+import APIURL from "../../Utils/Environment";
 
 const { Title } = Typography
 
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
-    const baseUrl = process.env.REACT_APP_API_URL;
+    const APIURL = process.env.REACT_APP_API_URL;
     const [confirmPassword, setConfirmPassword] = useState()
     const [failMessage, setFailMessage] = useState("")
     
@@ -32,7 +33,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     }
     console.log(`newUserData --> ${newUserData.email} ${newUserData.password} ${newUserData.displayName}`);
 
-    fetch(`${baseUrl}/user/signup`, {
+    fetch(`${APIURL}/user/signup`, {
         method: 'POST',
         headers: new Headers ({
             'Content-Type': 'application/json'

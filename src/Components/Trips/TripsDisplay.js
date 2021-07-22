@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "antd";
+import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
-  const baseUrl = process.env.REACT_APP_API_URL;
+  const APIURL = process.env.REACT_APP_API_URL;
   const [trips, setTrips] = useState([]);
 
   const fetchTrips = () => {
-    fetch(`${baseUrl}/trip/all`, {
+    fetch(`${APIURL}/trip/all`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -22,7 +23,7 @@ const TripsDisplay = (props) => {
   };
 
   const deleteTrips = (trip) => {
-    fetch(`${baseUrl}/trip/${trip.id}`, {
+    fetch(`${APIURL}/trip/${trip.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -34,7 +35,7 @@ const TripsDisplay = (props) => {
   };
   
   const editTrips = (trip) => {
-    fetch(`${baseUrl}/trip/${trip.id}`, {
+    fetch(`${APIURL}/trip/${trip.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

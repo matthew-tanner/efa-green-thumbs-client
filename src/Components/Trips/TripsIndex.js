@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Select, Button, Divider, Modal } from "antd";
 import { useHistory } from "react-router-dom";
+import APIURL from "../../Utils/Environment";
 
 const TripsIndex = (props) => {
-  const baseUrl = process.env.REACT_APP_API_URL;
   const npsKey = process.env.REACT_APP_NPS_KEY;
   const history = useHistory();
   const [stateId, setStateId] = useState("");
@@ -228,7 +228,7 @@ const TripsIndex = (props) => {
         parkCode: parkCode,
       };
 
-      fetch(`${baseUrl}/trip/create`, {
+      fetch(`${APIURL}/trip/create`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
@@ -269,7 +269,7 @@ const TripsIndex = (props) => {
       });
     });
 
-    fetch(`${baseUrl}/activity/create/${tripId}`, {
+    fetch(`${APIURL}/activity/create/${tripId}`, {
       method: "POST",
       body: JSON.stringify(actData),
       headers: new Headers({
