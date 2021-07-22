@@ -20,6 +20,7 @@ const TripsDisplay = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
   const deleteTrips = (trip) => {
     fetch(`${baseUrl}/trip/${trip.id}`, {
       method: "DELETE",
@@ -31,6 +32,7 @@ const TripsDisplay = (props) => {
       .then(() => fetchTrips())
       .catch((err) => console.log(err));
   };
+  
   const editTrips = (trip) => {
     fetch(`${baseUrl}/trip/${trip.id}`, {
       method: "PUT",
@@ -43,25 +45,40 @@ const TripsDisplay = (props) => {
       .catch((err) => console.log(err));
   };
 
-    };
+  const gridStyle = {
+    width: '100%',
+    textAlign: 'center',
+  };
 
-    return (
-        <>
-            <div className="view-trips-grid">
-                <Card title="Trips" >
-                    {trips.map(trip => {
-                        return (
-                            <Card.Grid style={gridStyle}>
-                                Trip Name: {trip.name}<br />
-                                <Button onClick={() => { deleteTrips(trip) }}>Delete</Button>
-                                <Button onClick={() => { editTrips(trip) }}>Edit</Button>
-                            </Card.Grid>
-                        )
-                    }
-                    )}
-                </Card>
-            </div>
-        </>
-    )
-                  }
-export default TripsDisplay
+  return (
+    <>
+      <div className="view-trips-grid">
+        <Card title="Trips">
+          {trips.map((trip) => {
+            return (
+              <Card.Grid style={gridStyle}>
+                Trip Name: {trip.name}
+                <br />
+                <Button
+                  onClick={() => {
+                    deleteTrips(trip);
+                  }}
+                >
+                  Delete
+                </Button>
+                <Button
+                  onClick={() => {
+                    editTrips(trip);
+                  }}
+                >
+                  Edit
+                </Button>
+              </Card.Grid>
+            );
+          })}
+        </Card>
+      </div>
+    </>
+  );
+};
+export default TripsDisplay;

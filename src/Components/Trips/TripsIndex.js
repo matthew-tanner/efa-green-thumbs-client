@@ -10,7 +10,7 @@ const TripsIndex = (props) => {
   const [parkCode, setParkCode] = useState("");
   const [parkName, setParkName] = useState("");
   const [tripId, setTripId] = useState("");
-  const [activityStatus, setActivityStatus] = useState("");
+  const [activityStatus, setActivityStatus] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
   const [parksList, setParksList] = useState([]);
@@ -78,21 +78,21 @@ const TripsIndex = (props) => {
   ];
 
   useEffect(() => {
-    if (stateId !== "") {
+    if (stateId !== "" && activityStatus === 0) {
       getParks();
     }
-    if (parkCode !== "") {
+    if (parkCode !== "" && activityStatus === 0) {
       getActivities();
     }
-    if (tripId !== "") {
+    if (tripId !== "" && activityStatus === 0) {
       createActivities();
-    }
-    if (activityStatus == "200") {
-      success();
     }
   }, [stateId, parkCode, tripId, activityStatus]);
 
   const onChangeState = (value) => {
+    setParkCode("");
+    setTripId("");
+    setActivityStatus(0);
     setStateId(value);
   };
 
@@ -123,20 +123,22 @@ const TripsIndex = (props) => {
     fetch(`https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${npsKey}`)
       .then((response) => response.json())
       .then((data) => {
-        setParkName(data.data[0].relatedParks[0].fullName);
-        setActivitiesList(
-          data.data.map((x) => {
-            return {
-              id: x.id,
-              name: x.activities[0].name,
-              title: x.title,
-              location: x.location,
-              shortDescription: x.shortDescription,
-              url: x.url,
-              image: x.images[0].url,
-            };
-          })
-        );
+        if (data.data[0].relatedParks[0].fullName) {
+          setParkName(data.data[0].relatedParks[0].fullName);
+          setActivitiesList(
+            data.data.map((x) => {
+              return {
+                id: x.id,
+                name: x.activities[0].name,
+                title: x.title,
+                location: x.location,
+                shortDescription: x.shortDescription,
+                url: x.url,
+                image: x.images[0].url,
+              };
+            })
+          );
+        }
       });
   };
 
@@ -202,7 +204,7 @@ const TripsIndex = (props) => {
           onChange={onChangeActivity}
         >
           {activitiesList.map((x) => (
-            <Option key={x.id} value={x.name}>
+            <Option key={x.id} value={x.title}>
               {x.title}
             </Option>
           ))}
@@ -210,16 +212,17 @@ const TripsIndex = (props) => {
       </>
     );
   };
-  const success = () => {
-    Modal.success({
-      content: parkName + " has been created as a new trip!",
-    });
-    history.push("/viewTrips");
-  };
+
+  // const success = () => {
+  //   Modal.success({
+  //     content: parkName + " has been created as a new trip!",
+  //   });
+  //   //history.push("/viewTrips");
+  // };
 
   const createTrip = () => {
+    setActivityStatus(0);
     if (props.token) {
-      //console.log(activitiesList, selectedActivities)
       const data = {
         name: parkName,
         parkCode: parkCode,
@@ -237,17 +240,22 @@ const TripsIndex = (props) => {
         .then((data) => {
           console.log(data.data.id);
           setTripId(data.data.id);
-        });
+        })
+        .then(
+          Modal.success({
+            content: parkName + " has been created as a new trip!",
+          })
+        );
     } else {
       history.push("/portal", { from: "/trips" });
     }
   };
-console.log(tripId);
-  const createActivities = () => {
+
+  const createActivities = (e) => {
     const actData = [];
     activitiesList.map((x) => {
       return selectedActivities.forEach((item, index, array) => {
-        if (x.name === item) {
+        if (item === x.title) {
           actData.push({
             name: x.name,
             tripId: tripId,
@@ -268,16 +276,14 @@ console.log(tripId);
         "Content-Type": "application/json",
         Authorization: `Bearer ${props.token}`,
       }),
-    }).then(
-      (response) => setActivityStatus(response.status)
-    );
+    }).then((response) => setActivityStatus(response.status));
   };
 
   const showCreateButton = () => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => console.log(createTrip())}>
+        <Button type="primary" onClick={() => createTrip()}>
           Create Trip
         </Button>
       </>
