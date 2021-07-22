@@ -72,7 +72,29 @@
 
 .tripDiv {
   margin-top: 10rem;
+  background-color: #383e56 !important;
+  padding: 1rem;
+  border-radius: 5px !important;
+  font-family: 'Varela Round', sans-serif;
+}
 
+.tripDiv h3 {
+  color: white;
+  background-color: #383e56 !important;
+}
+
+.tripDiv button {
+  background-color: #FB743E;
+  border-radius: 5px;
+  border: none;
+  margin: 1rem;
+}
+
+.tripDiv button:hover {
+  background-color: #9fb8ad;
+  border: none;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
 }
 
 .tripDisplay {
@@ -105,4 +127,9 @@
 
 .view-trips-grid {
   margin-right: 80px;
+}
+
+.stateSelector {
+  font-family: 'Varela Round', sans-serif;
+  color: #383e56 !important;
 }

@@ -145,8 +145,9 @@ const TripsIndex = (props) => {
     return (
       <div>
         <Select
+          className='stateSelector'
           showSearch
-          style={{ width: 200 }}
+          style={{ width: 300 }}
           placeholder="Select a State"
           optionFilterProp="children"
           filterOption={(input, option) =>
@@ -167,7 +168,7 @@ const TripsIndex = (props) => {
   const popParks = () => {
     return (
       <>
-        <h3>Select a Park</h3>
+        {/* <h3>Select a Park</h3> */}
         <Select
           showSearch
           style={{ width: 300 }}
@@ -191,7 +192,7 @@ const TripsIndex = (props) => {
   const popActivities = () => {
     return (
       <>
-        <h3>Select an Activity</h3>
+        {/* <h3>Select an Activity</h3> */}
         <Select
           mode="multiple"
           showSearch
@@ -290,13 +291,14 @@ const TripsIndex = (props) => {
   };
 
   return (
-    <div>
-      <div className="tripDiv">
-        <h3>Select a State</h3>
+    <div className='tripDiv'>
+      <div>
+        <h3>Plan Your Trip</h3>
       </div>
       <div>{popStates()}</div>
       <br />
       <div>{parksList.length > 0 ? popParks() : <></>}</div>
+      <br />
       <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
       <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
     </div>

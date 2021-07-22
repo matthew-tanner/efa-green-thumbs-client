@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Link, Switch } from "react-router-dom";
-// import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
 import { bool } from "prop-types";
 
@@ -54,7 +53,6 @@ const StyledMenu = styled.nav`
 const SideNav = ({ open, setOpen, token, logout, newToken }) => {
   return (
     <>
-      {/* <Router> */}
         <div>
           <StyledMenu open={open}>
             <Link to="/Home">
@@ -96,7 +94,6 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             </Route>
           </Switch>
         </div>
-      {/* </Router> */}
     </>
   );
 };

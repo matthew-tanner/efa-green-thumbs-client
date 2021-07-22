@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
+import Portal from '../Auth/Portal';
+
 const AccessContainer = styled.div`
     display: flex;
     margin-left: 10px;
@@ -24,7 +26,7 @@ const LoginButton = styled.button`
     }
 `
 
-const Access = (props) => {
+const Access = () => {
     return(
         <>
         <AccessContainer>

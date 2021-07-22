@@ -7,14 +7,14 @@ import { useHistory } from "react-router-dom";
 
 const { Title } = Typography
 
-function Login({ toggle, token, newToken, previous }){
+function Login({ toggle, token, newToken }){
     const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const confirmAndSend = () => {
         userLogin()
-        history.goBack()
+        // history.goBack()
         // if (userLogin()) {
         //     return <Redirect to ='/' />
         // } else {
