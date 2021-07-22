@@ -17,6 +17,7 @@ console.log(`In tripActivityIndex. tripId = ${props.tripId}, token = ${props.tok
 console.log(`In tripActivityIndex fetchTripActivities. tripId = ${props.tripId}, token = ${props.token}`)
         fetch(`http://localhost:3000/activity/all/${props.tripId}`, {
             method: 'GET',
+            
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${props.token}`
@@ -24,6 +25,7 @@ console.log(`In tripActivityIndex fetchTripActivities. tripId = ${props.tripId},
         })
             .then((res) => res.json())
             .then((tripActivityData) => {
+console.log(`After fetching activities, tripActivityData is ${tripActivityData}`)
                 setTripActivities(tripActivityData)
             })
     }

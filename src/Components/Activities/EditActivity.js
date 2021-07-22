@@ -8,7 +8,7 @@ const EditActivity = (props) => {
   const [activityId, setActivityId] = useState(props.activityToUpdate.id)
   const [name, setName] = useState(props.activityToUpdate.name)
   const [description, setDescription] = useState(props.activityToUpdate.description)
-  const [title, setTitle] = useState(props.ActivityToUpdate.title)
+  const [title, setTitle] = useState(props.activityToUpdate.title)
   const [notes, setNotes] = useState(props.activityToUpdate.notes)
   
   console.log(`In EditActivity - visible is ${props.visible}`)
