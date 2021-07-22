@@ -61,7 +61,6 @@ const NavLinks = ({token, logout, newToken, open, setOpen }) => {
                 <LinkItem ><Link to="/Trips" className='link1'><Link1>Park Search</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/viewTrips" className='link1'><Link1>View Trips</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/tripActivityIndex" className='link1'><Link1>Activities</Link1></Link></LinkItem>
-                {/* <LinkItem ><Link to="/portal" className='link1'><Link1>Login</Link1></Link></LinkItem> */}
                 
 
             </LinksWrapper>

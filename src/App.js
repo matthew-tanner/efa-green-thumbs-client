@@ -4,7 +4,6 @@ import { GlobalStyles } from "./Global";
 import { theme } from "./Theme";
 import "./App.css";
 import { useMediaQuery } from "react-responsive";
-import { Redirect } from "react-router";
 
 import { useOnClickOutside } from "./Utils/Hooks";
 import Burger from "./Components/Navbar/Burger";
