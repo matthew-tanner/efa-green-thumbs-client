@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import Burger from "./Components/Navbar/Burger";
 import SideNav from "./Components/Navbar/SideNav";
 import Navbar from "./Components/Navbar/Navbar";
-import {DeviceSize} from "./Utils/DeviceSize";
+import {DeviceSize} from "./Utils/DeviceSize.js";
 
 function App() {
   const [open, setOpen] = useState(false);
