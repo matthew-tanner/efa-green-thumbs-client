@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { Card, Button } from 'antd';
-
+import { Card, Button, Link } from 'antd';
+import { useHistory } from 'react-router-dom';
 import TripActivityIndex from '../Activities/TripActivityIndex'
 
 const TripsDisplay = (props) => {
@@ -18,9 +18,10 @@ console.log(`In TripsDisplay fetchTrips`)
             .then((tripData) => {
                 console.log(tripData)
                 setTrips(tripData)
-                console.log(trips);
+                
             }) .catch ((err) => console.log(err))
     }
+    console.log(trips);
     const deleteTrips = (trip) => {
         fetch(`http://localhost:3000/trip/${trip.id}`, {
         method: 'DELETE',
@@ -62,29 +63,34 @@ console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
     }, [])
 
     const gridStyle = {
-        width: '50%',
+        width: '100%',
         textAlign: 'center',
 
       };
-
+    // const cardGrid = {
+    //     backgroundColor: '#FB743E'
+    // }
     return(
         <>
-    <div className="view-trips-grid">
-    <Card title="Trips" >
+<div className="trips-grid">
+    <Card title="Trips">
      {trips.map(trip => {
          return (
-                 <Card.Grid style={gridStyle}>
-                    Trip Name: {trip.name}<br /> 
-                 <Button onClick={() => {deleteTrips(trip)}}>Delete</Button>
-                 
-                 
+             <div className="card-grid-style">
+                 <Card.Grid style={gridStyle} >
+                    {trip.name}<br />
+                 <Button className="delete-button" onClick={() => {deleteTrips(trip)}}>Delete</Button><br />
+                 <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
+                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a>
         {/* You'll want two buttons, one that updates and one that deletes  */}
                 </Card.Grid>
+                </div>
         )
      }
      )}
     </Card>
     </div>
+
         </>
     )
 }
