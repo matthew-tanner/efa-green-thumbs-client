@@ -25,8 +25,8 @@ const Home = (props) => {
             align="middle"
             cover={<img alt="logomain" src="../assets/logo.png" style={{ maxWidth: "400px" }} />}
           >
-            <Button type="primary" onClick={() => history.push("/portal")}>
-              Test
+            <Button type="primary" onClick={() => history.push("/trips")}>
+              Start Planning
             </Button>
           </Card>
         </Col>

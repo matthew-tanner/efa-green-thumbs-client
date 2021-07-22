@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 const { Title } = Typography
 
 function Login({ toggle, token, newToken }){
+    const baseUrl = process.env.REACT_APP_API_URL;
     const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,7 +32,7 @@ function Login({ toggle, token, newToken }){
         }
         console.log(`userData --> ${userData.email} ${userData.password}`);
     
-        fetch(`http://localhost:3000/user/login`, {
+        fetch(`${baseUrl}/user/login`, {
             method: 'POST',
             headers: new Headers ({
                 'Content-Type': 'application/json'

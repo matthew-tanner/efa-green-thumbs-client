@@ -4,6 +4,7 @@ import { Form, Input, Button, Typography, Card } from 'antd'
 const { Title } = Typography
 
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
+    const baseUrl = process.env.REACT_APP_API_URL;
     const [confirmPassword, setConfirmPassword] = useState()
     const [failMessage, setFailMessage] = useState("")
     
@@ -31,7 +32,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     }
     console.log(`newUserData --> ${newUserData.email} ${newUserData.password} ${newUserData.displayName}`);
 
-    fetch(`http://localhost:3000/user/signup`, {
+    fetch(`${baseUrl}/user/signup`, {
         method: 'POST',
         headers: new Headers ({
             'Content-Type': 'application/json'

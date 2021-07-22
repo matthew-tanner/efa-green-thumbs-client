@@ -3,6 +3,8 @@ import { Select, Button, Divider, Modal } from "antd";
 import { useHistory } from "react-router-dom";
 
 const TripsIndex = (props) => {
+  const baseUrl = process.env.REACT_APP_API_URL;
+  const npsKey = process.env.REACT_APP_NPS_KEY;
   const history = useHistory();
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
@@ -103,9 +105,7 @@ const TripsIndex = (props) => {
   };
 
   const getParks = (e) => {
-    fetch(
-      `https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`
-    )
+    fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=${npsKey}`)
       .then((response) => response.json())
       .then((data) => {
         setParksList(
@@ -120,15 +120,14 @@ const TripsIndex = (props) => {
   };
 
   const getActivities = (e) => {
-    fetch(
-      `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`
-    )
+    fetch(`https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${npsKey}`)
       .then((response) => response.json())
       .then((data) => {
         setParkName(data.data[0].relatedParks[0].fullName);
         setActivitiesList(
           data.data.map((x) => {
             return {
+              id: x.id,
               name: x.activities[0].name,
               title: x.title,
               location: x.location,
@@ -145,7 +144,7 @@ const TripsIndex = (props) => {
     return (
       <div>
         <Select
-          className='stateSelector'
+          className="stateSelector"
           showSearch
           style={{ width: 300 }}
           placeholder="Select a State"
@@ -168,7 +167,6 @@ const TripsIndex = (props) => {
   const popParks = () => {
     return (
       <>
-        {/* <h3>Select a Park</h3> */}
         <Select
           showSearch
           style={{ width: 300 }}
@@ -192,7 +190,6 @@ const TripsIndex = (props) => {
   const popActivities = () => {
     return (
       <>
-        {/* <h3>Select an Activity</h3> */}
         <Select
           mode="multiple"
           showSearch
@@ -205,8 +202,8 @@ const TripsIndex = (props) => {
           onChange={onChangeActivity}
         >
           {activitiesList.map((x) => (
-            <Option key={x.name} value={x.name}>
-              {x.name}
+            <Option key={x.id} value={x.name}>
+              {x.title}
             </Option>
           ))}
         </Select>
@@ -217,7 +214,7 @@ const TripsIndex = (props) => {
     Modal.success({
       content: parkName + " has been created as a new trip!",
     });
-    history.push("/viewTrips")
+    history.push("/viewTrips");
   };
 
   const createTrip = () => {
@@ -228,7 +225,7 @@ const TripsIndex = (props) => {
         parkCode: parkCode,
       };
 
-      fetch("http://localhost:3000/trip/create", {
+      fetch(`${baseUrl}/trip/create`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({
@@ -241,8 +238,8 @@ const TripsIndex = (props) => {
           console.log(data.data.id);
           setTripId(data.data.id);
         });
-    }else{
-      history.push("/portal", {from: '/trips'});
+    } else {
+      history.push("/portal", { from: "/trips" });
     }
   };
 
@@ -264,19 +261,16 @@ const TripsIndex = (props) => {
       });
     });
 
-    fetch(`http://localhost:3000/activity/create/${tripId}`, {
+    fetch(`${baseUrl}/activity/create/${tripId}`, {
       method: "POST",
       body: JSON.stringify(actData),
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: `Bearer ${props.token}`,
       }),
-    })
-      .then((response) => setActivityStatus(response.status)
-      // .then((data) => {
-      //   console.log(data.status);
-      //}
-      );
+    }).then(
+      (response) => setActivityStatus(response.status)
+    );
   };
 
   const showCreateButton = () => {
@@ -291,7 +285,7 @@ const TripsIndex = (props) => {
   };
 
   return (
-    <div className='tripDiv'>
+    <div className="tripDiv">
       <div>
         <h3>Plan Your Trip</h3>
       </div>
