@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "antd";
 import {useLocation} from "react-router-dom";
+import { Card, Button, message } from "antd";
+
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
@@ -27,9 +28,10 @@ const TripsDisplay = (props) => {
         console.log(tripData);
         setTrips(tripData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
   console.log(trips);
+
   const deleteTrips = (trip) => {
     fetch(`${APIURL}/trip/${trip.id}`, {
       method: "DELETE",
@@ -39,8 +41,12 @@ const TripsDisplay = (props) => {
       }),
     })
       .then(() => fetchTrips())
+      .then(success())
       .catch((err) => console.log(err));
   };
+  const success = () => {
+    message.success('Successfully deleted')
+}
   // const editTrips = (trip) => {
   //   console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
   //   return <TripActivityIndex token={props.token} tripId={trip.id} />;
