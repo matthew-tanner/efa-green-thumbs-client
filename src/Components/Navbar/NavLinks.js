@@ -5,6 +5,7 @@ import { Route, Link, Switch } from "react-router-dom";
 import Home from '../Home/Home';
 import Portal from '../Auth/Portal';
 import TripsIndex from '../Trips/TripsIndex';
+import TripsDisplay from '../Trips/TripsDisplay';
 import TripActivityIndex from "../Activities/TripActivityIndex"
 import TripsDisplay from '../Trips/TripsDisplay';
 
