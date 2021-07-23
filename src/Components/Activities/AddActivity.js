@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Form, Input } from 'antd';
-
+import APIURL from "../../Utils/Environment";
 import "antd/dist/antd.css";
 
 // ToDo: Add location, url, image
@@ -11,7 +11,7 @@ const AddActivity = (props) => {
     const [notes, setNotes] = useState('')
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3000/activity/create/${props.tripId}`, {
+        fetch(`${APIURL}/activity/create/${props.tripId}`, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

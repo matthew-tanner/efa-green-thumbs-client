@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import DisplayTripActivities from './DisplayTripActivities'
 import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
+import APIURL from "../../Utils/Environment";
 
 const TripActivityIndex = (props) => {
 
@@ -12,7 +12,7 @@ const TripActivityIndex = (props) => {
     const [visible, setVisible] = useState(false);
 
     const fetchTripActivities = () => {
-        fetch(`http://localhost:3000/activity/all/${props.tripId}`, {
+        fetch(`${APIURL}/activity/all/${props.tripId}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -21,6 +21,7 @@ const TripActivityIndex = (props) => {
         })
             .then((res) => res.json())
             .then((tripActivityData) => {
+                console.log("trip activity data" ,tripActivityData);
                 setTripActivities(tripActivityData)
             })
     }

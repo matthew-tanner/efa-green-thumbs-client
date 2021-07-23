@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Modal, Form, Input } from 'antd';
+import APIURL from "../../Utils/Environment";
 
 import "antd/dist/antd.css";
 
@@ -12,7 +13,7 @@ const EditActivity = (props) => {
 
   const handleOk = () => {
 
-    fetch(`http://localhost:3000/activity/${props.activityToUpdate.id}`, {
+    fetch(`${APIURL}/activity/${props.activityToUpdate.id}`, {
         method: 'PUT',
         body: JSON.stringify({notes: notes}),
         headers: new Headers({ 

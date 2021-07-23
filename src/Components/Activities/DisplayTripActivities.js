@@ -2,6 +2,7 @@ import { Button, Card, Col, Row } from 'antd';
 
 import { EditOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
+import APIURL from "../../Utils/Environment";
 
 const DisplayTripActivities = (props) => {
 
@@ -9,7 +10,7 @@ const DisplayTripActivities = (props) => {
 
     const deleteActivity = (tripActivity) => {
 
-        fetch(`http://localhost:3000/activity/${tripActivity.id}`, {
+        fetch(`${APIURL}/activity/${tripActivity.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
