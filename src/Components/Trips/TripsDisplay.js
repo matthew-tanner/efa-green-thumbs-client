@@ -7,7 +7,6 @@ const TripsDisplay = (props) => {
     const [trips, setTrips] = useState([])
     
     const fetchTrips = () => {
-console.log(`In TripsDisplay fetchTrips`)
        fetch(`http://localhost:3000/trip/all`, {
             method: 'GET',
             headers: new Headers({
@@ -73,8 +72,7 @@ console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
                     {trip.name}<br />
                  <Button className="delete-button" onClick={() => {deleteTrips(trip)}}>Delete</Button><br />
                  {/* <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
-                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a> */}
-       
+                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a> */}       
                 </Card.Grid>
                 </div>
         )
@@ -82,8 +80,7 @@ console.log(`In editTrips in TripsDisplay - trip = ${trip}`)
      )}
     </Card>
     </div>
-
-        </>
+    </>
     )
 }
 export default TripsDisplay
