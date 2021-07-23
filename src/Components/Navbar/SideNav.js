@@ -64,10 +64,6 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/viewTrips">
               <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
             </Link>
-{/* ToDo: Remove this link once TripActivityIndex is accessible from TripsDisplay */}
-            <Link to="/tripActivityIndex">
-              <span aria-label="Trip Activities" onClick={() => setOpen(!open)}>Trip Activities</span>
-            </Link>
             <Link to="/Portal">
               <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
             </Link>
@@ -81,15 +77,12 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Route exact path="/trips">
               <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
             </Route>
-            <Route exact path="/portal">
-              <Portal token={token} newToken={newToken} logout={logout} />
-            </Route>
             <Route exact path="/viewTrips">
               <TripsDisplay token={token} />
             </Route>
-{/* ToDo: This TripActivittyIndex component is just a temporary Route to facilitate development.  
-Remove this Route once it's accessible from TripsDisplay Note that the trip object, not just the tripId should 
-be passed in as a prop so that the user can search for/add new activities to the trip via parkCode.*/}
+            <Route exact path="/portal">
+              <Portal token={token} newToken={newToken} logout={logout} />
+            </Route>
             <Route exact path="/tripActivityIndex">
               <TripActivityIndex token={token} tripId={7}/>
             </Route>

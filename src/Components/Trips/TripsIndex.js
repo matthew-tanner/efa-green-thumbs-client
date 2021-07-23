@@ -212,13 +212,6 @@ const TripsIndex = (props) => {
     );
   };
 
-  // const success = () => {
-  //   Modal.success({
-  //     content: parkName + " has been created as a new trip!",
-  //   });
-  //   //history.push("/viewTrips");
-  // };
-
   const createTrip = () => {
     setActivityStatus(0);
     if (props.token) {
@@ -275,7 +268,8 @@ const TripsIndex = (props) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${props.token}`,
       }),
-    }).then((response) => setActivityStatus(response.status));
+    }).then((response) => setActivityStatus(response.status))
+    .then(() => history.push("/viewTrips"))
   };
 
   const showCreateButton = () => {

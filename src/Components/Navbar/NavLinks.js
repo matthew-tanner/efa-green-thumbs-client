@@ -6,7 +6,7 @@ import Home from '../Home/Home';
 import Portal from '../Auth/Portal';
 import TripsIndex from '../Trips/TripsIndex';
 import TripActivityIndex from "../Activities/TripActivityIndex"
-
+import TripsDisplay from '../Trips/TripsDisplay';
 
 const NavLinksContainer = styled.div`
     height: 100%;
@@ -61,8 +61,6 @@ const NavLinks = ({token, logout, newToken, open, setOpen }) => {
                 <LinkItem ><Link to="/Trips" className='link1'><Link1>Park Search</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/viewTrips" className='link1'><Link1>View Trips</Link1></Link></LinkItem>
                 <LinkItem ><Link to="/tripActivityIndex" className='link1'><Link1>Activities</Link1></Link></LinkItem>
-                
-
             </LinksWrapper>
         </NavLinksContainer>
                 <div className="nav-route">
@@ -77,7 +75,7 @@ const NavLinks = ({token, logout, newToken, open, setOpen }) => {
                         <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/viewTrips">
-                        <TripsIndex token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
+                        <TripsDisplay token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
                         </Route>
                         <Route exact path="/tripActivityIndex">
                         <TripActivityIndex token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsI…zk4fQ.u_9HuKRllUqWJIdmeq3LyBVNG3vymd3fwJXcd2tfVlk'} 
