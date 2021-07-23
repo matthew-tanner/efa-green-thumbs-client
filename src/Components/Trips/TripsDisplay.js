@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "antd";
+import {useLocation} from "react-router-dom";
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
+  const location = useLocation();
+  let localToken = "";
+  if (typeof location.state === "undefined"){
+    localToken = props.token
+  }else{
+    localToken = location.state.token
+  }
+
   const [trips, setTrips] = useState([]);
 
   const fetchTrips = () => {
@@ -10,7 +19,7 @@ const TripsDisplay = (props) => {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${localToken}`,
       }),
     })
       .then((res) => res.json())
@@ -26,7 +35,7 @@ const TripsDisplay = (props) => {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${localToken}`,
       }),
     })
       .then(() => fetchTrips())
