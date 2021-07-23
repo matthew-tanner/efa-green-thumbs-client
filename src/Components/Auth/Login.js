@@ -7,10 +7,17 @@ const { Title } = Typography
 function Login({ toggle, token, newToken }){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const success = () => {
+        message.success('You are now logged in!')
+    }
     
     const confirmAndSend = () => {
         userLogin()
+        success()
+        window.location.href='./viewTrips'
     }
+    
 
     function userLogin() {
         let userData = {
