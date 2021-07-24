@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {useLocation} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import { Card, Button, message } from "antd";
 
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
+  const history = useHistory()
   const location = useLocation();
+  console.log(location);
   let localToken = "";
   if (typeof location.state === "undefined"){
     localToken = props.token
@@ -15,6 +17,7 @@ const TripsDisplay = (props) => {
 
   const [trips, setTrips] = useState([]);
 
+  
   const fetchTrips = () => {
     fetch(`${APIURL}/trip/all`, {
       method: "GET",
@@ -29,8 +32,8 @@ const TripsDisplay = (props) => {
         setTrips(tripData);
       })
       .catch((err) => err);
-  };
-  console.log(trips);
+  }
+
 
   const deleteTrips = (trip) => {
     fetch(`${APIURL}/trip/${trip.id}`, {
@@ -47,21 +50,18 @@ const TripsDisplay = (props) => {
   const success = () => {
     message.success('Successfully deleted')
 }
-  // const editTrips = (trip) => {
-  //   console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
-  //   return <TripActivityIndex token={props.token} tripId={trip.id} />;
-  // };
-  // const editTrips = (trip) => {
-  //     fetch(`http://localhost:3000/trip/${trip.id}`, {
-  //     method: 'PUT',
-  //     headers: new Headers({
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${props.token}`
-  //     })
-  // }) .then (() => fetchTrips())
-  //     .catch (err => console.log(err))
-
-  // }
+  const editTrips = (trip) => {
+    // console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
+    // return <TripActivityIndex token={props.token} tripId={trip.id} />;
+    history.push({
+    pathname: "/tripActivityIndex",
+    state: {
+        token: localToken,
+        parkCode: trip.parkCode,
+        tripId: trip.id
+        }
+    })    
+  }
 
   useEffect(() => {
     console.log("In TripsDisplay useEffect");
@@ -91,8 +91,7 @@ const TripsDisplay = (props) => {
                     Delete
                   </Button>
                   <br />
-                  {/* <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
-                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a> */}
+                 <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
                 </Card.Grid>
               </div>
             );
