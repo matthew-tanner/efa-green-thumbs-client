@@ -14,7 +14,7 @@ function Login({ toggle, token, newToken }){
         message.success('You are now logged in!')
         //window.location.href='./viewTrips'
         history.push({
-            pathname: "/vewTrips",
+            pathname: "/viewTrips",
             state: {
                 token: token,
             }
