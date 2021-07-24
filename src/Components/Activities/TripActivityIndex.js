@@ -3,20 +3,25 @@ import DisplayTripActivities from './DisplayTripActivities'
 import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 import APIURL from "../../Utils/Environment";
+import { useLocation} from 'react-router-dom'
 
 const TripActivityIndex = (props) => {
 
+    const location = useLocation()
+    const parkCode = location.state.parkCode
+    const token = location.state.token
+    const tripId = location.state.tripId
     const [tripActivities, setTripActivities] = useState([])
     const [updateActive, setUpdateActive] = useState(false)
     const [activityToUpdate, setActivityToUpdate] = useState({})
     const [visible, setVisible] = useState(false);
 
     const fetchTripActivities = () => {
-        fetch(`${APIURL}/activity/all/${props.tripId}`, {
+        fetch(`${APIURL}/activity/all/${tripId}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${props.token}`
+                'Authorization': `Bearer ${token}`
             })
         })
             .then((res) => res.json())
@@ -47,21 +52,21 @@ const TripActivityIndex = (props) => {
         <div >
             <div className='tripDisplay'>
                 <DisplayTripActivities
-                    tripId={props.tripId}
+                    tripId={tripId}
                     tripActivityList={tripActivities}
                     editUpdateActivity={editUpdateActivity}
                     updateOn={updateOn}
                     fetchTripActivities={fetchTripActivities}
                     visible={visible}
                     setVisible={setVisible}
-                    token={props.token}
+                    token={token}
                 />
 
                 {updateActive
                     ? <EditActivity
                         activityToUpdate={activityToUpdate}
                         updateOff={updateOff}
-                        token={props.token}
+                        token={token}
                         fetchTripActivities={fetchTripActivities}
                         visible={visible}
                         setVisible={setVisible}
