@@ -76,6 +76,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 rules={[
                 {
                     required: true,
+                    type: 'email',
                     message: 'Please input your email.',
                 },
                 ]}
@@ -98,10 +99,8 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 name="password"
                 id='password'
                 rules={[
-                {
-                    required: true,
-                    message: 'Please input your password.',
-                },
+                { required: true, message: 'Please input your password.'},
+                { min: 5, message: 'Password must be a minimum of 5 characters.'}
                 ]}
             >
                 <Input.Password id='password'  style={{ width: '100%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
@@ -109,10 +108,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 <Form.Item
                 name="confirm"
                 rules={[
-                {
-                    required: true,
-                    message: 'Please confirm your password.',
-                },
+                { required: true, message: 'Please confirm your password.'},
                 ]}
             >
                 <Input.Password  style={{ width: '100%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>

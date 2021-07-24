@@ -61,9 +61,15 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/Trips">
               <span aria-label="Park Search" onClick={() => setOpen(!open)}>Park Search</span>
             </Link>
+            {token ?
             <Link to="/viewTrips">
               <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
             </Link>
+            :
+            <>
+            </>
+            
+          }
              {token ? <Link to="/"><span aria-label="logout" onClick={logout}>Logout</span></Link> : <Link to="/Portal"><span aria-label="Login" onClick={() => setOpen(!open)}>Login</span></Link>}
           </StyledMenu>
         </div>
