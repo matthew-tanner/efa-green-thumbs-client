@@ -58,7 +58,7 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
       <NavLinksContainer>
         <LinksWrapper>
           <LinkItem>
-            <Link to="/Home" className="link1">
+            <Link to="/" className="link1">
               <Link1>Home</Link1>
             </Link>
           </LinkItem>
@@ -81,7 +81,7 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
       </NavLinksContainer>
       <div className="nav-route">
         <Switch>
-          <Route exact path="/home">
+          <Route exact path="/">
             <Home token={token} newToken={newToken} logout={logout} />
           </Route>
           <Route exact path="/portal">

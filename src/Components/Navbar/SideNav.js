@@ -55,7 +55,7 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
     <>
         <div>
           <StyledMenu open={open}>
-            <Link to="/Home">
+            <Link to="/">
               <span aria-label="home" onClick={() => setOpen(!open)}>Home</span>
             </Link>
             <Link to="/Trips">
@@ -64,14 +64,12 @@ const SideNav = ({ open, setOpen, token, logout, newToken }) => {
             <Link to="/viewTrips">
               <span aria-label="View Trips" onClick={() => setOpen(!open)}>View Trips</span>
             </Link>
-            <Link to="/Portal">
-              <span aria-label="Login" onClick={() => setOpen(!open)}>Login</span>
-            </Link>
+             {token ? <Link to="/"><span aria-label="logout" onClick={logout}>Logout</span></Link> : <Link to="/Portal"><span aria-label="Login" onClick={() => setOpen(!open)}>Login</span></Link>}
           </StyledMenu>
         </div>
         <div className="nav-route">
           <Switch>
-            <Route exact path="/home">
+            <Route exact path="/">
               <Home token={token} open={open} setOpen={setOpen} newToken={newToken} logout={logout} />
             </Route>
             <Route exact path="/trips">
