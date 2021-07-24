@@ -1,21 +1,29 @@
 import { useState } from "react"
-import { Form, Input, Button, Typography, Card, Checkbox, message, Space } from 'antd'
+import { Form, Input, Button, Typography, Card, Checkbox, message, Space } from 'antd';
+import { useHistory } from "react-router-dom";
 import APIURL from "../../Utils/Environment";
 
 const { Title } = Typography
 
 function Login({ toggle, token, newToken }){
+    const history = useHistory();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const success = () => {
         message.success('You are now logged in!')
+        //window.location.href='./viewTrips'
+        history.push({
+            pathname: "/vewTrips",
+            state: {
+                token: token,
+            }
+        })
     }
     
     const confirmAndSend = () => {
         userLogin()
         success()
-        window.location.href='./viewTrips'
     }
     
 

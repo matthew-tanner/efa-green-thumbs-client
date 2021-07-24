@@ -29,7 +29,6 @@ function App() {
   const clearToken = () => {
     localStorage.clear();
     setToken("");
-    //derp
   };
 
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
