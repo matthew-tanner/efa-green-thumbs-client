@@ -9,6 +9,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     const history = useHistory();
     const [confirmPassword, setConfirmPassword] = useState()
     const [failMessage, setFailMessage] = useState("")
+    const [readyToPush, setReadyToPush ] = useState("")
 
     const success = () => {
         message.success('You are registered!')
@@ -17,16 +18,35 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
             pathname: "/trips",
         })
     }
+
+    // const emailRules = () => {
+    //     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value))
+    //     {
+    //         return (true)
+    //     }
+    //         alert("You have entered an invalid email address!")
+    //         return (false)
+    // }
     
+    // const confirmAndSend = () => {
+    // if (password === confirmPassword && password.length >4 && emailRules == true) {
+    //     userSignup()
+    //     success()
+    // } else {
+    //     setFailMessage("The Passwords don't match")
+    //     setTimeout(() => { failMessage("") }, 4000)
+    // }
+    // }
+
     const confirmAndSend = () => {
-    if (password === confirmPassword) {
-        userSignup()
-        success()
-    } else {
-        setFailMessage("The Passwords don't match")
-        setTimeout(() => { failMessage("") }, 4000)
-    }
-    }
+        if (password === confirmPassword) {
+            userSignup()
+            success()
+        } else {
+            setFailMessage("The Passwords don't match")
+            setTimeout(() => { failMessage("") }, 4000)
+        }
+        }
 
     // User Signup 
     function userSignup() {
