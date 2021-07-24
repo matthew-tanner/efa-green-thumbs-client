@@ -1,16 +1,27 @@
 import { useState } from "react"
-import { Form, Input, Button, Typography, Card } from 'antd'
+import { Form, Input, Button, Typography, Card, message } from 'antd'
+import { useHistory } from "react-router-dom";
 import APIURL from "../../Utils/Environment";
 
 const { Title } = Typography
 
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
+    const history = useHistory();
     const [confirmPassword, setConfirmPassword] = useState()
     const [failMessage, setFailMessage] = useState("")
+
+    const success = () => {
+        message.success('You are registered!')
+        // window.location.href='./portal'
+        history.push({
+            pathname: "/trips",
+        })
+    }
     
     const confirmAndSend = () => {
     if (password === confirmPassword) {
         userSignup()
+        success()
     } else {
         setFailMessage("The Passwords don't match")
         setTimeout(() => { failMessage("") }, 4000)
