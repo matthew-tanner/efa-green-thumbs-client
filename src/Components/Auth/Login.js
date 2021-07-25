@@ -83,12 +83,12 @@ function Login({ toggle, token, newToken }) {
               />
             </Form.Item>
             <Form.Item
-              name="displayName"
-              id="displayName"
+              name="password"
+              id="password"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Display Name!",
+                  message: "Please input your password!",
                 },
               ]}
             >

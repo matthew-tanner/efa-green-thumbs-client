@@ -28,6 +28,11 @@
   color: #51566B !important;
 }
 
+.message {
+  margin-top: 2em;
+  padding: 1em;
+}
+
 .homeButton {
     border: 0;
     padding-bottom: 1em;

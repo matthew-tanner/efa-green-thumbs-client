@@ -8,45 +8,28 @@ const { Title } = Typography
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
     const history = useHistory();
     const [confirmPassword, setConfirmPassword] = useState()
-    const [failMessage, setFailMessage] = useState("")
-    const [readyToPush, setReadyToPush ] = useState("")
+    const [emailValid, setEmailValid] = useState(false)
 
     const success = () => {
         message.success('You are registered!')
-        // window.location.href='./portal'
         history.push({
             pathname: "/trips",
         })
     }
 
-    // const emailRules = () => {
-    //     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value))
-    //     {
-    //         return (true)
-    //     }
-    //         alert("You have entered an invalid email address!")
-    //         return (false)
-    // }
     
-    // const confirmAndSend = () => {
-    // if (password === confirmPassword && password.length >4 && emailRules == true) {
-    //     userSignup()
-    //     success()
-    // } else {
-    //     setFailMessage("The Passwords don't match")
-    //     setTimeout(() => { failMessage("") }, 4000)
-    // }
-    // }
-
     const confirmAndSend = () => {
-        if (password === confirmPassword) {
+        if (password === confirmPassword && password.length >4 && emailValid == true) {
             userSignup()
             success()
+        } else if (emailValid !== true) {
+            message.error('Please enter a valid email.')
+        } else if (password.length <5) {
+            message.error('Password must be at least 5 characters.')
         } else {
-            setFailMessage("The Passwords don't match")
-            setTimeout(() => { failMessage("") }, 4000)
+            message.error('Passwords must match.')
         }
-        }
+    }
 
     // User Signup 
     function userSignup() {
@@ -97,11 +80,19 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 {
                     required: true,
                     type: 'email',
-                    message: 'Please input your email.',
+                    message: 'Please input your email.'
                 },
                 ]}
             >
-                <Input id='email' style={{ width: '100%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input id='email' style={{ width: '100%' }} placeholder='Email'
+                onChange={(e) => { 
+                setEmail(e.target.value) 
+                if(e.target.value.includes('@') && e.target.value.includes('.')) {
+                    setEmailValid(true)
+                } else {
+                    setEmailValid(false)
+                }
+                }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
