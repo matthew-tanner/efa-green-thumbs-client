@@ -186,8 +186,6 @@
   border: none;
 
 }
-
-a {
-color: white;
-font-family: 'Varela Round', sans-serif;
+.desktop-trips{
+  margin-top: 30%;
 }
