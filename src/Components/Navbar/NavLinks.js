@@ -6,6 +6,7 @@ import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
 import TripsIndex from "../Trips/TripsIndex";
 import TripsDisplay from "../Trips/TripsDisplay";
+import TripsDisplayDesktop from "../Trips/TripsDisplayDesktop";
 import TripActivityIndex from "../Activities/TripActivityIndex";
 
 const NavLinksContainer = styled.div`
@@ -103,7 +104,7 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
                 />
             </Route>
             <Route exact path="/viewTrips">
-                <TripsDisplay
+                <TripsDisplayDesktop
                 token={token}
                 open={open}
                 setOpen={setOpen}
