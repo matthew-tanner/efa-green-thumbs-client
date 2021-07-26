@@ -7,6 +7,7 @@ const TripsIndex = (props) => {
   const history = useHistory();
   const [stateId, setStateId] = useState("");
   const [parkCode, setParkCode] = useState("");
+  const [parkImage, setParkImage] = useState("")
   const [parkName, setParkName] = useState("");
   const [tripId, setTripId] = useState("");
   const [activityStatus, setActivityStatus] = useState(0);
@@ -107,11 +108,13 @@ const TripsIndex = (props) => {
     fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`)
       .then((response) => response.json())
       .then((data) => {
+        setParkImage(data.data[0].images[0].url)
         setParksList(
           data.data.map((x) => {
             return {
               fullName: x.fullName,
               parkCode: x.parkCode,
+              image: x.parkImage
             };
           })
         );
@@ -220,6 +223,7 @@ const TripsIndex = (props) => {
       const data = {
         name: parkName,
         parkCode: parkCode,
+        image: parkImage
       };
 
       fetch(`${APIURL}/trip/create`, {

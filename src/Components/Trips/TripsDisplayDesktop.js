@@ -85,8 +85,9 @@ const TripsDisplayDesktop = (props) => {
                                     style={{ width: 300, margin: 10 }}
                                     cover={
                                         <img
-                                            alt="Park Planner Logo"
-                                            src="../../../assets/logo.png"
+                                        src={trip.image}
+                                            // alt="Park Planner Logo"
+                                            // src="../../../assets/logo.png"
                                         />
                                     }
                                 >
@@ -116,30 +117,6 @@ const TripsDisplayDesktop = (props) => {
                 </Row>
             </div>
         </div>
-      {/* <div className="trips-grid">
-        <Card title="Trips">
-          {trips.map((trip) => {
-            return (
-              <div className="card-grid-style">
-                <Card.Grid style={gridStyle}>
-                  {trip.name}
-                  <br />
-                  <Button
-                    className="delete-button"
-                    onClick={() => {
-                      deleteTrips(trip);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                  <br />
-                 <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
-                </Card.Grid>
-              </div>
-            );
-          })}
-        </Card>
-      </div> */}
     </>
   );
 };
