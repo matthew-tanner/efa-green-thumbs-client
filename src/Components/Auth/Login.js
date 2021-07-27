@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Input, Button, Typography, Card, Checkbox, message, Space } from "antd";
+import { Form, Input, Button, Typography, Card, Checkbox, message } from "antd";
 import { useHistory } from "react-router-dom";
 import APIURL from "../../Utils/Environment";
 
@@ -10,16 +10,6 @@ function Login({ toggle, token, newToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [localToken, setLocalToken] = useState("");
-
-  const success = () => {
-    message.success("You are now logged in!");
-    history.push({
-      pathname: "/viewTrips",
-      state: {
-        token: token,
-      },
-    });
-  };
 
   const confirmAndSend = () => {
     userLogin();
@@ -50,10 +40,20 @@ function Login({ toggle, token, newToken }) {
   }
 
   useEffect(() => {
+    const success = () => {
+      message.success("You are now logged in!");
+      history.push({
+        pathname: "/viewTrips",
+        state: {
+          token: token,
+        },
+      });
+    };
+
     if (localToken) {
       success();
     }
-  }, [localToken]);
+  }, [localToken, history, token]);
 
   return (
     <div className="root">

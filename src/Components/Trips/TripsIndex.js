@@ -91,9 +91,11 @@ const TripsIndex = (props) => {
 
   const onChangeState = (value) => {
     setParkCode("");
+    setParkName("");
     setTripId("");
     setActivityStatus(0);
     setStateId(value);
+    setSelectedActivities([]);
   };
 
   const onChangePark = (value) => {
@@ -108,7 +110,8 @@ const TripsIndex = (props) => {
     fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateId}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`)
       .then((response) => response.json())
       .then((data) => {
-        setParkImage(data.data[0].images[0].url)
+        if(data.data.length > 0) {
+          setParkImage(data.data[0].images[0].url)
         setParksList(
           data.data.map((x) => {
             return {
@@ -118,6 +121,11 @@ const TripsIndex = (props) => {
             };
           })
         );
+        }else{
+          setParksList([]);
+          setActivitiesList([]);
+          setSelectedActivities([]);
+        }
       });
   };
 
@@ -125,7 +133,9 @@ const TripsIndex = (props) => {
     fetch(`https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=juZPWoiLqGQacPwyNwSLvePhqziqUeEAyhmebarc`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.data[0].relatedParks[0].fullName) {
+        setActivitiesList([]);
+        setSelectedActivities([]);
+        if (data.data.length > 0) {
           setParkName(data.data[0].relatedParks[0].fullName);
           setActivitiesList(
             data.data.map((x) => {
@@ -141,7 +151,7 @@ const TripsIndex = (props) => {
             })
           );
         }
-      }) .catch(err => {
+      }).catch(err => {
         console.error(err)
       });
   };
@@ -153,6 +163,7 @@ const TripsIndex = (props) => {
           className="stateSelector"
           showSearch
           style={{ width: 300 }}
+          value={stateId ? stateId : "Select a State"}
           placeholder="Select a State"
           optionFilterProp="children"
           filterOption={(input, option) =>
@@ -171,10 +182,13 @@ const TripsIndex = (props) => {
   };
 
   const popParks = () => {
+
     return (
+      parksList.length > 0 && stateId !== "" ? 
       <>
         <Select
           showSearch
+          value={parkName ? parkName : "Select a Park"}
           style={{ width: 300 }}
           placeholder="Select a Park"
           optionFilterProp="children"
@@ -190,7 +204,12 @@ const TripsIndex = (props) => {
           ))}
         </Select>
       </>
-    );
+      :
+      stateId === "" ? 
+      <></>
+      :
+      <>No Parks Available</>
+    )
   };
 
   const popActivities = () => {
@@ -198,6 +217,7 @@ const TripsIndex = (props) => {
       <>
         <Select
           mode="multiple"
+          value={selectedActivities}
           showSearch
           style={{ width: 300 }}
           placeholder="Select an Activity"
@@ -295,9 +315,9 @@ const TripsIndex = (props) => {
       </div>
       <div>{popStates()}</div>
       <br />
-      <div>{parksList.length > 0 ? popParks() : <></>}</div>
+      <div>{popParks()}</div>
       <br />
-      <div>{activitiesList.length > 0 ? popActivities() : <></>}</div>
+      <div>{activitiesList.length > 0 ? popActivities() : <>No Activities Available</>}</div>
       <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
     </div>
   );

@@ -10,7 +10,9 @@ const TripsDisplayDesktop = (props) => {
   const location = useLocation();
   let localToken = "";
   if (typeof location.state === "undefined"){
-    localToken = props.token
+    if (localStorage.getItem("token")) {
+      localToken = localStorage.getItem("token");
+    }
   }else{
     localToken = location.state.token
   }
@@ -50,8 +52,6 @@ const TripsDisplayDesktop = (props) => {
     message.success('Successfully deleted')
 }
   const editTrips = (trip) => {
-    // console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
-    // return <TripActivityIndex token={props.token} tripId={trip.id} />;
     history.push({
     pathname: "/tripActivityIndex",
     state: {
@@ -77,14 +77,14 @@ const TripsDisplayDesktop = (props) => {
                         return (
                             <Col>
                                 <Card
+                                    id={trip.id}
                                     className="activityCard"
                                     size="small"
                                     style={{ width: 300, margin: 10 }}
                                     cover={
                                         <img
                                         src={trip.image}
-                                            // alt="Park Planner Logo"
-                                            // src="../../../assets/logo.png"
+                                            alt="trip planner img"
                                         />
                                     }
                                 >
