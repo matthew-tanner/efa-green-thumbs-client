@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import {useHistory, useLocation} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Card, Button, message } from "antd";
 
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
-  const history = useHistory()
+  const history = useHistory();
   const location = useLocation();
   let localToken = "";
   if (typeof location.state === "undefined"){
-    localToken = props.token
+    if (localStorage.getItem("token")) {
+      localToken = localStorage.getItem("token");
+    }
   }else{
     localToken = location.state.token
   }
 
   const [trips, setTrips] = useState([]);
 
-  
   const fetchTrips = () => {
     fetch(`${APIURL}/trip/all`, {
       method: "GET",
@@ -30,8 +31,7 @@ const TripsDisplay = (props) => {
         setTrips(tripData);
       })
       .catch((err) => err);
-  }
-
+  };
 
   const deleteTrips = (trip) => {
     fetch(`${APIURL}/trip/${trip.id}`, {
@@ -46,20 +46,18 @@ const TripsDisplay = (props) => {
       .catch((err) => err);
   };
   const success = () => {
-    message.success('Successfully deleted')
-}
+    message.success("Successfully deleted");
+  };
   const editTrips = (trip) => {
-    // console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
-    // return <TripActivityIndex token={props.token} tripId={trip.id} />;
     history.push({
-    pathname: "/tripActivityIndex",
-    state: {
+      pathname: "/tripActivityIndex",
+      state: {
         token: localToken,
         parkCode: trip.parkCode,
-        tripId: trip.id
-        }
-    })    
-  }
+        tripId: trip.id,
+      },
+    });
+  };
 
   useEffect(() => {
     fetchTrips();
@@ -72,7 +70,7 @@ const TripsDisplay = (props) => {
   return (
     <>
       <div className="trips-grid">
-        <Card className='tripsCard' title="Trips">
+        <Card className="tripsCard" title="Trips">
           {trips.map((trip) => {
             return (
               <div className="card-grid-style">
@@ -88,7 +86,14 @@ const TripsDisplay = (props) => {
                     Delete
                   </Button>
                   <br />
-                 <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
+                  <Button
+                    onClick={() => {
+                      editTrips(trip);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <br />
                 </Card.Grid>
               </div>
             );

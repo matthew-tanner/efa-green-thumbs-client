@@ -19,7 +19,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
 
     
     const confirmAndSend = () => {
-        if (password === confirmPassword && password.length >4 && emailValid == true) {
+        if (password === confirmPassword && password.length > 4 && emailValid === true) {
             userSignup()
             success()
         } else if (emailValid !== true) {

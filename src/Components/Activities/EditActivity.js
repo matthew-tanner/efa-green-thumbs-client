@@ -1,13 +1,10 @@
-import React, { useCallback, useState, } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Modal } from 'antd';
 import APIURL from "../../Utils/Environment";
 import "antd/dist/antd.css";
 
 const EditActivity = (props) => {
-  const [activityId, setActivityId] = useState(props.activityToUpdate.id)
   const [notes, setNotes] = useState(props.activityToUpdate.notes)
-
-  const [formRef, setFormRef] = useState(null);
 
   const handleOk = () => {
 
@@ -30,12 +27,6 @@ const EditActivity = (props) => {
     props.updateOff()
     props.setVisible(false);
   };
-
-  const saveFormRef = useCallback(node => {
-    if (node !== null) {
-      setFormRef(node);
-    }
-  }, []);
 
   return (
     <>
