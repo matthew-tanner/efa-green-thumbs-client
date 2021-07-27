@@ -74,11 +74,6 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
                 <Link1>View Trips</Link1>
                 </Link>
             </LinkItem>
-            <LinkItem>
-                <Link to="/tripActivityIndex" className="link1">
-                <Link1>Activities</Link1>
-                </Link>
-            </LinkItem>
             </>
             :
             <>
