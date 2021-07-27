@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation} from 'react-router-dom'
 import DisplayTripActivities from './DisplayTripActivities'
-import AddActivity from './AddActivity'
 import EditActivity from './EditActivity'
 import APIURL from "../../Utils/Environment";
-import { useLocation} from 'react-router-dom'
+
 
 const TripActivityIndex = (props) => {
 
@@ -26,7 +26,6 @@ const TripActivityIndex = (props) => {
         })
             .then((res) => res.json())
             .then((tripActivityData) => {
-                console.log("trip activity data" ,tripActivityData);
                 setTripActivities(tripActivityData)
             })
     }
@@ -53,6 +52,7 @@ const TripActivityIndex = (props) => {
             <div className='tripDisplay'>
                 <DisplayTripActivities
                     tripId={tripId}
+                    parkCode={parkCode}
                     tripActivityList={tripActivities}
                     editUpdateActivity={editUpdateActivity}
                     updateOn={updateOn}
@@ -75,17 +75,6 @@ const TripActivityIndex = (props) => {
                 }
             </div>
             <div className='newActivity'>
-
-{/* ToDo:  Need to fetch activities for a park, and let the user select them. This component was a fill-in 
-for getting and storing the Notes, but that won't be necessary if we add Activities to a Trip using a 
-method similar menu selector used with Trip Planner.*/}
-                {/* <AddActivity
-                    tripId={props.tripId}
-                    inActivityName={'New Activity'}
-                    inActivityDescription={'This new activity will be super fun'}
-                    inActivityTitle={'Title of Activity'}
-                    fetchTripActivities={fetchTripActivities}
-                    token={props.token} /> */}
             </div>
         </div>
     )

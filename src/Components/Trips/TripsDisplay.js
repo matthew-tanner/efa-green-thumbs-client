@@ -72,7 +72,7 @@ const TripsDisplay = (props) => {
   return (
     <>
       <div className="trips-grid">
-        <Card title="Trips">
+        <Card className='tripsCard' title="Trips">
           {trips.map((trip) => {
             return (
               <div className="card-grid-style">
