@@ -142,7 +142,7 @@ const TripsIndex = (props) => {
           );
         }
       }) .catch(err => {
-        console.error(err)
+        err
       });
   };
 
@@ -236,7 +236,6 @@ const TripsIndex = (props) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.data.id);
           setTripId(data.data.id);
         })
         .then(

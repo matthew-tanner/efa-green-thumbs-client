@@ -7,7 +7,6 @@ import APIURL from "../../Utils/Environment";
 const TripsDisplay = (props) => {
   const history = useHistory()
   const location = useLocation();
-  console.log(location);
   let localToken = "";
   if (typeof location.state === "undefined"){
     localToken = props.token
@@ -28,7 +27,6 @@ const TripsDisplay = (props) => {
     })
       .then((res) => res.json())
       .then((tripData) => {
-        console.log(tripData);
         setTrips(tripData);
       })
       .catch((err) => err);
@@ -45,7 +43,7 @@ const TripsDisplay = (props) => {
     })
       .then(() => fetchTrips())
       .then(success())
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
   const success = () => {
     message.success('Successfully deleted')
@@ -64,7 +62,6 @@ const TripsDisplay = (props) => {
   }
 
   useEffect(() => {
-    console.log("In TripsDisplay useEffect");
     fetchTrips();
   }, []);
 
