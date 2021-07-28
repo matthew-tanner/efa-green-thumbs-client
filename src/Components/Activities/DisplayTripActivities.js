@@ -1,6 +1,6 @@
-import { Button, Card, Col, Divider, message, Row, Select } from "antd";
+import { Button, Card, Col, message, Row, Select } from "antd";
 
-import { EditOutlined } from "@ant-design/icons";
+import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import APIURL from "../../Utils/Environment";
 
@@ -147,11 +147,7 @@ const DisplayTripActivities = (props) => {
                     size="small"
                     style={{ width: 300, margin: 10 }}
                     cover={
-                      <img alt="National Park Service" src={tripActivity.image} />
-                      // <img
-                      //     alt="Park Planner Logo"
-                      //     src="../../../assets/logo.png"
-                      // />
+                      <img className="image-thumbnail" alt="National Park Service" src={tripActivity.image} />
                     }
                   >
                     <Meta
@@ -162,23 +158,21 @@ const DisplayTripActivities = (props) => {
                     <p>{tripActivity.notes}</p>
 
                     <Button
-                      icon={<EditOutlined />}
-                      onClick={() => {
-                        props.editUpdateActivity(tripActivity);
-                        props.setVisible(true);
-                        props.updateOn();
-                      }}
+                        icon={<EditFilled />}
+                        onClick={() => {props.editUpdateActivity(tripActivity);
+                          props.setVisible(true);
+                          props.updateOn();}}
+                        style={{marginTop: 2, marginRight: 12, marginLeft: 12, backgroundColor: "#383e56", color: "white", border: "none"}}
+                    
                     />
 
                     <Button
-                      shape="circle"
-                      style={{ color: "black", zIndex: 10 }}
-                      onClick={() => {
-                        deleteActivity(tripActivity);
-                      }}
+                        icon={<DeleteFilled />}
+                        onClick={() => { deleteActivity(tripActivity); }}
+                        style={{backgroundColor: "#FB743E", color: "white", border: "none"}}
                     >
-                      X
                     </Button>
+                    
                   </Card>
                 </Col>
               );

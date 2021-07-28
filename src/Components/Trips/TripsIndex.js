@@ -214,6 +214,7 @@ const TripsIndex = (props) => {
 
   const popActivities = () => {
     return (
+      activitiesList.length > 0 && parkCode !== "" ?
       <>
         <Select
           mode="multiple"
@@ -234,6 +235,11 @@ const TripsIndex = (props) => {
           ))}
         </Select>
       </>
+      :
+      parkCode === "" ?
+      <></>
+      :
+      <>No Activities Available</>
     );
   };
 
@@ -317,7 +323,7 @@ const TripsIndex = (props) => {
       <br />
       <div>{popParks()}</div>
       <br />
-      <div>{activitiesList.length > 0 ? popActivities() : <>No Activities Available</>}</div>
+      <div>{popActivities()}</div>
       <div>{selectedActivities.length > 0 ? showCreateButton() : <></>}</div>
     </div>
   );
