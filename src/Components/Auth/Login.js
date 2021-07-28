@@ -58,7 +58,7 @@ function Login({ toggle, token, newToken }) {
   return (
     <div className="root">
       <div className="site-card-border-less-wrapper">
-        <Card className="portalCard" title={<Title level={2}>Log In</Title>} bordered={false}>
+        <Card className="portalCard" title={<Title level={2} style={{color: 'white'}}>Log In</Title>} bordered={false}>
           <Form
             name="basic"
             initialValues={{
@@ -127,7 +127,7 @@ function Login({ toggle, token, newToken }) {
                 New here? Sign up to plan your trip.
               </Typography>
               <Button
-                style={{ width: "100%" }}
+                style={{ width: "100%"}}
                 className="button"
                 htmlType="submit"
                 onClick={toggle}
