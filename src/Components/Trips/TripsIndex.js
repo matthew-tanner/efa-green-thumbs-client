@@ -307,7 +307,7 @@ const TripsIndex = (props) => {
     return (
       <>
         <Divider />
-        <Button type="primary" onClick={() => createTrip()}>
+        <Button onClick={() => createTrip()}>
           Create Trip
         </Button>
       </>
