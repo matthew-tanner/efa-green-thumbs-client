@@ -1,20 +1,34 @@
 import { useState } from "react"
-import { Form, Input, Button, Typography, Card } from 'antd'
+import { Form, Input, Button, Typography, Card, message } from 'antd'
+import { useHistory } from "react-router-dom";
 import APIURL from "../../Utils/Environment";
 
 const { Title } = Typography
 
 function Signup({email, setEmail, password, setPassword, displayName, setDisplayName, toggle, submitForm}){
+    const history = useHistory();
     const [confirmPassword, setConfirmPassword] = useState()
-    const [failMessage, setFailMessage] = useState("")
+    const [emailValid, setEmailValid] = useState(false)
+
+    const success = () => {
+        message.success('You are registered!')
+        history.push({
+            pathname: "/trips",
+        })
+    }
+
     
     const confirmAndSend = () => {
-    if (password === confirmPassword) {
-        userSignup()
-    } else {
-        setFailMessage("The Passwords don't match")
-        setTimeout(() => { failMessage("") }, 4000)
-    }
+        if (password === confirmPassword && password.length > 4 && emailValid === true) {
+            userSignup()
+            success()
+        } else if (emailValid !== true) {
+            message.error('Please enter a valid email.')
+        } else if (password.length <5) {
+            message.error('Password must be at least 5 characters.')
+        } else {
+            message.error('Passwords must match.')
+        }
     }
 
     // User Signup 
@@ -65,11 +79,20 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 rules={[
                 {
                     required: true,
-                    message: 'Please input your email.',
+                    type: 'email',
+                    message: 'Please input your email.'
                 },
                 ]}
             >
-                <Input id='email' style={{ width: '100%' }} placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}/>
+                <Input id='email' style={{ width: '100%' }} placeholder='Email'
+                onChange={(e) => { 
+                setEmail(e.target.value) 
+                if(e.target.value.includes('@') && e.target.value.includes('.')) {
+                    setEmailValid(true)
+                } else {
+                    setEmailValid(false)
+                }
+                }}/>
                 </Form.Item>
                 <Form.Item
                 name="displayName"
@@ -87,10 +110,8 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 name="password"
                 id='password'
                 rules={[
-                {
-                    required: true,
-                    message: 'Please input your password.',
-                },
+                { required: true, message: 'Please input your password.'},
+                { min: 5, message: 'Password must be a minimum of 5 characters.'}
                 ]}
             >
                 <Input.Password id='password'  style={{ width: '100%' }} placeholder='Password' type="password" onChange={(e) => { setPassword(e.target.value) }}/>
@@ -98,10 +119,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 <Form.Item
                 name="confirm"
                 rules={[
-                {
-                    required: true,
-                    message: 'Please confirm your password.',
-                },
+                { required: true, message: 'Please confirm your password.'},
                 ]}
             >
                 <Input.Password  style={{ width: '100%' }} placeholder='Confirm Password' type="password" onChange={(e) => { setConfirmPassword(e.target.value) }}/>

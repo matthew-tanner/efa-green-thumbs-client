@@ -5,9 +5,8 @@ import { Route, Link, Switch } from "react-router-dom";
 import Home from "../Home/Home";
 import Portal from "../Auth/Portal";
 import TripsIndex from "../Trips/TripsIndex";
-import TripsDisplay from "../Trips/TripsDisplay";
+import TripsDisplayDesktop from "../Trips/TripsDisplayDesktop";
 import TripActivityIndex from "../Activities/TripActivityIndex";
-import { OmitProps } from "antd/lib/transfer/ListBody";
 
 const NavLinksContainer = styled.div`
   height: 100%;
@@ -42,46 +41,37 @@ const LinkItem = styled.li`
   }
 `;
 
-const Link1 = styled.a`
-  text-decoration: none;
-  color: inherit;
-  font-size: inherit;
-
-  &:hover {
-    color: #fb743e;
-  }
-`;
-
 const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
   return (
     <>
       <NavLinksContainer>
         <LinksWrapper>
           <LinkItem>
-            <Link to="/Home" className="link1">
-              <Link1>Home</Link1>
+            <Link to="/" className="link1">
+              Home
             </Link>
           </LinkItem>
           <LinkItem>
             <Link to="/Trips" className="link1">
-              <Link1>Park Search</Link1>
+              Park Search
             </Link>
           </LinkItem>
-          <LinkItem>
-            <Link to="/viewTrips" className="link1">
-              <Link1>View Trips</Link1>
-            </Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="/tripActivityIndex" className="link1">
-              <Link1>Activities</Link1>
-            </Link>
-          </LinkItem>
+          {token ? (
+            <>
+              <LinkItem>
+                <Link to="/viewTrips" className="link1">
+                  View Trips
+                </Link>
+              </LinkItem>
+            </>
+          ) : (
+            <></>
+          )}
         </LinksWrapper>
       </NavLinksContainer>
       <div className="nav-route">
         <Switch>
-          <Route exact path="/home">
+          <Route exact path="/">
             <Home token={token} newToken={newToken} logout={logout} />
           </Route>
           <Route exact path="/portal">
@@ -97,7 +87,7 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
             />
           </Route>
           <Route exact path="/viewTrips">
-            <TripsDisplay
+            <TripsDisplayDesktop
               token={token}
               open={open}
               setOpen={setOpen}
@@ -106,7 +96,7 @@ const NavLinks = ({ token, logout, newToken, open, setOpen }) => {
             />
           </Route>
           <Route exact path="/tripActivityIndex">
-            <TripActivityIndex token={token} tripId={37} />
+            <TripActivityIndex token={token} tripId={2} />
           </Route>
         </Switch>
       </div>

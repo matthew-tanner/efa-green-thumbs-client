@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "antd";
+import { useHistory, useLocation } from "react-router-dom";
+import { Card, Button, message } from "antd";
+
 import APIURL from "../../Utils/Environment";
 
 const TripsDisplay = (props) => {
+  const history = useHistory();
+  const location = useLocation();
+  let localToken = "";
+  if (typeof location.state === "undefined"){
+    if (localStorage.getItem("token")) {
+      localToken = localStorage.getItem("token");
+    }
+  }else{
+    localToken = location.state.token
+  }
+
   const [trips, setTrips] = useState([]);
 
   const fetchTrips = () => {
@@ -10,46 +23,43 @@ const TripsDisplay = (props) => {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${localToken}`,
       }),
     })
       .then((res) => res.json())
       .then((tripData) => {
-        console.log(tripData);
         setTrips(tripData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
-  console.log(trips);
+
   const deleteTrips = (trip) => {
     fetch(`${APIURL}/trip/${trip.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${localToken}`,
       }),
     })
       .then(() => fetchTrips())
-      .catch((err) => console.log(err));
+      .then(success())
+      .catch((err) => err);
   };
-  // const editTrips = (trip) => {
-  //   console.log(`In editTrips in TripsDisplay - trip = ${trip}`);
-  //   return <TripActivityIndex token={props.token} tripId={trip.id} />;
-  // };
-  // const editTrips = (trip) => {
-  //     fetch(`http://localhost:3000/trip/${trip.id}`, {
-  //     method: 'PUT',
-  //     headers: new Headers({
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${props.token}`
-  //     })
-  // }) .then (() => fetchTrips())
-  //     .catch (err => console.log(err))
-
-  // }
+  const success = () => {
+    message.success("Successfully deleted");
+  };
+  const editTrips = (trip) => {
+    history.push({
+      pathname: "/tripActivityIndex",
+      state: {
+        token: localToken,
+        parkCode: trip.parkCode,
+        tripId: trip.id,
+      },
+    });
+  };
 
   useEffect(() => {
-    console.log("In TripsDisplay useEffect");
     fetchTrips();
   }, []);
 
@@ -60,7 +70,7 @@ const TripsDisplay = (props) => {
   return (
     <>
       <div className="trips-grid">
-        <Card title="Trips">
+        <Card className="tripsCard" title="Trips">
           {trips.map((trip) => {
             return (
               <div className="card-grid-style">
@@ -76,8 +86,14 @@ const TripsDisplay = (props) => {
                     Delete
                   </Button>
                   <br />
-                  {/* <Button onClick={() => {editTrips(trip)}}>Edit</Button><br/>
-                 <a href="/tripActivityIndex"><u>View And Edit Trips</u></a> */}
+                  <Button
+                    onClick={() => {
+                      editTrips(trip);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <br />
                 </Card.Grid>
               </div>
             );
