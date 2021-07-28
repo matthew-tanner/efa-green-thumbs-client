@@ -144,6 +144,7 @@
   border-radius: 5px;
   border: none;
   margin: 1rem;
+  color: white;
 }
 
 .tripDiv button:hover {
@@ -151,6 +152,7 @@
   border: none;
   transition: all 300ms ease-in-out;
   cursor: pointer;
+  color: white;
 }
 
 .tripDisplay {
@@ -216,12 +218,28 @@
   color: white;
   font-family: 'Varela Round', sans-serif;
   border: none;
-
 }
+
 .desktop-trips{
-  margin-top: 30%;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+.desktop-trip-content {
+  justify-content: center;
 }
 
 .ant-typography h2{
   color: white !important;
+}
+
+.image-thumbnail {
+  width: 300px;
+  height: 225px;
+}
+
+.ant-btn-primary {
+  background-color: #383e56;
+  border: none;
 }

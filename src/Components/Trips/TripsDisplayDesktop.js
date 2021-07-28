@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useHistory, useLocation} from "react-router-dom";
-import { EditOutlined } from '@ant-design/icons';
+import { EditFilled, DeleteFilled } from '@ant-design/icons';
 import { Card, Button, message, Col, Row } from "antd";
 
 import APIURL from "../../Utils/Environment";
@@ -71,7 +71,7 @@ const TripsDisplayDesktop = (props) => {
     <>
     <div className="site-card-wrapper" >
             <div className="desktop-trips">
-                <Row >
+                <Row className='desktop-trip-content'>
 
                     {trips.map(trip => {
                         return (
@@ -85,6 +85,7 @@ const TripsDisplayDesktop = (props) => {
                                         <img
                                         src={trip.image}
                                             alt="trip planner img"
+                                            className='image-thumbnail'
                                         />
                                     }
                                 >
@@ -95,16 +96,16 @@ const TripsDisplayDesktop = (props) => {
                             
 
                                     <Button
-                                        icon={<EditOutlined />}
+                                        icon={<EditFilled />}
                                         onClick={() => {editTrips(trip)}}
+                                        style={{marginTop: 2, marginRight: 12, marginLeft: 12, backgroundColor: "#383e56", color: "white", border: "none"}}
                                     />
 
                                     <Button
-                                        shape="circle"
-                                        style={{ color: 'black', zIndex: 10 }}
+                                        icon={<DeleteFilled />}
                                         onClick={() => { deleteTrips(trip) }}
+                                        style={{backgroundColor: "#FB743E", color: "white", border: "none"}}
                                     >
-                                      X
                                     </Button>
                                 </Card>
                             </Col>
