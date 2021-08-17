@@ -66,7 +66,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
     return (
         <>
         <div className='site-card-border-less-wrapper'>
-        <Card className='portalCard' title={<Title level={2}>Sign Up</Title>} bordered={false}>
+        <Card className='portalCard' title={<Title level={2} style={{color: 'white'}}>Sign Up</Title>} bordered={false}>
             <Form
                 name="basic"
                 initialValues={{
@@ -127,7 +127,7 @@ function Signup({email, setEmail, password, setPassword, displayName, setDisplay
                 
 
                 <Form.Item>
-                    <Button  style={{ width: '100%' }} className='button' htmlType="submit" onClick={confirmAndSend}>
+                    <Button  style={{ width: '100%'}} className='button' htmlType="submit" onClick={confirmAndSend}>
                     Sign Up
                     </Button>
                 </Form.Item>
